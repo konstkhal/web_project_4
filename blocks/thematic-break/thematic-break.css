@@ -1,0 +1,16 @@
+.thematic-break {
+  border: 0;
+  border-top: 1px solid #545454;
+  opacity: 0.7;
+  justify-self: center;
+  max-width: 880px;
+  width: 100%;
+  margin: 41px 198px 0;
+}
+
+@media screen and (max-width: 767px) {
+  .thematic-break {
+    max-width: 320 px;
+    margin: 32px 0 0;
+  }
+}
