@@ -6,12 +6,15 @@
 
 * [commitlint.io:] (https://commitlint.io/)
 * [emoji as favicon] (https://css-tricks.com/svg-favicons-and-all-the-fun-things-we-can-do-with-them/)
-
-Have fun with JavaScript!
+* [I had fun with vanilla JavaScript!] (http://vanilla-js.com/ Vanilla JS)
 
 #### TODO
+* Header section for all @media queries
+* Thematic break -//-
+* 
 
 ← I`m here
+
 * add correct image to the meta property og:image in the head part o a project page
 * [Export images directly from Figma — Don't forget to optimize them → here] (https://tinypng.com/), so project will loads faster.
 * [Make a page like in Figma Brief [Link to the project in Figma] (https://www.figma.com/file/SurN1jaeEQIhuZEDMhmWWf/Sprint-4-Around-The-U.S.-desktop-mobile?node-id=0%3A1) 
