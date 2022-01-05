@@ -2,6 +2,9 @@
 
 ### Overview
 
+### Technology and tools used4
+
+* [commitlint.io:] (https://commitlint.io/)
 
 
 Have fun with JavaScript!
