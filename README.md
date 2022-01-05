@@ -11,14 +11,17 @@
 #### TODO
 * Header section for all @media queries
 * Thematic break -//-
-* 
+* Fonts / readability
+* Some git queue passed
 
 ← I`m here
 
+* Remove excessive commentaries from header block css
+* Some git queue approching
 * add correct image to the meta property og:image in the head part o a project page
 * [Export images directly from Figma — Don't forget to optimize them → here] (https://tinypng.com/), so project will loads faster.
 * [Make a page like in Figma Brief [Link to the project in Figma] (https://www.figma.com/file/SurN1jaeEQIhuZEDMhmWWf/Sprint-4-Around-The-U.S.-desktop-mobile?node-id=0%3A1) 
-* Correct the meta property og:url in the head part o a project page
+* Correct the meta property og:url in the head part of a project page
 * [Arrange Readme.md instruction - link:] (https://practicum.yandex.com/trainer/web-practicum100/lesson/90beaee1-02f2-4eef-81c7-bc8fd31cbea5)
 * [Deploy Project to GitHub Pages - instruction link:] (https://practicum.yandex.com/trainer/web-practicum100/lesson/6ca44095-4549-4a7a-9fc7-29d75ddd010b)
 
