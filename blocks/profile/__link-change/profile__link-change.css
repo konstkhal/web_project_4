@@ -1,0 +1,14 @@
+.profile__link-change {
+  display: flex;
+  border: 1px solid #ffffff;
+  /*  width: 24px;
+  height: 24px; */
+  align-items: center;
+  justify-content: center;
+  /*   align-self: flex-start;
+  justify-self: flex-end; */
+  margin: 9px 0 0 16px;
+  width: 24px;
+  height: 24px;
+  align-self: center;
+}

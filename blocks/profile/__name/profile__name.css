@@ -1,0 +1,7 @@
+.profile__name {
+  margin: 0;
+  font-size: 42px;
+  line-height: calc(48 / 42);
+  width: 373px;
+  font-weight: 500;
+}
