@@ -8,4 +8,8 @@
   text-rendering: optimizeLegibility;
   background-color: #000000;
   margin: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
 }

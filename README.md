@@ -18,7 +18,8 @@
 
 * Remove excessive commentaries from header block css
 * Some git queue approching
-* add correct image to the meta property og:image in the head part o a project page
+* Make header for mobile (size of the logo image)
+* Add correct image to the meta property og:image in the head part o a project page
 * [Export images directly from Figma — Don't forget to optimize them → here] (https://tinypng.com/), so project will loads faster.
 * [Make a page like in Figma Brief [Link to the project in Figma] (https://www.figma.com/file/SurN1jaeEQIhuZEDMhmWWf/Sprint-4-Around-The-U.S.-desktop-mobile?node-id=0%3A1) 
 * Correct the meta property og:url in the head part of a project page

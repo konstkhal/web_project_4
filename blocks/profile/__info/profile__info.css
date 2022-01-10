@@ -3,6 +3,15 @@
   flex-direction: row;
   margin: 22px 0 21px 30px;
   flex-wrap: wrap;
-  max-width: 415px;
-  width: 100%;
+  min-width: 415px;
+  justify-content: center;
+}
+
+@media screen and (max-width: 890px) {
+  .profile__info {
+    margin: unset;
+    margin-top: 26px;
+    min-width: unset;
+    max-width: 290px;
+  }
 }
