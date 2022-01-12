@@ -4,7 +4,7 @@
   margin: 22px 0 21px 30px;
   flex-wrap: wrap;
   min-width: 415px;
-  justify-content: center;
+  justify-content: left;
 }
 
 @media screen and (max-width: 890px) {
@@ -13,5 +13,6 @@
     margin-top: 26px;
     min-width: unset;
     max-width: 290px;
+    justify-content: center;
   }
 }
