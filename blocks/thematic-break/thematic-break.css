@@ -10,7 +10,6 @@
 
 @media screen and (max-width: 767px) {
   .thematic-break {
-    max-width: 320px;
     margin: 32px 0 0;
   }
 }
