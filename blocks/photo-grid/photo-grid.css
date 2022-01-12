@@ -1,11 +1,6 @@
 .photo-grid {
-  /*   border: 1px solid red;
- */
   margin: 46px 0 0;
   max-width: 880px;
+  display: flex;
+  justify-content: center;
 }
-
-/* .photo-grid * {
-  border: solid 1px red;
-}
- */
