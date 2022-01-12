@@ -1,0 +1,14 @@
+.photo-grid__item {
+  border-radius: 10px;
+  background-color: #ffffff;
+  /*  display: grid;
+  grid-template-rows: 282px calc(361px - 282px);
+  grid-template-columns: 216px 1fr;
+  grid-template-areas:
+    picture picture
+    title like; */
+  display: flex;
+  flex-direction: column;
+  /*   flex-wrap: nowrap;
+ */
+}

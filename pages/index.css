@@ -12,7 +12,12 @@
 
 /*Elements*/
 @import url(../blocks/header/__logo/header__logo.css);
+@import url(../blocks/photo-grid/__container/photo-grid__container.css);
+@import url(../blocks/photo-grid/__like-button/photo-grid__like-button.css);
+@import url(../blocks/photo-grid/__item/photo-grid__item.css);
 @import url(../blocks/photo-grid/__list/photo-grid__list.css);
+@import url(../blocks/photo-grid/__title/photo-grid__title.css);
+
 @import url(../blocks/profile/__info/profile__info.css);
 @import url(../blocks/profile/__link-add/profile__link-add.css);
 @import url(../blocks/profile/__image-change/profile__image-change.css);
