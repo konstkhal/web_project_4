@@ -19,13 +19,14 @@
 @import url(../blocks/photo-grid/__item/photo-grid__item.css);
 @import url(../blocks/photo-grid/__list/photo-grid__list.css);
 @import url(../blocks/photo-grid/__title/photo-grid__title.css);
-
 @import url(../blocks/profile/__info/profile__info.css);
 @import url(../blocks/profile/__link-add/profile__link-add.css);
 @import url(../blocks/profile/__image-change/profile__image-change.css);
 @import url(../blocks/profile/__link-change/profile__link-change.css);
 @import url(../blocks/profile/__name/profile__name.css);
+@import url(../blocks/popup/__window/popup__window.css);
 @import url(../blocks/profile/__photo/profile__photo.css);
+
 @import url(../blocks/profile/__role/profile__role.css);
 
 /*Modifiers*/
