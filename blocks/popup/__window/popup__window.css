@@ -1,0 +1,16 @@
+.popup__window {
+  position: fixed;
+  border-radius: 10px;
+  background-color: #fff;
+  width: 100%;
+  height: 100%;
+  max-width: 430px;
+  max-height: 330px;
+  margin: 195px calc((100% - 430px) / 2) 0;
+  opacity: 1;
+  align-self: flex-start;
+  /*   margin: 195px;
+ */
+  justify-self: center;
+  z-index: 10;
+}
