@@ -1,0 +1,16 @@
+.popup__close-button {
+  background-image: url(../../../images/Vector-1.svg);
+  background-size: cover;
+  background-color: transparent;
+  background-blend-mode: overlay;
+  transform: rotate(45deg);
+  width: 40px;
+  height: 40px;
+  position: absolute;
+  top: -40px;
+  right: -40px;
+  border-style: hidden;
+  transition: opacity 0.4s;
+  cursor: pointer;
+  padding: 0;
+}
