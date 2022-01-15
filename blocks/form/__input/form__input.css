@@ -6,3 +6,11 @@
   border: 0;
   border-bottom: 1px solid #000000;
 }
+
+@media screen and (max-width: 890px) {
+  .form__input {
+    max-width: 238px;
+    padding: 0 0 9px;
+    margin: 76px 22px 0;
+  }
+}

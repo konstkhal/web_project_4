@@ -6,8 +6,18 @@
   height: 100%;
   border-radius: 2px;
   background-color: #000000;
-  font-size: 14px;
+  font-size: 18px;
   font-weight: 400;
   line-height: calc(22 / 18);
   color: #fff;
+}
+
+@media screen and (max-width: 890px) {
+  .form__submit-button {
+    max-width: 238px;
+    max-height: 46px;
+    margin: 22px 25px 0;
+    font-size: 14px;
+    line-height: calc(17 / 14);
+  }
 }

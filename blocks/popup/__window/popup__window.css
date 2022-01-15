@@ -12,8 +12,14 @@
   margin: 195px calc((100% - 430px) / 2) 0;
   opacity: 1;
   align-self: flex-start;
-  /*   margin: 195px;
- */
   justify-self: center;
   z-index: 10;
+}
+
+@media screen and (max-width: 890px) {
+  .popup__window {
+    max-width: 282px;
+    max-height: 322px;
+    margin: 123px calc((100% - 282px) / 2) 0;
+  }
 }
