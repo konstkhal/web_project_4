@@ -27,6 +27,7 @@ function savePopup(evt) {
   // This line stops the browser from
   // submitting the form in the default way.
   evt.preventDefault();
+  togglePopup();
   nameElement.textContent = nameInput.value;
   roleElement.textContent = roleInput.value;
 }
@@ -50,9 +51,9 @@ openButton.addEventListener("click", openPopup);
 /* -------------------------------------------------------------------------- */
 /*                          Popup save functionality                          */
 /* -------------------------------------------------------------------------- */
-let saveButton = document.querySelector(".form__submit-button");
+let formSubmiter = document.querySelector(".popup__container");
 
-saveButton.addEventListener("submit", savePopup);
+formSubmiter.addEventListener("submit", savePopup);
 /* -------------------------------------------------------------------------- */
 /*                                 Submitting                                 */
 /* -------------------------------------------------------------------------- */
