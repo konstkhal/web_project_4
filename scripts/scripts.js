@@ -28,7 +28,6 @@ function savePopup(evt) {
   // submitting the form in the default way.
   evt.preventDefault();
   nameElement.textContent = nameInput.value;
-  console.log(nameInput);
   roleElement.textContent = roleInput.value;
 }
 
