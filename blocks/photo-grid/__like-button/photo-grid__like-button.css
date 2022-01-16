@@ -1,7 +1,17 @@
 .photo-grid__like-button {
+  background-image: url(../../../images/Vector.svg);
   width: 21px;
   height: 19px;
   cursor: pointer;
   padding: 0;
   margin: 24px 15px 31px 0;
+  border: 0px;
+}
+
+.photo-grid__like-button:disabled {
+  opacity: 1;
+}
+
+.photo-grid__like-button:active {
+  background-image: url(../../../images/Union.svg);
 }
