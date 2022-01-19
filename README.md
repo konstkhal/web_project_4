@@ -26,13 +26,13 @@
 * Correct the meta property og:url in the head part of a project page
 * [Arrange Readme.md instruction - link:] (https://practicum.yandex.com/trainer/web-practicum100/lesson/90beaee1-02f2-4eef-81c7-bc8fd31cbea5)
 * [Deploy Project to GitHub Pages - instruction link:] (https://practicum.yandex.com/trainer/web-practicum100/lesson/6ca44095-4549-4a7a-9fc7-29d75ddd010b)
+
 ← End of left uncompleted
 
 ← I`m here
-
-
-
-
+####Can be improved:
+* You can use auto-fit and minmax keywords for Grid in cards section, to implement the wrapping and more "responsive" design, where the width of the cards will adapt to the container width. More about auto-fit: https://css-tricks.com/auto-sizing-columns-css-grid-auto-fill-vs-auto-fit/
+* Almost all (except for the submit button) buttons do not have an accessible name. When a button doesn't have an accessible name, screen readers announce it as "button", making it unusable for users who rely on screen readers. Use aria-label attribute to give names. Learn more: https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/ARIA_Techniques/Using_the_aria-label_attribute
 
 #### Git Workflow used
 ##### Step-by-Step Instructions on Working with Branches Like a Professional
