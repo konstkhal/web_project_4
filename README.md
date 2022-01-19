@@ -12,6 +12,8 @@
 * Header section for all @media queries
 * Thematic break -//-
 * Fonts / readability
+* bugFix: Please note that different buttons should have different opacity values on hover, please check the design.
+* bugFix: On desktop: "add" button has incorrect width.
 * Some git queue passed
 
 ← Start of left uncompleted
@@ -28,7 +30,7 @@
 
 ← I`m here
 
-* bugFix: Please note that different buttons should have different opacity values on hover, please check the design.
+
 
 
 
