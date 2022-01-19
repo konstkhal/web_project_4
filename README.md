@@ -14,8 +14,7 @@
 * Fonts / readability
 * Some git queue passed
 
-← I`m here
-
+← Start of left uncompleted
 * Remove excessive commentaries from header block css
 * Some git queue approching
 * Make header for mobile (size of the logo image)
@@ -25,6 +24,12 @@
 * Correct the meta property og:url in the head part of a project page
 * [Arrange Readme.md instruction - link:] (https://practicum.yandex.com/trainer/web-practicum100/lesson/90beaee1-02f2-4eef-81c7-bc8fd31cbea5)
 * [Deploy Project to GitHub Pages - instruction link:] (https://practicum.yandex.com/trainer/web-practicum100/lesson/6ca44095-4549-4a7a-9fc7-29d75ddd010b)
+← End of left uncompleted
+
+← I`m here
+
+* bugFix: Please note that different buttons should have different opacity values on hover, please check the design.
+
 
 
 #### Git Workflow used

@@ -12,6 +12,10 @@
   color: #fff;
 }
 
+.form__submit-button:hover {
+  opacity: 0.8;
+}
+
 @media screen and (max-width: 890px) {
   .form__submit-button {
     max-width: 238px;
