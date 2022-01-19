@@ -1,7 +1,3 @@
-/* * {
-  border: solid 1px red;
-} */
-
 .profile {
   color: #ffffff;
   width: 880px;
@@ -18,5 +14,6 @@
     padding: 0 19px 0;
     flex-direction: column;
     align-items: center;
+    margin-bottom: 0;
   }
 }

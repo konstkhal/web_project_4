@@ -14,6 +14,7 @@
 * Fonts / readability
 * bugFix: Please note that different buttons should have different opacity values on hover, please check the design.
 * bugFix: On desktop: "add" button has incorrect width.
+* bugFix: incorrect margin between profile and elements
 * Some git queue passed
 
 ← Start of left uncompleted
