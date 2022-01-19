@@ -9,6 +9,8 @@
   font-weight: 400;
   line-height: calc(22 / 18);
   color: #fff;
+  padding: 0;
+  border: 0;
 }
 
 .form__submit-button:hover {
