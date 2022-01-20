@@ -6,16 +6,13 @@ let nameElement = document.querySelector(".profile__name");
 let nameInput = document.querySelector(".form__input_type_name");
 let roleElement = document.querySelector(".profile__role");
 let roleInput = document.querySelector(".form__input_type_role");
+const popupElement = document.querySelector(".popup"); // selecting the element with the class name "popup"
 
 /* ------- Function to toggle appropriate class of element (popup_opened) ------ */
 function togglePopup() {
-  let element = document.querySelector(".popup"); // selecting the element with the class name "popup"
-  element.classList.toggle("popup_opened"); // toggling popup_opened class for selected element
+  popupElement.classList.toggle("popup_opened"); // toggling popup_opened class for selected element
 }
-/* ------- Function to close popup ------ */
-function closePopup() {
-  togglePopup();
-}
+
 /* ------- Function to open popup ------ */
 function openPopup() {
   togglePopup();
@@ -38,7 +35,7 @@ function savePopup(evt) {
 /* ---------------------------- Selecting closing button element --------------------------- */
 let closeButton = document.querySelector(".popup__close-button");
 /* --------------------- Event listener for close button -------------------- */
-closeButton.addEventListener("click", closePopup);
+closeButton.addEventListener("click", togglePopup);
 
 /* -------------------------------------------------------------------------- */
 /*                          Popup open functionality                          */
