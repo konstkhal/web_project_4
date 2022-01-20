@@ -1,6 +1,7 @@
 # Project 4: Around The U.S.
 
 ### Overview
+* [Link to deployed project 4] (https://konstkhal.github.io/web_project_4/)
 
 ### Technology and tools used4
 
