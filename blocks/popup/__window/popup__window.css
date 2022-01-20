@@ -6,15 +6,15 @@
   border-radius: 10px;
   background-color: #fff;
   width: 100%;
-  margin: 195px calc((100% - 430px) / 2) 0;
+  max-width: 430px;
+  max-height: 330px;
   opacity: 1;
-  align-self: flex-start;
-  justify-self: center;
   z-index: 10;
 }
 
 @media screen and (max-width: 890px) {
   .popup__window {
-    margin: 123px calc((100% - 282px) / 2) 0;
+    max-width: 282px;
+    max-height: 322px;
   }
 }
