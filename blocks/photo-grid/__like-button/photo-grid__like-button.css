@@ -8,7 +8,7 @@
   border: 0px;
 }
 
-.photo-grid__like-button:disabled {
+.photo-grid__like-button:hover {
   opacity: 0.5;
 }
 
