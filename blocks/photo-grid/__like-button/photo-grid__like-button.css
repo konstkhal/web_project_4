@@ -9,6 +9,10 @@
 }
 
 .photo-grid__like-button:disabled {
+  opacity: 0.5;
+}
+
+.photo-grid__like-button:disabled {
   opacity: 1;
 }
 
