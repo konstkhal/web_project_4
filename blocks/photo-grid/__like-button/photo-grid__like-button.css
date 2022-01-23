@@ -1,6 +1,5 @@
 .photo-grid__like-button {
-  background-image: url(../../../images/Vector.svg);
-  background-color: transparent;
+  background: url(../../../images/Vector.svg);
   width: 21px;
   height: 19px;
   cursor: pointer;
@@ -18,5 +17,5 @@
 }
 
 .photo-grid__like-button:active {
-  background-image: url(../../../images/Union.svg);
+  background: url(../../../images/Union.svg);
 }
