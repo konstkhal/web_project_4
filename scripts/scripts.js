@@ -2,11 +2,49 @@
 /*                              Main scripts file                             */
 /* -------------------------------------------------------------------------- */
 
+/* -------------------------------------------------------------------------- */
+/*                              INITIAL variables                             */
+/* -------------------------------------------------------------------------- */
+
 let nameElement = document.querySelector(".profile__name");
 let nameInput = document.querySelector(".form__input_type_name");
 let roleElement = document.querySelector(".profile__role");
 let roleInput = document.querySelector(".form__input_type_role");
 const popupElement = document.querySelector(".popup"); // selecting the element with the class name "popup"
+
+const cardsListElement = document.querySelector(".photo-grid__list"); // selecting photo-grid__list to fill with cards
+
+const cardTemplateElement = document.querySelector("#card-template"); // selecting card template element
+/* -------------------------------------------------------------------------- */
+/*                              Six initial cards                             */
+/* -------------------------------------------------------------------------- */
+
+const initialCards = [
+  {
+    name: "Yosemite Valley",
+    link: "https://code.s3.yandex.net/web-code/yosemite.jpg",
+  },
+  {
+    name: "Lake Louise",
+    link: "https://code.s3.yandex.net/web-code/lake-louise.jpg",
+  },
+  {
+    name: "Bald Mountains",
+    link: "https://code.s3.yandex.net/web-code/bald-mountains.jpg",
+  },
+  {
+    name: "Latemar",
+    link: "https://code.s3.yandex.net/web-code/latemar.jpg",
+  },
+  {
+    name: "Vanoise National Park",
+    link: "https://code.s3.yandex.net/web-code/vanoise.jpg",
+  },
+  {
+    name: "Lago di Braies",
+    link: "https://code.s3.yandex.net/web-code/lago.jpg",
+  },
+];
 
 /* ------- Function to toggle appropriate class of element (popup_opened) ------ */
 function togglePopup() {
@@ -30,9 +68,82 @@ function savePopup(evt) {
 }
 
 /* -------------------------------------------------------------------------- */
+/*       TEMPLATE. Function to make card. Need to change function names       */
+/* -------------------------------------------------------------------------- */
+
+function createCard(card) {
+  // get card template and make a copy
+  const cardElement = cardTemplateElement.content
+    .querySelector(".photo-grid__item")
+    .cloneNode(true);
+  // select card element parts
+  const cardTitleElement = cardElement.querySelector(".photo-grid__title");
+  const cardImageElement = cardElement.querySelector(".photo-grid__image");
+  const cardLikeButtonElement = cardElement.querySelector(
+    ".photo-grid__like-button"
+  );
+  const cardTrashButtonElement = cardElement.querySelector(
+    ".photo-grid__delete-button"
+  );
+  // add card information
+  cardTitleElement.textContent = card.name;
+  cardImageElement.src = card.link;
+  cardImageElement.alt = card.name;
+  // add event listeners
+  cardLikeButtonElement.addEventListener("click", handleLikeButtonClick);
+  cardTrashButtonElement.addEventListener("click", handleTrashButtonClick);
+  cardImageElement.addEventListener("click", handleCardImageClick);
+  // return card
+  return cardElement;
+}
+
+/* -------------------------------------------------------------------------- */
+/*       TEMPLATE. Function to render card. Need to change function names     */
+/* -------------------------------------------------------------------------- */
+
+function renderCard(card) {
+  cardsListElement.prepend(createCard(card));
+}
+
+/* -------------------------------------------------------------------------- */
+/* TEMPLATE. Function to render INITIAL cards. Need to change function names  */
+/* -------------------------------------------------------------------------- */
+
+function renderInitialCards() {
+  initialCards.forEach((card) => renderCard(card));
+}
+
+/* -------------------------------------------------------------------------- */
+/* TEMPLATE. Function to handle LIKE button click. Need to change f - names   */
+/* -------------------------------------------------------------------------- */
+
+function handleLikeButtonClick(event) {
+  event.target.classList.toggle("like-button_active");
+}
+
+/* -------------------------------------------------------------------------- */
+/* TEMPLATE. Function to handle DELETE button click. Need to change f - names */
+/* -------------------------------------------------------------------------- */
+
+function handleTrashButtonClick(event) {
+  event.target.closest(".cards-list__item").remove();
+}
+
+/* -------------------------------------------------------------------------- */
+/* TEMPLATE. Function to handle image click. Need to change function names  */
+/* -------------------------------------------------------------------------- */
+
+function handleCardImageClick(event) {
+  previewPopupImage.src = event.target.src;
+  previewPopupImage.alt = event.target.alt;
+  previewPopupDescription.textContent = event.target.alt;
+  openPopup(previewPopup);
+}
+
+/* -------------------------------------------------------------------------- */
 /*                          Popup close functionality                         */
 /* -------------------------------------------------------------------------- */
-/* ---------------------------- Selecting closing button element --------------------------- */
+/* ------------- Selecting closing button element --------------------------- */
 let closeButton = document.querySelector(".popup__close-button");
 /* --------------------- Event listener for close button -------------------- */
 closeButton.addEventListener("click", togglePopup);
@@ -40,7 +151,7 @@ closeButton.addEventListener("click", togglePopup);
 /* -------------------------------------------------------------------------- */
 /*                          Popup open functionality                          */
 /* -------------------------------------------------------------------------- */
-/* ---------------------------- Selecting opening button element --------------------------- */
+/* ------------- Selecting opening button element --------------------------- */
 let openButton = document.querySelector(".profile__link-change");
 /* --------------------- Event listener for open button -------------------- */
 openButton.addEventListener("click", openPopup);
@@ -86,3 +197,7 @@ function handleProfileFormSubmit(evt) {
 // it will watch the submit event
 formElement.addEventListener('submit', handleProfileFormSubmit);
  -------------------------------------------------------------------------- */
+/* -------------------------------------------------------------------------- */
+/*                          INITIALIZATION                      */
+/* -------------------------------------------------------------------------- */
+renderInitialCards();
