@@ -101,7 +101,7 @@ let formSubmiter = document.querySelector(".popup__container_place-profile");
 formSubmiter.addEventListener("submit", savePopup);
 
 /* -------------------------------------------------------------------------- */
-/*       TEMPLATE. Function to make card. Need to change function names       */
+/*                           Function to make card.                           */
 /* -------------------------------------------------------------------------- */
 
 function createCard(card) {
@@ -131,7 +131,7 @@ function createCard(card) {
 }
 
 /* -------------------------------------------------------------------------- */
-/*       TEMPLATE. Function to render card. Need to change function names     */
+/*                      Function to render card.                              */
 /* -------------------------------------------------------------------------- */
 
 function renderCard(card) {
@@ -139,7 +139,7 @@ function renderCard(card) {
 }
 
 /* -------------------------------------------------------------------------- */
-/* TEMPLATE. Function to render INITIAL cards. Need to change function names  */
+/*                     Function to render INITIAL cards.                      */
 /* -------------------------------------------------------------------------- */
 
 function renderInitialCards() {
@@ -147,7 +147,7 @@ function renderInitialCards() {
 }
 
 /* -------------------------------------------------------------------------- */
-/* TEMPLATE. Function to handle LIKE button click. Need to change f - names   */
+/*                        Function to handle LIKE button click.               */
 /* -------------------------------------------------------------------------- */
 
 function handleLikeButtonClick(event) {
@@ -155,7 +155,7 @@ function handleLikeButtonClick(event) {
 }
 
 /* -------------------------------------------------------------------------- */
-/* TEMPLATE. Function to handle DELETE button click. Need to change f - names */
+/*      Function to handle DELETE button click.                               */
 /* -------------------------------------------------------------------------- */
 
 function handleTrashButtonClick(event) {
@@ -163,16 +163,26 @@ function handleTrashButtonClick(event) {
 }
 
 /* -------------------------------------------------------------------------- */
-/* TEMPLATE. Function to handle image click. Need to change function names  */
+/*                     Function to handle image click.                        */
 /* -------------------------------------------------------------------------- */
 
-function handleCardImageClick(event) {
-  previewPopupImage.src = event.target.src;
-  previewPopupImage.alt = event.target.alt;
-  previewPopupDescription.textContent = event.target.alt;
-  openPopup(previewPopup);
+const previewPopup = document.querySelector(".popup_type_preview");
+const previewPopupImage = document.querySelector(".popup__preview-image");
+const previewPopupCloseButton = document.querySelector(
+  ".popup__close-button_place_preview"
+);
+const previewPopupDescription = document.querySelector(".popup__description");
+
+function handleCardImageClick(evt) {
+  previewPopupImage.src = evt.target.src;
+  previewPopupImage.alt = evt.target.alt;
+  previewPopupDescription.textContent = evt.target.alt;
+  togglePopup(previewPopup);
 }
 
+previewPopupCloseButton.addEventListener("click", () =>
+  togglePopup(previewPopup)
+);
 /* -------------------------------------------------------------------------- */
 /*                        Popup ADD card functionality                        */
 /* -------------------------------------------------------------------------- */
@@ -189,7 +199,7 @@ const userInputImageLink = document.querySelector(
   ".form__input_type_image-link"
 );
 function handleNewCardButtonClick() {
-  console.log("click");
+  console.log("click fo new card");
   newCardForm.reset();
   togglePopup(newCardPopup);
 }
@@ -217,8 +227,6 @@ newCardForm.addEventListener("submit", handleNewCardFormSubmit);
 function handleLikeButtonClick(event) {
   event.target.classList.toggle("photo-grid__like-button_active");
 }
-
-//cardLikeButtonElement.addEventListener("click", handleLikeButtonClick);
 
 /* -------------------------------------------------------------------------- */
 /*                          INITIALIZATION                      */

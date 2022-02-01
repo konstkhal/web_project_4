@@ -72,6 +72,23 @@
     <footer class="footer">
       <p class="footer__paragraph">© 2022 Around The U.S.</p>
     </footer>
+
+    <!-- ----------------------------------------------------------------------- -->
+    <!--                       Popup Image Preview window                        -->
+    <!-- ----------------------------------------------------------------------- -->
+
+    <div class="popup popup_type_preview">
+      <div class="popup__window popup__window_type_preview">
+        <button
+          type="button"
+          class="popup__close-button popup__close-button_place_preview"
+          aria-label="close"
+        ></button>
+        <img src=" " alt="preview image" class="popup__preview-image" />
+        <p class="popup__description"></p>
+      </div>
+    </div>
+
     <!-- ----------------------------------------------------------------------- -->
     <!--                            Popup Edit window                            -->
     <!-- ----------------------------------------------------------------------- -->
@@ -154,7 +171,7 @@
       </div>
     </div>
     <!-- ----------------------------------------------------------------------- -->
-    <!--              Template. Need to change class names                       -->
+    <!--                            Template for card.                           -->
     <!--↓ ---------------------------------------------------------------------↓ -->
     <template id="card-template">
       <li class="photo-grid__item">
@@ -162,9 +179,7 @@
           type="button"
           class="button photo-grid__delete-button"
           aria-label="delete"
-        >
-          <!--  <img src="./images/delete.svg" alt="Delete button" class="button" /> -->
-        </button>
+        ></button>
         <img src=" " alt="" class="photo-grid__image" />
         <div class="photo-grid__container">
           <h2 class="photo-grid__title"></h2>
