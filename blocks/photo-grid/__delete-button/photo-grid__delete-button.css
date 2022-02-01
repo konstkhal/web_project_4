@@ -14,13 +14,4 @@
 .photo-grid__delete-button:hover {
   opacity: 0.5;
   background: url(../../../images/delete.svg);
-  position: absolute;
-  width: 18px;
-  height: 19px;
-  top: 18px;
-  right: 15px;
-  cursor: pointer;
-  transition: opacity 0.4s;
-  padding: 0;
-  border: 0px;
 }

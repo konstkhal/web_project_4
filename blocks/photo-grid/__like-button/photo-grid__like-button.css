@@ -11,11 +11,7 @@
 .photo-grid__like-button:hover {
   opacity: 0.5;
 }
-
+/*
 .photo-grid__like-button:disabled {
   opacity: 1;
-}
-
-.photo-grid__like-button:active {
-  background: url(../../../images/Union.svg);
-}
+} */

@@ -212,6 +212,15 @@ newCardPopupCloseButtonElement.addEventListener("click", () =>
 newCardForm.addEventListener("submit", handleNewCardFormSubmit);
 
 /* -------------------------------------------------------------------------- */
+/*                          Like button functionality                         */
+/* -------------------------------------------------------------------------- */
+function handleLikeButtonClick(event) {
+  event.target.classList.toggle("photo-grid__like-button_active");
+}
+
+//cardLikeButtonElement.addEventListener("click", handleLikeButtonClick);
+
+/* -------------------------------------------------------------------------- */
 /*                          INITIALIZATION                      */
 /* -------------------------------------------------------------------------- */
 renderInitialCards();
