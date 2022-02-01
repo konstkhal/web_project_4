@@ -159,7 +159,7 @@ function handleLikeButtonClick(event) {
 /* -------------------------------------------------------------------------- */
 
 function handleTrashButtonClick(event) {
-  event.target.closest(".cards-list__item").remove();
+  event.target.closest(".photo-grid__item").remove();
 }
 
 /* -------------------------------------------------------------------------- */
