@@ -3,17 +3,10 @@
 /* -------------------------------------------------------------------------- */
 
 /* -------------------------------------------------------------------------- */
-/*                              INITIAL variables                             */
+/*                     Cards initialization functionality                     */
 /* -------------------------------------------------------------------------- */
 
-let nameElement = document.querySelector(".profile__name");
-let nameInput = document.querySelector(".form__input_type_name");
-let roleElement = document.querySelector(".profile__role");
-let roleInput = document.querySelector(".form__input_type_role");
-const popupElement = document.querySelector(".popup"); // selecting the element with the class name "popup"
-
 const cardsListElement = document.querySelector(".photo-grid__list"); // selecting photo-grid__list to fill with cards
-
 const cardTemplateElement = document.querySelector("#card-template"); // selecting card template element
 /* -------------------------------------------------------------------------- */
 /*                              Six initial cards                             */
@@ -46,14 +39,27 @@ const initialCards = [
   },
 ];
 
+/* -------------------------------------------------------------------------- */
+/*                         Edit profile Functionality                         */
+/* -------------------------------------------------------------------------- */
+
+/* -------------------------------------------------------------------------- */
+/*                     INITIAL variables for profile edit                     */
+/* -------------------------------------------------------------------------- */
+const nameElement = document.querySelector(".profile__name");
+const nameInput = document.querySelector(".form__input_type_name");
+const roleElement = document.querySelector(".profile__role");
+const roleInput = document.querySelector(".form__input_type_role");
+const popupElement = document.querySelector(".popup_type_edit-profile"); // selecting the element with the class name "popup_type_edit-profile"
+
 /* ------- Function to toggle appropriate class of element (popup_opened) ------ */
-function togglePopup() {
-  popupElement.classList.toggle("popup_opened"); // toggling popup_opened class for selected element
+function togglePopup(popup) {
+  popup.classList.toggle("popup_opened"); // toggling popup_opened class for selected element
 }
 
 /* ------- Function to open popup ------ */
 function openPopup() {
-  togglePopup();
+  togglePopup(popupElement);
   nameInput.value = nameElement.textContent;
   roleInput.value = roleElement.textContent;
 }
@@ -62,10 +68,37 @@ function savePopup(evt) {
   // This line stops the browser from
   // submitting the form in the default way.
   evt.preventDefault();
-  togglePopup();
+  togglePopup(popupElement);
   nameElement.textContent = nameInput.value;
   roleElement.textContent = roleInput.value;
 }
+/* ------------------ Function to close profile popup ----------------- */
+function closePopup() {
+  togglePopup(popupElement);
+}
+
+/* -------------------------------------------------------------------------- */
+/*             Edit profile Popup close functionality                         */
+/* -------------------------------------------------------------------------- */
+/* ------------- Selecting closing button element --------------------------- */
+let closeButton = document.querySelector(".popup__close-button");
+/* --------------------- Event listener for close button -------------------- */
+closeButton.addEventListener("click", closePopup);
+
+/* -------------------------------------------------------------------------- */
+/*             Edit profile Popup open functionality                          */
+/* -------------------------------------------------------------------------- */
+/* ------------- Selecting opening button element --------------------------- */
+let openButton = document.querySelector(".profile__link-change");
+/* --------------------- Event listener for open button -------------------- */
+openButton.addEventListener("click", openPopup);
+
+/* -------------------------------------------------------------------------- */
+/*            Edit profile  Popup save functionality                          */
+/* -------------------------------------------------------------------------- */
+let formSubmiter = document.querySelector(".popup__container_place-profile");
+
+formSubmiter.addEventListener("submit", savePopup);
 
 /* -------------------------------------------------------------------------- */
 /*       TEMPLATE. Function to make card. Need to change function names       */
@@ -141,62 +174,43 @@ function handleCardImageClick(event) {
 }
 
 /* -------------------------------------------------------------------------- */
-/*                          Popup close functionality                         */
+/*                        Popup ADD card functionality                        */
 /* -------------------------------------------------------------------------- */
-/* ------------- Selecting closing button element --------------------------- */
-let closeButton = document.querySelector(".popup__close-button");
-/* --------------------- Event listener for close button -------------------- */
-closeButton.addEventListener("click", togglePopup);
-
-/* -------------------------------------------------------------------------- */
-/*                          Popup open functionality                          */
-/* -------------------------------------------------------------------------- */
-/* ------------- Selecting opening button element --------------------------- */
-let openButton = document.querySelector(".profile__link-change");
-/* --------------------- Event listener for open button -------------------- */
-openButton.addEventListener("click", openPopup);
-
-/* -------------------------------------------------------------------------- */
-/*                          Popup save functionality                          */
-/* -------------------------------------------------------------------------- */
-let formSubmiter = document.querySelector(".popup__container");
-
-formSubmiter.addEventListener("submit", savePopup);
-/* -------------------------------------------------------------------------- */
-/*                                 Submitting                                 */
-/* -------------------------------------------------------------------------- */
-/*
-// Let's find the form in the DOM
-let formElement = // Use the querySelector() method
-
-// Next is the form submit handler, though
-// it won't submit anywhere just yet
-
-// Note that the function name starts with a verb
-// and describes exactly what the function does
-function handleProfileFormSubmit(evt) {
-  // This line stops the browser from
-  // submitting the form in the default way.
-  evt.preventDefault();
-    // Having done so, we can define our own way of submitting the form.
-    // We'll explain it in more detail later.
-
-    // Let's find the form fields in the DOM
-    let nameInput = // Use querySelector()
-    let jobInput = // Use querySelector()
-
-    // Get the values of each field from the corresponding value property
-
-    // Select elements where the field values will be entered
-
-    // Insert new values using the textContent
-    // property of the querySelector() method
+const newCardForm = document.querySelector(".popup__container_place-card");
+const newCardPopup = document.querySelector(".popup_type_new-card");
+const newCardButtonElement = document.querySelector(".profile__link-add");
+const newCardPopupCloseButtonElement = document.querySelector(
+  ".popup__close-button_place_card"
+);
+const userInputImageTitle = document.querySelector(
+  ".form__input_type_image-title"
+);
+const userInputImageLink = document.querySelector(
+  ".form__input_type_image-link"
+);
+function handleNewCardButtonClick() {
+  console.log("click");
+  newCardForm.reset();
+  togglePopup(newCardPopup);
 }
 
-// Connect the handler to the form:
-// it will watch the submit event
-formElement.addEventListener('submit', handleProfileFormSubmit);
- -------------------------------------------------------------------------- */
+function handleNewCardFormSubmit(evt) {
+  evt.preventDefault();
+  const card = {
+    name: userInputImageTitle.value,
+    link: userInputImageLink.value,
+  };
+  renderCard(card);
+  console.log(card);
+  togglePopup(newCardPopup);
+}
+
+newCardButtonElement.addEventListener("click", handleNewCardButtonClick);
+newCardPopupCloseButtonElement.addEventListener("click", () =>
+  togglePopup(newCardPopup)
+);
+newCardForm.addEventListener("submit", handleNewCardFormSubmit);
+
 /* -------------------------------------------------------------------------- */
 /*                          INITIALIZATION                      */
 /* -------------------------------------------------------------------------- */

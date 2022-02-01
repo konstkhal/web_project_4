@@ -221,7 +221,10 @@
     <footer class="footer">
       <p class="footer__paragraph">© 2022 Around The U.S.</p>
     </footer>
-    <div class="popup">
+    <!-- ----------------------------------------------------------------------- -->
+    <!--                            Popup Edit window                            -->
+    <!-- ----------------------------------------------------------------------- -->
+    <div class="popup popup_type_edit-profile">
       <div class="popup__window">
         <button
           type="button"
@@ -229,10 +232,15 @@
           aria-label="close"
         ></button>
         <h2 class="popup__title">Edit profile</h2>
-        <form class="form popup__container" name="profileEditForm" novalidate>
+        <form
+          class="form popup__container popup__container_place-profile"
+          name="profileEditForm"
+          novalidate
+        >
           <input
-            value=" "
+            value="Input name"
             type="text"
+            placeholder=""
             class="form__input form__input_type_name"
             name="profileFormNameInput"
             required
@@ -241,7 +249,7 @@
           />
 
           <input
-            value=" "
+            value="Input role"
             type="text"
             class="form__input form__input_type_role"
             name="profileFormRoleInput"
@@ -251,6 +259,46 @@
           />
 
           <button type="submit" class="button form__submit-button">Save</button>
+        </form>
+      </div>
+    </div>
+
+    <!-- ----------------------------------------------------------------------- -->
+    <!--                         Popup create card window                        -->
+    <!-- ----------------------------------------------------------------------- -->
+    <div class="popup popup_type_new-card">
+      <div class="popup__window">
+        <button
+          type="button"
+          class="popup__close-button popup__close-button_place_card"
+          aria-label="close"
+        ></button>
+        <h2 class="popup__title">New place</h2>
+        <form
+          class="form popup__container popup__container_place-card"
+          name="newCardForm"
+          novalidate
+        >
+          <input
+            value=""
+            type="text"
+            class="form__input form__input_type_image-title"
+            placeholder="Title"
+            name="newCardFormImageTitleInput"
+          />
+          <input
+            value=" "
+            type="url"
+            class="form__input form__input_type_image-link"
+            placeholder="Image link"
+            name="newCardFormImageLinkInput"
+          />
+          <button
+            type="submit"
+            class="button form__submit-button form__submit-button_place_new-card"
+          >
+            Create
+          </button>
         </form>
       </div>
     </div>
