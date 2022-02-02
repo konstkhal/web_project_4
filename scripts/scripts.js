@@ -81,7 +81,9 @@ function closePopupEditProfile() {
 /*             Edit profile Popup close functionality                         */
 /* -------------------------------------------------------------------------- */
 /* ------------- Selecting closing button element --------------------------- */
-let closeButton = document.querySelector(".popup__close-button_place-profile");
+const closeButton = document.querySelector(
+  ".popup__close-button_place-profile"
+);
 /* --------------------- Event listener for close button -------------------- */
 
 closeButton.addEventListener("click", () => togglePopup(popupElement));
@@ -89,14 +91,14 @@ closeButton.addEventListener("click", () => togglePopup(popupElement));
 /*             Edit profile Popup open functionality                          */
 /* -------------------------------------------------------------------------- */
 /* ------------- Selecting opening button element --------------------------- */
-let openButton = document.querySelector(".profile__link-change");
+const openButton = document.querySelector(".profile__link-change");
 /* --------------------- Event listener for open button -------------------- */
 openButton.addEventListener("click", openPopup);
 
 /* -------------------------------------------------------------------------- */
 /*            Edit profile  Popup save functionality                          */
 /* -------------------------------------------------------------------------- */
-let formSubmiter = document.querySelector(".popup__container_place-profile");
+const formSubmiter = document.querySelector(".popup__container_place-profile");
 
 formSubmiter.addEventListener("submit", savePopup);
 
