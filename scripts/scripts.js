@@ -73,7 +73,7 @@ function savePopup(evt) {
   roleElement.textContent = roleInput.value;
 }
 /* ------------------ Function to close profile popup ----------------- */
-function closePopup() {
+function closePopupEditProfile() {
   togglePopup(popupElement);
 }
 
@@ -81,10 +81,10 @@ function closePopup() {
 /*             Edit profile Popup close functionality                         */
 /* -------------------------------------------------------------------------- */
 /* ------------- Selecting closing button element --------------------------- */
-let closeButton = document.querySelector(".popup__close-button");
+let closeButton = document.querySelector(".popup__close-button_place-profile");
 /* --------------------- Event listener for close button -------------------- */
-closeButton.addEventListener("click", closePopup);
 
+closeButton.addEventListener("click", () => togglePopup(popupElement));
 /* -------------------------------------------------------------------------- */
 /*             Edit profile Popup open functionality                          */
 /* -------------------------------------------------------------------------- */
