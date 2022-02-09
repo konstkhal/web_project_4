@@ -27,14 +27,14 @@ function togglePopup(popup) {
   popup.classList.toggle("popup_opened"); // toggling popup_opened class for selected element
 }
 
-/* ------- Function to open popup ------ */
-function openPopup() {
+/* ------- Function to edit popup ------ */
+function openEditProfile() {
   togglePopup(popupElement);
   nameInput.value = nameElement.textContent;
   roleInput.value = roleElement.textContent;
 }
 /* ------- Function to save popup ------ */
-function savePopup(evt) {
+function handleEditProfile(evt) {
   // This line stops the browser from
   // submitting the form in the default way.
   evt.preventDefault();
@@ -63,14 +63,14 @@ closeButton.addEventListener("click", () => togglePopup(popupElement));
 /* ------------- Selecting opening button element --------------------------- */
 const openButton = document.querySelector(".profile__link-change");
 /* --------------------- Event listener for open button -------------------- */
-openButton.addEventListener("click", openPopup);
+openButton.addEventListener("click", openEditProfile);
 
 /* -------------------------------------------------------------------------- */
 /*            Edit profile  Popup save functionality                          */
 /* -------------------------------------------------------------------------- */
 const formSubmiter = document.querySelector(".popup__container_place-profile");
 
-formSubmiter.addEventListener("submit", savePopup);
+formSubmiter.addEventListener("submit", handleEditProfile);
 
 /* -------------------------------------------------------------------------- */
 /*                           Function to make card.                           */
