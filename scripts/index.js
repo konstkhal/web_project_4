@@ -42,35 +42,43 @@ function handleEditProfile(evt) {
   nameElement.textContent = nameInput.value;
   roleElement.textContent = roleInput.value;
 }
-/* ------------------ Function to close profile popup ----------------- */
+/* ------------------ Function to close profile popup if opened----------------- */
 function closePopupEditProfile() {
-  togglePopup(popupElement);
+  if (popup.classList.contains(popup_opened)) {
+    togglePopup(popupElement);
+  }
 }
 
 /* -------------------------------------------------------------------------- */
 /*             Edit profile Popup close functionality                         */
 /* -------------------------------------------------------------------------- */
 /* ------------- Selecting closing button element --------------------------- */
-const closeButton = document.querySelector(
+const popupCloseEditProfileButton = document.querySelector(
   ".popup__close-button_place-profile"
 );
 /* --------------------- Event listener for close button -------------------- */
 
-closeButton.addEventListener("click", () => togglePopup(popupElement));
+popupCloseEditProfileButton.addEventListener("click", () =>
+  togglePopup(popupElement)
+);
 /* -------------------------------------------------------------------------- */
 /*             Edit profile Popup open functionality                          */
 /* -------------------------------------------------------------------------- */
 /* ------------- Selecting opening button element --------------------------- */
-const openButton = document.querySelector(".profile__link-change");
+const popupOpenEditProfileButton = document.querySelector(
+  ".profile__link-change"
+);
 /* --------------------- Event listener for open button -------------------- */
-openButton.addEventListener("click", openEditProfile);
+popupOpenEditProfileButton.addEventListener("click", openEditProfile);
 
 /* -------------------------------------------------------------------------- */
 /*            Edit profile  Popup save functionality                          */
 /* -------------------------------------------------------------------------- */
-const formSubmiter = document.querySelector(".popup__container_place-profile");
+const editProfileformSubmitter = document.querySelector(
+  ".popup__container_place-profile"
+);
 
-formSubmiter.addEventListener("submit", handleEditProfile);
+editProfileformSubmitter.addEventListener("submit", handleEditProfile);
 
 /* -------------------------------------------------------------------------- */
 /*                           Function to make card.                           */
@@ -171,7 +179,6 @@ const userInputImageLink = document.querySelector(
   ".form__input_type_image-link"
 );
 function handleNewCardButtonClick() {
-  console.log("click fo new card");
   newCardForm.reset();
   togglePopup(newCardPopup);
 }
@@ -183,7 +190,6 @@ function handleNewCardFormSubmit(evt) {
     link: userInputImageLink.value,
   };
   renderCard(card);
-  console.log(card);
   togglePopup(newCardPopup);
 }
 
