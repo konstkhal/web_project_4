@@ -14,6 +14,7 @@
 
 /*Elements*/
 @import url(../blocks/footer/__paragraph/footer__paragraph.css);
+@import url(../blocks/form/__error/form__error.css);
 @import url(../blocks/form/__input/form__input.css);
 @import url(../blocks/form/__submit-button/form__submit-button.css);
 @import url(../blocks/header/__logo/header__logo.css);

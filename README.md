@@ -28,17 +28,19 @@
 
 ← End of left uncompleted
 
-← I`m here
+
 
 * Step 1. Validating the "Edit Profile" Form. If a field of the "Edit profile" form doesn't pass the validation, a red error message should be displayed underneath it. Validation settings are as follows:
+    * HTML structure
+    ← I`m here
+    * CSS styling of blocks
+    * JS code
+
   Both fields are required.
   The "Name" field must contain between 2 and 40 characters.
   The "About" field must contain between 2 and 200 characters.
   Use the default error messages of the browser.
   If any field doesn't pass validation, the "Save" button should be inactive. If both fields pass validation, then they should be active. Use the colors from the design for the inactive buttons.
-    * HTML structure
-    * CSS styling of blocks
-    * JS code
 
 * Step 2. Validating the "New Place" Form
   This step is similar to the previous one, with just a few differences. The link field doesn't need a text length check. Instead, you need to check if a valid URL has been entered:
