@@ -1,7 +1,11 @@
 /* -------------------------------------------------------------------------- */
 /*                              Main scripts file                             */
 /* -------------------------------------------------------------------------- */
+/* -------------------------------------------------------------------------- */
+/*                              Importing scripts                             */
+/* -------------------------------------------------------------------------- */
 
+import { resetForm, config } from "./validate.js";
 /* -------------------------------------------------------------------------- */
 /*                     Cards initialization functionality                     */
 /* -------------------------------------------------------------------------- */
@@ -127,11 +131,12 @@ function renderInitialCards() {
 }
 
 /* -------------------------------------------------------------------------- */
+/*                          Like button functionality                         */
 /*                        Function to handle LIKE button click.               */
 /* -------------------------------------------------------------------------- */
 
 function handleLikeButtonClick(event) {
-  event.target.classList.toggle("like-button_active");
+  event.target.classList.toggle("photo-grid__like-button_active");
 }
 
 /* -------------------------------------------------------------------------- */
@@ -198,13 +203,6 @@ newCardPopupCloseButtonElement.addEventListener("click", () =>
   togglePopup(newCardPopup)
 );
 newCardForm.addEventListener("submit", handleNewCardFormSubmit);
-
-/* -------------------------------------------------------------------------- */
-/*                          Like button functionality                         */
-/* -------------------------------------------------------------------------- */
-function handleLikeButtonClick(event) {
-  event.target.classList.toggle("photo-grid__like-button_active");
-}
 
 /* -------------------------------------------------------------------------- */
 /*                          INITIALIZATION                      */

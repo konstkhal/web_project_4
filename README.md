@@ -32,8 +32,8 @@
 
 * Step 1. Validating the "Edit Profile" Form. If a field of the "Edit profile" form doesn't pass the validation, a red error message should be displayed underneath it. Validation settings are as follows:
     * HTML structure
-    ← I`m here
     * CSS styling of blocks
+        ← I`m here
     * JS code
 
   Both fields are required.
