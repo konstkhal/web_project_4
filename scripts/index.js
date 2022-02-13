@@ -192,8 +192,9 @@ previewPopupCloseButton.addEventListener("click", () => {
 const ESC_BUTTON = "Escape";
 
 const handleEscapeUp = (evt) => {
-  evt.preventDefault();
-  isEscapeEvent(evt, closePopup);
+  //debugger;
+
+  isEscapeEvent(evt);
 };
 
 /* -------------------------------------------------------------------------- */
@@ -201,6 +202,8 @@ const handleEscapeUp = (evt) => {
 /* -------------------------------------------------------------------------- */
 const isEscapeEvent = (evt) => {
   if (evt.key === ESC_BUTTON) {
+    evt.preventDefault();
+    //debugger;
     //console.log(evt.key);
     const popup = document.querySelector(".popup_opened");
     closePopup(popup);
