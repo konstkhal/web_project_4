@@ -29,9 +29,9 @@ const roleInput = document.querySelector(".form__input_type_role");
 const popupElement = document.querySelector(".popup_type_edit-profile"); // selecting the element with the class name "popup_type_edit-profile"
 
 /* ------- Function to toggle appropriate class of element (popup_opened) ------ */
-function togglePopup(popup) {
+/*function togglePopup(popup) {
   popup.classList.toggle("popup_opened"); // toggling popup_opened class for selected element
-}
+}*/
 
 /* -------------------------- Universal popup open -------------------------- */
 
@@ -47,7 +47,7 @@ function closePopup(popup) {
 
 /* ------- Function to edit popup ------ */
 function openEditProfile() {
-  togglePopup(popupElement);
+  openPopup(popupElement);
   nameInput.value = nameElement.textContent;
   roleInput.value = roleElement.textContent;
 }
@@ -56,14 +56,14 @@ function handleEditProfile(evt) {
   // This line stops the browser from
   // submitting the form in the default way.
   evt.preventDefault();
-  togglePopup(popupElement);
+  openPopup(popupElement);
   nameElement.textContent = nameInput.value;
   roleElement.textContent = roleInput.value;
 }
 /* ------------------ Function to close profile popup if opened----------------- */
 function closePopupEditProfile() {
   if (popup.classList.contains(popup_opened)) {
-    togglePopup(popupElement);
+    closePopup(popupElement);
   }
 }
 
@@ -77,7 +77,7 @@ const popupCloseEditProfileButton = document.querySelector(
 /* --------------------- Event listener for close button -------------------- */
 
 popupCloseEditProfileButton.addEventListener("click", () =>
-  togglePopup(popupElement)
+  closePopup(popupElement)
 );
 /* -------------------------------------------------------------------------- */
 /*             Edit profile Popup open functionality                          */
@@ -176,12 +176,12 @@ function handleCardImageClick(evt) {
   previewPopupImage.src = evt.target.src;
   previewPopupImage.alt = evt.target.alt;
   previewPopupDescription.textContent = evt.target.alt;
-  togglePopup(previewPopup);
+  openPopup(previewPopup);
   document.addEventListener("keyup", handleEscapeUp);
 }
 
 previewPopupCloseButton.addEventListener("click", () => {
-  togglePopup(previewPopup);
+  closePopup(previewPopup);
   document.removeEventListener("keyup", handleEscapeUp);
 });
 
@@ -193,7 +193,7 @@ const ESC_BUTTON = "Escape";
 
 const handleEscapeUp = (evt) => {
   evt.preventDefault();
-  isEscapeEvent(evt, closePopupEditProfile);
+  isEscapeEvent(evt, closePopup);
 };
 
 /* -------------------------------------------------------------------------- */
@@ -201,7 +201,7 @@ const handleEscapeUp = (evt) => {
 /* -------------------------------------------------------------------------- */
 const isEscapeEvent = (evt) => {
   if (evt.key === ESC_BUTTON) {
-    console.log(evt.key);
+    //console.log(evt.key);
     const popup = document.querySelector(".popup_opened");
     closePopup(popup);
   }
@@ -224,7 +224,7 @@ const userInputImageLink = document.querySelector(
 );
 function handleNewCardButtonClick() {
   newCardForm.reset();
-  togglePopup(newCardPopup);
+  openPopup(newCardPopup);
 }
 
 function handleNewCardFormSubmit(evt) {
@@ -234,12 +234,12 @@ function handleNewCardFormSubmit(evt) {
     link: userInputImageLink.value,
   };
   renderCard(card);
-  togglePopup(newCardPopup);
+  openPopup(newCardPopup);
 }
 
 newCardButtonElement.addEventListener("click", handleNewCardButtonClick);
 newCardPopupCloseButtonElement.addEventListener("click", () =>
-  togglePopup(newCardPopup)
+  closePopup(newCardPopup)
 );
 
 newCardForm.addEventListener("submit", handleNewCardFormSubmit);
