@@ -1,11 +1,13 @@
 /* -------------------------------------------------------------------------- */
 /*                              Main scripts file                             */
 /* -------------------------------------------------------------------------- */
+
 /* -------------------------------------------------------------------------- */
 /*                              Importing scripts                             */
 /* -------------------------------------------------------------------------- */
 
-import { resetForm, config } from "./validate.js";
+//import { resetForm, config } from "./validate.js";
+
 /* -------------------------------------------------------------------------- */
 /*                     Cards initialization functionality                     */
 /* -------------------------------------------------------------------------- */
@@ -29,6 +31,18 @@ const popupElement = document.querySelector(".popup_type_edit-profile"); // sele
 /* ------- Function to toggle appropriate class of element (popup_opened) ------ */
 function togglePopup(popup) {
   popup.classList.toggle("popup_opened"); // toggling popup_opened class for selected element
+}
+
+/* -------------------------- Universal popup open -------------------------- */
+
+function openPopup(popup) {
+  popup.classList.add("popup_opened");
+  document.addEventListener("keydown", handleEscapeUp);
+}
+/* -------------------------- Universal popup close ------------------------- */
+function closePopup(popup) {
+  popup.classList.remove("popup_opened");
+  document.removeEventListener("keydown", handleEscapeUp);
 }
 
 /* ------- Function to edit popup ------ */
@@ -140,7 +154,7 @@ function handleLikeButtonClick(event) {
 }
 
 /* -------------------------------------------------------------------------- */
-/*      Function to handle DELETE button click.                               */
+/*               Function to handle DELETE button click.                      */
 /* -------------------------------------------------------------------------- */
 
 function handleTrashButtonClick(event) {
@@ -163,11 +177,36 @@ function handleCardImageClick(evt) {
   previewPopupImage.alt = evt.target.alt;
   previewPopupDescription.textContent = evt.target.alt;
   togglePopup(previewPopup);
+  document.addEventListener("keyup", handleEscapeUp);
 }
 
-previewPopupCloseButton.addEventListener("click", () =>
-  togglePopup(previewPopup)
-);
+previewPopupCloseButton.addEventListener("click", () => {
+  togglePopup(previewPopup);
+  document.removeEventListener("keyup", handleEscapeUp);
+});
+
+/* -------------------------------------------------------------------------- */
+/*                          Escape key press listener                         */
+/* -------------------------------------------------------------------------- */
+
+const ESC_BUTTON = "Escape";
+
+const handleEscapeUp = (evt) => {
+  evt.preventDefault();
+  isEscapeEvent(evt, closePopupEditProfile);
+};
+
+/* -------------------------------------------------------------------------- */
+/*                           Escape action function                           */
+/* -------------------------------------------------------------------------- */
+const isEscapeEvent = (evt) => {
+  if (evt.key === ESC_BUTTON) {
+    console.log(evt.key);
+    const popup = document.querySelector(".popup_opened");
+    closePopup(popup);
+  }
+};
+
 /* -------------------------------------------------------------------------- */
 /*                        Popup ADD card functionality                        */
 /* -------------------------------------------------------------------------- */
@@ -202,9 +241,7 @@ newCardButtonElement.addEventListener("click", handleNewCardButtonClick);
 newCardPopupCloseButtonElement.addEventListener("click", () =>
   togglePopup(newCardPopup)
 );
+
 newCardForm.addEventListener("submit", handleNewCardFormSubmit);
 
-/* -------------------------------------------------------------------------- */
-/*                          INITIALIZATION                      */
-/* -------------------------------------------------------------------------- */
 renderInitialCards();
