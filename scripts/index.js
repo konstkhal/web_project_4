@@ -56,7 +56,7 @@ function handleEditProfile(evt) {
   // This line stops the browser from
   // submitting the form in the default way.
   evt.preventDefault();
-  openPopup(popupElement);
+  closePopup(popupElement);
   nameElement.textContent = nameInput.value;
   roleElement.textContent = roleInput.value;
 }
@@ -237,7 +237,7 @@ function handleNewCardFormSubmit(evt) {
     link: userInputImageLink.value,
   };
   renderCard(card);
-  openPopup(newCardPopup);
+  closePopup(newCardPopup);
 }
 
 newCardButtonElement.addEventListener("click", handleNewCardButtonClick);
