@@ -27,6 +27,7 @@ const nameInput = document.querySelector(".form__input_type_name");
 const roleElement = document.querySelector(".profile__role");
 const roleInput = document.querySelector(".form__input_type_role");
 const popupElement = document.querySelector(".popup_type_edit-profile"); // selecting the element with the class name "popup_type_edit-profile"
+const overlays = document.querySelectorAll(".popup");
 
 /* ------- Function to toggle appropriate class of element (popup_opened) ------ */
 /*function togglePopup(popup) {
@@ -38,12 +39,19 @@ const popupElement = document.querySelector(".popup_type_edit-profile"); // sele
 function openPopup(popup) {
   popup.classList.add("popup_opened");
   document.addEventListener("keydown", handleEscapeUp);
+  overlays.forEach(function (overlay) {
+    overlay.addEventListener("click", handlePopupMouseDown);
+  });
 }
 /* -------------------------- Universal popup close ------------------------- */
 function closePopup(popup) {
   popup.classList.remove("popup_opened");
   document.removeEventListener("keydown", handleEscapeUp);
+  overlays.forEach(function (overlay) {
+    overlay.removeEventListener("click", handlePopupMouseDown);
+  });
 }
+1;
 
 /* ------- Function to edit popup ------ */
 function openEditProfile() {
@@ -177,12 +185,14 @@ function handleCardImageClick(evt) {
   previewPopupImage.alt = evt.target.alt;
   previewPopupDescription.textContent = evt.target.alt;
   openPopup(previewPopup);
-  document.addEventListener("keyup", handleEscapeUp);
+  // document.addEventListener("keyup", handleEscapeUp);
+  // document.addEventListener("mousedown", handlePopupMouseDown);
 }
 
 previewPopupCloseButton.addEventListener("click", () => {
   closePopup(previewPopup);
-  document.removeEventListener("keyup", handleEscapeUp);
+  //  document.removeEventListener("keyup", handleEscapeUp);
+  //  document.removeEventListener("mousedown", handlePopupMouseDown);
 });
 
 /* -------------------------------------------------------------------------- */
@@ -192,8 +202,6 @@ previewPopupCloseButton.addEventListener("click", () => {
 const ESC_BUTTON = "Escape";
 
 const handleEscapeUp = (evt) => {
-  //debugger;
-
   isEscapeEvent(evt);
 };
 
@@ -203,13 +211,22 @@ const handleEscapeUp = (evt) => {
 const isEscapeEvent = (evt) => {
   if (evt.key === ESC_BUTTON) {
     evt.preventDefault();
-    //debugger;
-    //console.log(evt.key);
     const popup = document.querySelector(".popup_opened");
     closePopup(popup);
   }
 };
 
+/* -------------------------------------------------------------------------- */
+/*                             Mouseclick Handling                            */
+/* -------------------------------------------------------------------------- */
+
+function handlePopupMouseDown(event) {
+  const popup = document.querySelector(".popup_opened");
+  console.log(event.target + " VS " + event.currentTarget);
+  if (event.target === event.currentTarget) {
+    closePopup(event.target);
+  }
+}
 /* -------------------------------------------------------------------------- */
 /*                        Popup ADD card functionality                        */
 /* -------------------------------------------------------------------------- */
