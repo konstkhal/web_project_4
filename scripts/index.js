@@ -6,8 +6,6 @@
 /*                              Importing scripts                             */
 /* -------------------------------------------------------------------------- */
 
-//import { resetForm, config } from "./validate.js";
-
 /* -------------------------------------------------------------------------- */
 /*                     Cards initialization functionality                     */
 /* -------------------------------------------------------------------------- */
@@ -26,13 +24,8 @@ const nameElement = document.querySelector(".profile__name");
 const nameInput = document.querySelector(".form__input_type_name");
 const roleElement = document.querySelector(".profile__role");
 const roleInput = document.querySelector(".form__input_type_role");
-const popupElement = document.querySelector(".popup_type_edit-profile"); // selecting the element with the class name "popup_type_edit-profile"
+const profilePopupElement = document.querySelector(".popup_type_edit-profile"); // selecting the element with the class name "popup_type_edit-profile"
 const overlays = document.querySelectorAll(".popup");
-
-/* ------- Function to toggle appropriate class of element (popup_opened) ------ */
-/*function togglePopup(popup) {
-  popup.classList.toggle("popup_opened"); // toggling popup_opened class for selected element
-}*/
 
 /* -------------------------- Universal popup open -------------------------- */
 
@@ -55,7 +48,7 @@ function closePopup(popup) {
 
 /* ------- Function to edit popup ------ */
 function openEditProfile() {
-  openPopup(popupElement);
+  openPopup(profilePopupElement);
   nameInput.value = nameElement.textContent;
   roleInput.value = roleElement.textContent;
 }
@@ -64,14 +57,14 @@ function handleEditProfile(evt) {
   // This line stops the browser from
   // submitting the form in the default way.
   evt.preventDefault();
-  closePopup(popupElement);
+  closePopup(profilePopupElement);
   nameElement.textContent = nameInput.value;
   roleElement.textContent = roleInput.value;
 }
 /* ------------------ Function to close profile popup if opened----------------- */
 function closePopupEditProfile() {
   if (popup.classList.contains(popup_opened)) {
-    closePopup(popupElement);
+    closePopup(profilePopupElement);
   }
 }
 
@@ -85,7 +78,7 @@ const popupCloseEditProfileButton = document.querySelector(
 /* --------------------- Event listener for close button -------------------- */
 
 popupCloseEditProfileButton.addEventListener("click", () =>
-  closePopup(popupElement)
+  closePopup(profilePopupElement)
 );
 /* -------------------------------------------------------------------------- */
 /*             Edit profile Popup open functionality                          */

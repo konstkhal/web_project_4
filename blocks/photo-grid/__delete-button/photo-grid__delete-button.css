@@ -5,13 +5,14 @@
   height: 19px;
   top: 18px;
   right: 15px;
-  cursor: pointer;
+  cursor: default;
   transition: opacity 0.4s;
   padding: 0;
   border: 0px;
+  z-index: 1;
 }
 
 .photo-grid__delete-button:hover {
-  opacity: 0.5;
+  opacity: 0.6;
   background: url(../../../images/delete.svg);
 }
