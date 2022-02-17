@@ -1,4 +1,4 @@
-.button:hover {
+.button:hover:not(:disabled) {
   opacity: 0.6;
   cursor: pointer;
 }
@@ -8,4 +8,5 @@
   border: 1px solid black;
   background-color: #e5e5e5;
   opacity: 20%;
+  cursor: default;
 }
