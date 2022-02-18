@@ -40,11 +40,11 @@ function openPopup(popup) {
   popup.classList.add("popup_opened");
   document.addEventListener("keydown", handleEscapeUp);
   popup.addEventListener("mousedown", handlePopupMouseDown);
-  evaModule.toggleButton(
+  /* evaModule.toggleButton(
     popup,
     popup.querySelector(".form__submit-button"),
     evaModule.config
-  );
+  );*/
   // console.log(popup);
 }
 /* -------------------------- Universal popup close ------------------------- */
@@ -162,7 +162,6 @@ function renderInitialCards() {
 /* -------------------------------------------------------------------------- */
 
 function handleLikeButtonClick(event) {
-
   event.target.classList.toggle("photo-grid__like-button_active");
 }
 
@@ -250,6 +249,14 @@ const userInputImageLink = document.querySelector(
 function handleNewCardButtonClick() {
   newCardForm.reset();
   openPopup(newCardPopup);
+
+  console.log(newCardPopup.querySelector(".form__submit-button"));
+
+  evaModule.toggleButton(
+    [...newCardPopup.querySelectorAll(".form__input")],
+    newCardPopup.querySelector(".form__submit-button"),
+    evaModule.config
+  );
 }
 
 function handleNewCardFormSubmit(evt) {
