@@ -1,7 +1,10 @@
 /* -------------------------------------------------------------------------- */
 /*                              Main scripts file                             */
 /* -------------------------------------------------------------------------- */
-
+/* -------------------------------------------------------------------------- */
+/*                                   Imports                                  */
+/* -------------------------------------------------------------------------- */
+import * as evaModule from "./validate.js";
 /* -------------------------------------------------------------------------- */
 /*                              Importing scripts                             */
 /* -------------------------------------------------------------------------- */
@@ -25,6 +28,10 @@ const nameInput = document.querySelector(".form__input_type_name");
 const roleElement = document.querySelector(".profile__role");
 const roleInput = document.querySelector(".form__input_type_role");
 const profilePopupElement = document.querySelector(".popup_type_edit-profile"); // selecting the element with the class name "popup_type_edit-profile"
+
+/* -------------------------------------------------------------------------- */
+/*                       Closing popup on outside click                       */
+/* -------------------------------------------------------------------------- */
 const overlays = document.querySelectorAll(".popup");
 
 /* -------------------------- Universal popup open -------------------------- */
@@ -32,19 +39,23 @@ const overlays = document.querySelectorAll(".popup");
 function openPopup(popup) {
   popup.classList.add("popup_opened");
   document.addEventListener("keydown", handleEscapeUp);
-  overlays.forEach(function (overlay) {
-    overlay.addEventListener("click", handlePopupMouseDown);
-  });
+  popup.addEventListener("mousedown", handlePopupMouseDown);
+  evaModule.toggleButton(
+    popup,
+    popup.querySelector(".form__submit-button"),
+    evaModule.config
+  );
+  // console.log(popup);
 }
 /* -------------------------- Universal popup close ------------------------- */
 function closePopup(popup) {
   popup.classList.remove("popup_opened");
   document.removeEventListener("keydown", handleEscapeUp);
-  overlays.forEach(function (overlay) {
-    overlay.removeEventListener("click", handlePopupMouseDown);
-  });
+  popup.removeEventListener("mousedown", handlePopupMouseDown);
+  /*overlays.forEach(function (overlay) {
+    overlay.removeEventListener("mousedown", handlePopupMouseDown);
+  });*/
 }
-1;
 
 /* ------- Function to edit popup ------ */
 function openEditProfile() {
@@ -61,12 +72,12 @@ function handleEditProfile(evt) {
   nameElement.textContent = nameInput.value;
   roleElement.textContent = roleInput.value;
 }
-/* ------------------ Function to close profile popup if opened----------------- */
+/* ------------------ Function to close profile popup if opened-----------------
 function closePopupEditProfile() {
   if (popup.classList.contains(popup_opened)) {
     closePopup(profilePopupElement);
   }
-}
+}*/
 
 /* -------------------------------------------------------------------------- */
 /*             Edit profile Popup close functionality                         */
@@ -77,7 +88,7 @@ const popupCloseEditProfileButton = document.querySelector(
 );
 /* --------------------- Event listener for close button -------------------- */
 
-popupCloseEditProfileButton.addEventListener("click", () =>
+popupCloseEditProfileButton.addEventListener("mousedown", () =>
   closePopup(profilePopupElement)
 );
 /* -------------------------------------------------------------------------- */
@@ -88,7 +99,7 @@ const popupOpenEditProfileButton = document.querySelector(
   ".profile__link-change"
 );
 /* --------------------- Event listener for open button -------------------- */
-popupOpenEditProfileButton.addEventListener("click", openEditProfile);
+popupOpenEditProfileButton.addEventListener("mousedown", openEditProfile);
 
 /* -------------------------------------------------------------------------- */
 /*            Edit profile  Popup save functionality                          */
@@ -122,9 +133,9 @@ function createCard(card) {
   cardImageElement.src = card.link;
   cardImageElement.alt = card.name;
   // add event listeners
-  cardLikeButtonElement.addEventListener("click", handleLikeButtonClick);
-  cardTrashButtonElement.addEventListener("click", handleTrashButtonClick);
-  cardImageElement.addEventListener("click", handleCardImageClick);
+  cardLikeButtonElement.addEventListener("mousedown", handleLikeButtonClick);
+  cardTrashButtonElement.addEventListener("mousedown", handleTrashButtonClick);
+  cardImageElement.addEventListener("mousedown", handleCardImageClick);
   // return card
   return cardElement;
 }
@@ -151,6 +162,7 @@ function renderInitialCards() {
 /* -------------------------------------------------------------------------- */
 
 function handleLikeButtonClick(event) {
+
   event.target.classList.toggle("photo-grid__like-button_active");
 }
 
@@ -182,7 +194,7 @@ function handleCardImageClick(evt) {
   // document.addEventListener("mousedown", handlePopupMouseDown);
 }
 
-previewPopupCloseButton.addEventListener("click", () => {
+previewPopupCloseButton.addEventListener("mousedown", () => {
   closePopup(previewPopup);
   //  document.removeEventListener("keyup", handleEscapeUp);
   //  document.removeEventListener("mousedown", handlePopupMouseDown);
@@ -195,13 +207,13 @@ previewPopupCloseButton.addEventListener("click", () => {
 const ESC_BUTTON = "Escape";
 
 const handleEscapeUp = (evt) => {
-  isEscapeEvent(evt);
+  handleEscapeKeyDown(evt);
 };
 
 /* -------------------------------------------------------------------------- */
 /*                           Escape action function                           */
 /* -------------------------------------------------------------------------- */
-const isEscapeEvent = (evt) => {
+const handleEscapeKeyDown = (evt) => {
   if (evt.key === ESC_BUTTON) {
     evt.preventDefault();
     const popup = document.querySelector(".popup_opened");
@@ -215,7 +227,7 @@ const isEscapeEvent = (evt) => {
 
 function handlePopupMouseDown(event) {
   const popup = document.querySelector(".popup_opened");
-  console.log(event.target + " VS " + event.currentTarget);
+  //console.log(event.target + " VS " + event.currentTarget);
   if (event.target === event.currentTarget) {
     closePopup(event.target);
   }
@@ -250,11 +262,12 @@ function handleNewCardFormSubmit(evt) {
   closePopup(newCardPopup);
 }
 
-newCardButtonElement.addEventListener("click", handleNewCardButtonClick);
-newCardPopupCloseButtonElement.addEventListener("click", () =>
+newCardPopupCloseButtonElement.addEventListener("mousedown", () =>
   closePopup(newCardPopup)
 );
 
+//popupOpenEditProfileButton.addEventListener("mousedown", openEditProfile);
+newCardButtonElement.addEventListener("mousedown", handleNewCardButtonClick);
 newCardForm.addEventListener("submit", handleNewCardFormSubmit);
 
 renderInitialCards();
