@@ -4,7 +4,54 @@
 /* -------------------------------------------------------------------------- */
 /*                                   Imports                                  */
 /* -------------------------------------------------------------------------- */
-import * as evaModule from "./validate.js";
+//import * as evaModule from "./validate.js";
+import { Card } from "./Card.js";
+import FormValidator from "./FormValidator.js";
+import {
+  openPopup,
+  closePopup,
+  previewPopup,
+  previewPopupImage,
+  previewPopupCloseButton,
+  previewPopupDescription,
+} from "./utils.js"; //need to export all the least entities
+
+//validation activation
+
+const defaultFormConfig = {
+  inputSelector: ".form__input",
+  submitButtonSelector: ".form__submit-button",
+  inactiveButtonClass: "button_blocked",
+  inputErrorClass: "form__input-error",
+  errorClass: "form__input-error_visible",
+};
+
+// selecting the Popup element with Profile
+
+const profilePopupElement = document.querySelector(".popup_type_edit-profile"); //not sure
+const newCardPopup = document.querySelector(".popup_type_new-card"); //not sure
+
+const formElement = document.querySelector(".form"); //not sure
+
+//enableValidation(config);
+
+/**
+ * Validation objects
+ */
+//console.log(newCardPopup);
+//console.log(profilePopupElement);
+const editForm = new FormValidator(defaultFormConfig, profilePopupElement);
+const addCardForm = new FormValidator(defaultFormConfig, newCardPopup);
+//console.log(addCardForm);
+//debugger;
+editForm.enableValidation();
+addCardForm.enableValidation();
+//console.dir(editForm._config.inputList);
+editForm.resetValidation();
+addCardForm.resetValidation();
+//console.dir(editForm);
+
+//import cards from "./cards";
 /* -------------------------------------------------------------------------- */
 /*                              Importing scripts                             */
 /* -------------------------------------------------------------------------- */
@@ -12,9 +59,6 @@ import * as evaModule from "./validate.js";
 /* -------------------------------------------------------------------------- */
 /*                     Cards initialization functionality                     */
 /* -------------------------------------------------------------------------- */
-
-const cardsListElement = document.querySelector(".photo-grid__list"); // selecting photo-grid__list to fill with cards
-const cardTemplateElement = document.querySelector("#card-template"); // selecting card template element
 
 /* -------------------------------------------------------------------------- */
 /*                         Edit profile Functionality                         */
@@ -24,10 +68,10 @@ const cardTemplateElement = document.querySelector("#card-template"); // selecti
 /*                     INITIAL variables for profile edit                     */
 /* -------------------------------------------------------------------------- */
 const nameElement = document.querySelector(".profile__name");
-const nameInput = document.querySelector(".form__input_type_name");
+const nameInput = document.querySelector(".form__input_type_name"); //popup form
 const roleElement = document.querySelector(".profile__role");
 const roleInput = document.querySelector(".form__input_type_role");
-const profilePopupElement = document.querySelector(".popup_type_edit-profile"); // selecting the element with the class name "popup_type_edit-profile"
+//const profilePopupElement = document.querySelector(".popup_type_edit-profile"); // selecting the element with the class name "popup_type_edit-profile"
 
 /* -------------------------------------------------------------------------- */
 /*                       Closing popup on outside click                       */
@@ -36,38 +80,31 @@ const overlays = document.querySelectorAll(".popup");
 
 /* -------------------------- Universal popup open -------------------------- */
 
-function openPopup(popup) {
+/* function openPopup(popup) {
   popup.classList.add("popup_opened");
   document.addEventListener("keydown", handleEscapeUp);
   popup.addEventListener("mousedown", handlePopupMouseDown);
-  /* evaModule.toggleButton(
-    popup,
-    popup.querySelector(".form__submit-button"),
-    evaModule.config
-  );*/
-  // console.log(popup);
-}
+
+} */
 /* -------------------------- Universal popup close ------------------------- */
-function closePopup(popup) {
+/* function closePopup(popup) {
   popup.classList.remove("popup_opened");
   document.removeEventListener("keydown", handleEscapeUp);
   popup.removeEventListener("mousedown", handlePopupMouseDown);
-  /*overlays.forEach(function (overlay) {
-    overlay.removeEventListener("mousedown", handlePopupMouseDown);
-  });*/
 }
-
+ */
 /* ------- Function to edit popup ------ */
 function openEditProfile() {
+  editForm.resetValidation();
   openPopup(profilePopupElement);
   nameInput.value = nameElement.textContent;
   roleInput.value = roleElement.textContent;
 }
 /* ------- Function to save popup ------ */
-function handleEditProfile(evt) {
+function handleEditProfile(event) {
   // This line stops the browser from
   // submitting the form in the default way.
-  evt.preventDefault();
+  event.preventDefault();
   closePopup(profilePopupElement);
   nameElement.textContent = nameInput.value;
   roleElement.textContent = roleInput.value;
@@ -133,9 +170,9 @@ function createCard(card) {
   cardImageElement.src = card.link;
   cardImageElement.alt = card.name;
   // add event listeners
-  cardLikeButtonElement.addEventListener("mousedown", handleLikeButtonClick);
+  /*   cardLikeButtonElement.addEventListener("mousedown", handleLikeButtonClick);
   cardTrashButtonElement.addEventListener("mousedown", handleTrashButtonClick);
-  cardImageElement.addEventListener("mousedown", handleCardImageClick);
+  cardImageElement.addEventListener("mousedown", handleCardImageClick); */
   // return card
   return cardElement;
 }
@@ -144,8 +181,24 @@ function createCard(card) {
 /*                      Function to render card.                              */
 /* -------------------------------------------------------------------------- */
 
-function renderCard(card) {
+/*function renderCard(card) {
   cardsListElement.prepend(createCard(card));
+
+
+}*/
+// selecting photo-grid__list to fill with cards
+const cardsListElement = document.querySelector(".photo-grid__list");
+// selecting card template element
+const cardTemplateElement = document.querySelector("#card-template");
+
+/**
+ * @function renderCard creates Card object with data param and with template hardcoded
+ * @param {array} data contains {name, link}
+ * @var {text} cardTemplateElement contains text id of card element to be cloned
+ */
+function renderCard(data, cardsListElement) {
+  const card = new Card(data, cardTemplateElement);
+  cardsListElement.prepend(card.generateCard());
 }
 
 /* -------------------------------------------------------------------------- */
@@ -153,7 +206,7 @@ function renderCard(card) {
 /* -------------------------------------------------------------------------- */
 
 function renderInitialCards() {
-  initialCards.forEach((card) => renderCard(card));
+  initialCards.forEach((data) => renderCard(data, cardsListElement));
 }
 
 /* -------------------------------------------------------------------------- */
@@ -176,14 +229,14 @@ function handleTrashButtonClick(event) {
 /* -------------------------------------------------------------------------- */
 /*                     Function to handle image click.                        */
 /* -------------------------------------------------------------------------- */
-
+/*
 const previewPopup = document.querySelector(".popup_type_preview");
 const previewPopupImage = document.querySelector(".popup__preview-image");
 const previewPopupCloseButton = document.querySelector(
   ".popup__close-button_place_preview"
 );
 const previewPopupDescription = document.querySelector(".popup__description");
-
+ */
 function handleCardImageClick(evt) {
   previewPopupImage.src = evt.target.src;
   previewPopupImage.alt = evt.target.alt;
@@ -235,7 +288,7 @@ function handlePopupMouseDown(event) {
 /*                        Popup ADD card functionality                        */
 /* -------------------------------------------------------------------------- */
 const newCardForm = document.querySelector(".popup__container_place-card");
-const newCardPopup = document.querySelector(".popup_type_new-card");
+//const newCardPopup = document.querySelector(".popup_type_new-card");
 const newCardButtonElement = document.querySelector(".profile__link-add");
 const newCardPopupCloseButtonElement = document.querySelector(
   ".popup__close-button_place_card"
@@ -247,25 +300,27 @@ const userInputImageLink = document.querySelector(
   ".form__input_type_image-link"
 );
 function handleNewCardButtonClick() {
-  newCardForm.reset();
+  //new card button
+  addCardForm.resetValidation();
+  // newCardForm.reset();
   openPopup(newCardPopup);
 
-  console.log(newCardPopup.querySelector(".form__submit-button"));
+  // console.log(newCardPopup.querySelector(".form__submit-button"));
 
-  evaModule.toggleButton(
+  toggleButton(
     [...newCardPopup.querySelectorAll(".form__input")],
     newCardPopup.querySelector(".form__submit-button"),
     evaModule.config
   );
 }
 
-function handleNewCardFormSubmit(evt) {
-  evt.preventDefault();
+function handleNewCardFormSubmit(event) {
+  event.preventDefault();
   const card = {
     name: userInputImageTitle.value,
     link: userInputImageLink.value,
   };
-  renderCard(card);
+  renderCard(card, cardsListElement);
   closePopup(newCardPopup);
 }
 
@@ -276,5 +331,19 @@ newCardPopupCloseButtonElement.addEventListener("mousedown", () =>
 //popupOpenEditProfileButton.addEventListener("mousedown", openEditProfile);
 newCardButtonElement.addEventListener("mousedown", handleNewCardButtonClick);
 newCardForm.addEventListener("submit", handleNewCardFormSubmit);
+
+/**
+ * Implementation of classes based validation
+ *
+ */
+
+/*
+const nameElement = document.querySelector(".profile__name");
+const nameInput = document.querySelector(".form__input_type_name"); //popup form
+const roleElement = document.querySelector(".profile__role");
+const roleInput = document.querySelector(".form__input_type_role");
+const profilePopupElement = document.querySelector(".popup_type_edit-profile");
+// selecting the element with the class name "popup_type_edit-profile"
+*/
 
 renderInitialCards();
