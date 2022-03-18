@@ -28,28 +28,18 @@ const defaultFormConfig = {
 
 // selecting the Popup element with Profile
 
-const profilePopupElement = document.querySelector(".popup_type_edit-profile"); //not sure
+const profilePopupElement = document.querySelector(".popup_type_edit-profile");
+//not sure
 const newCardPopup = document.querySelector(".popup_type_new-card"); //not sure
 
-const formElement = document.querySelector(".form"); //not sure
-
-//enableValidation(config);
-
-/**
- * Validation objects
- */
-//console.log(newCardPopup);
-//console.log(profilePopupElement);
 const editForm = new FormValidator(defaultFormConfig, profilePopupElement);
 const addCardForm = new FormValidator(defaultFormConfig, newCardPopup);
-//console.log(addCardForm);
-//debugger;
-editForm.enableValidation();
+
 addCardForm.enableValidation();
-//console.dir(editForm._config.inputList);
-editForm.resetValidation();
+editForm.enableValidation();
+
 addCardForm.resetValidation();
-//console.dir(editForm);
+editForm.resetValidation();
 
 //import cards from "./cards";
 /* -------------------------------------------------------------------------- */
@@ -71,7 +61,8 @@ const nameElement = document.querySelector(".profile__name");
 const nameInput = document.querySelector(".form__input_type_name"); //popup form
 const roleElement = document.querySelector(".profile__role");
 const roleInput = document.querySelector(".form__input_type_role");
-//const profilePopupElement = document.querySelector(".popup_type_edit-profile"); // selecting the element with the class name "popup_type_edit-profile"
+//const profilePopupElement = document.querySelector(".popup_type_edit-profile");
+// selecting the element with the class name "popup_type_edit-profile"
 
 /* -------------------------------------------------------------------------- */
 /*                       Closing popup on outside click                       */
