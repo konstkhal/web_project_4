@@ -28,17 +28,50 @@ const defaultFormConfig = {
 
 // selecting the Popup element with Profile
 
-const profilePopupElement = document.querySelector(".popup_type_edit-profile");
+//const profilePopupElement = document.querySelector(".popup_type_edit-profile");
 //not sure
-const newCardPopup = document.querySelector(".popup_type_new-card"); //not sure
+//const newCardPopup = document.querySelector(".popup_type_new-card"); //not sure
 
-const editForm = new FormValidator(defaultFormConfig, profilePopupElement);
+const profilePopupElement = document.querySelector(
+  ".popup__container_place-profile"
+);
+//not sure
+const newCardPopup = document.querySelector(".popup__container_place-card"); //not sure
+
+/*
+popup__container_place-profile
+popup__container_place-card
+*/
+
 const addCardForm = new FormValidator(defaultFormConfig, newCardPopup);
+/*
+console.log(
+  addCardForm._element.querySelectorAll(addCardForm._config.inputSelector)
+);
+*/
+/*
+console.log("Индекс 1 Создали только эдд");
+*/
+const editForm = new FormValidator(defaultFormConfig, profilePopupElement);
+/*
+
+*/
 
 addCardForm.enableValidation();
 editForm.enableValidation();
 
+console.log(
+  addCardForm._element.querySelectorAll(addCardForm._config.inputSelector)
+);
+//console.log(editForm._element.querySelectorAll(editForm._config.inputSelector));
+console.log("Индекс 2");
+
 addCardForm.resetValidation();
+/* console.log(
+  addCardForm._element.querySelectorAll(addCardForm._config.inputSelector)
+);
+console.log(editForm._element.querySelectorAll(editForm._config.inputSelector));
+console.log("Индекс 2"); */
 editForm.resetValidation();
 
 //import cards from "./cards";
@@ -61,7 +94,7 @@ const nameElement = document.querySelector(".profile__name");
 const nameInput = document.querySelector(".form__input_type_name"); //popup form
 const roleElement = document.querySelector(".profile__role");
 const roleInput = document.querySelector(".form__input_type_role");
-//const profilePopupElement = document.querySelector(".popup_type_edit-profile");
+// const profilePopupElement = document.querySelector(".popup_type_edit-profile");
 // selecting the element with the class name "popup_type_edit-profile"
 
 /* -------------------------------------------------------------------------- */
@@ -142,7 +175,7 @@ editProfileformSubmitter.addEventListener("submit", handleEditProfile);
 /*                           Function to make card.                           */
 /* -------------------------------------------------------------------------- */
 
-function createCard(card) {
+/* function createCard(card) {
   // get card template and make a copy
   const cardElement = cardTemplateElement.content
     .querySelector(".photo-grid__item")
@@ -161,12 +194,10 @@ function createCard(card) {
   cardImageElement.src = card.link;
   cardImageElement.alt = card.name;
   // add event listeners
-  /*   cardLikeButtonElement.addEventListener("mousedown", handleLikeButtonClick);
-  cardTrashButtonElement.addEventListener("mousedown", handleTrashButtonClick);
-  cardImageElement.addEventListener("mousedown", handleCardImageClick); */
+
   // return card
   return cardElement;
-}
+} */
 
 /* -------------------------------------------------------------------------- */
 /*                      Function to render card.                              */
@@ -247,34 +278,34 @@ previewPopupCloseButton.addEventListener("mousedown", () => {
 /*                          Escape key press listener                         */
 /* -------------------------------------------------------------------------- */
 
-const ESC_BUTTON = "Escape";
+/* const ESC_BUTTON = "Escape";
 
 const handleEscapeUp = (evt) => {
   handleEscapeKeyDown(evt);
 };
-
+ */
 /* -------------------------------------------------------------------------- */
 /*                           Escape action function                           */
 /* -------------------------------------------------------------------------- */
-const handleEscapeKeyDown = (evt) => {
+/* const handleEscapeKeyDown = (evt) => {
   if (evt.key === ESC_BUTTON) {
     evt.preventDefault();
     const popup = document.querySelector(".popup_opened");
     closePopup(popup);
   }
-};
+}; */
 
 /* -------------------------------------------------------------------------- */
 /*                             Mouseclick Handling                            */
 /* -------------------------------------------------------------------------- */
 
-function handlePopupMouseDown(event) {
+/* function handlePopupMouseDown(event) {
   const popup = document.querySelector(".popup_opened");
   //console.log(event.target + " VS " + event.currentTarget);
   if (event.target === event.currentTarget) {
     closePopup(event.target);
   }
-}
+} */
 /* -------------------------------------------------------------------------- */
 /*                        Popup ADD card functionality                        */
 /* -------------------------------------------------------------------------- */
@@ -327,14 +358,5 @@ newCardForm.addEventListener("submit", handleNewCardFormSubmit);
  * Implementation of classes based validation
  *
  */
-
-/*
-const nameElement = document.querySelector(".profile__name");
-const nameInput = document.querySelector(".form__input_type_name"); //popup form
-const roleElement = document.querySelector(".profile__role");
-const roleInput = document.querySelector(".form__input_type_role");
-const profilePopupElement = document.querySelector(".popup_type_edit-profile");
-// selecting the element with the class name "popup_type_edit-profile"
-*/
 
 renderInitialCards();

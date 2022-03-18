@@ -1,14 +1,17 @@
 class FormValidator {
   constructor(config, formEl) {
-    console.log(this);
     this._config = config; //configs are here
     this._element = formEl; //my form is here
+
     this._buttonElement = this._element.querySelector(
       this._config.submitButtonSelector
     );
     this._config.inputList = Array.from(
       this._element.querySelectorAll(this._config.inputSelector)
     );
+
+    /*     console.log(this._config.inputList);
+    console.log("Конструктор"); */
   }
 
   _toggleButton() {
@@ -29,36 +32,38 @@ class FormValidator {
   _setEventListeners = () => {
     this._toggleButton();
 
-    this._config.inputList.forEach((inputElement) => {
-      inputElement.addEventListener("input", () => {
+    this._config.inputList.forEach((input) => {
+      input.addEventListener("input", () => {
         this._сheckInputValidity(input);
         this._toggleButton();
       });
     });
   };
 
-  _showInputError = (inputElement) => {
-    const errorSpan = this._element.querySelector(`#${inputElement.id}-error`);
+  _showInputError = (input) => {
+    const errorSpan = this._element.querySelector(`#${input.id}-error`);
 
-    errorSpan.textContent = inputElement.validationMessage; //is it correct?
+    errorSpan.textContent = input.validationMessage; //is it correct?
     errorSpan.classList.add(this._config.errorClass);
-    inputElement.classList.add(this._config.inputErrorClass);
+    input.classList.add(this._config.inputErrorClass);
   };
 
-  _hideInputError = (inputElement) => {
-    const errorSpan = this._element.querySelector(`#${inputElement.id}-error`);
-    /*     console.log(inputElement);
-    console.log(errorSpan); */
+  _hideInputError = (input) => {
+    /*     console.log(this);
+    console.log(this._config.inputList); */
+    const errorSpan = this._element.querySelector(`#${input.id}-error`);
+    // console.log(errorSpan);
+
     errorSpan.textContent = "";
     errorSpan.classList.remove(this._config.errorClass);
-    inputElement.classList.remove(this._config.inputErrorClass);
+    input.classList.remove(this._config.inputErrorClass);
   };
 
-  _сheckInputValidity = (inputElement) => {
-    if (inputElement.validity.valid) {
-      this._hideInputError(inputElement);
+  _сheckInputValidity = (input) => {
+    if (input.validity.valid) {
+      this._hideInputError(input);
     } else {
-      this._showInputError(inputElement);
+      this._showInputError(input);
     }
   };
 
@@ -72,8 +77,12 @@ class FormValidator {
   }
 
   resetValidation() {
+    console.log(this);
+    console.log(this._config.inputList);
+    //  this._toggleButton();
+
     this._config.inputList.forEach((input) => {
-      console.log(input);
+      //console.log(input);
       this._hideInputError(input);
     });
   }
