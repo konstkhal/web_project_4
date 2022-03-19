@@ -77,12 +77,11 @@ class FormValidator {
   }
 
   resetValidation() {
-    console.log(this);
-    console.log(this._config.inputList);
+    /*  console.log(this);
+    console.log(this._config.inputList); */
     //  this._toggleButton();
 
     this._config.inputList.forEach((input) => {
-      //console.log(input);
       this._hideInputError(input);
     });
   }

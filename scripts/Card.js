@@ -53,10 +53,12 @@ export class Card {
   }
 
   _handleLikeButtonClick = (event) => {
+    console.log(event);
     event.target.classList.toggle("photo-grid__like-button_active");
   };
 
   _handleTrashButtonClick = (event) => {
+    console.log(event);
     event.target.closest(".photo-grid__item").remove();
     //the same as this._cardElement.remove?
   };

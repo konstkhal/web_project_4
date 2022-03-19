@@ -28,20 +28,13 @@ const defaultFormConfig = {
 
 // selecting the Popup element with Profile
 
-//const profilePopupElement = document.querySelector(".popup_type_edit-profile");
+const profilePopupElement = document.querySelector(".popup_type_edit-profile");
 //not sure
-//const newCardPopup = document.querySelector(".popup_type_new-card"); //not sure
+const newCardPopup = document.querySelector(".popup_type_new-card"); //not sure
 
-const profilePopupElement = document.querySelector(
-  ".popup__container_place-profile"
-);
+//const profilePopupElement = document.querySelector(  ".popup__container_place-profile");
 //not sure
-const newCardPopup = document.querySelector(".popup__container_place-card"); //not sure
-
-/*
-popup__container_place-profile
-popup__container_place-card
-*/
+//const newCardPopup = document.querySelector(".popup__container_place-card"); //not sure
 
 const addCardForm = new FormValidator(defaultFormConfig, newCardPopup);
 /*
@@ -52,19 +45,19 @@ console.log(
 /*
 console.log("Индекс 1 Создали только эдд");
 */
-const editForm = new FormValidator(defaultFormConfig, profilePopupElement);
+//const editForm = new FormValidator(defaultFormConfig, profilePopupElement);
 /*
 
 */
 
 addCardForm.enableValidation();
-editForm.enableValidation();
+//editForm.enableValidation();
 
-console.log(
+/* console.log(
   addCardForm._element.querySelectorAll(addCardForm._config.inputSelector)
-);
+); */
 //console.log(editForm._element.querySelectorAll(editForm._config.inputSelector));
-console.log("Индекс 2");
+//console.log("Индекс 2");
 
 addCardForm.resetValidation();
 /* console.log(
@@ -72,7 +65,7 @@ addCardForm.resetValidation();
 );
 console.log(editForm._element.querySelectorAll(editForm._config.inputSelector));
 console.log("Индекс 2"); */
-editForm.resetValidation();
+//editForm.resetValidation();
 
 //import cards from "./cards";
 /* -------------------------------------------------------------------------- */
@@ -323,17 +316,12 @@ const userInputImageLink = document.querySelector(
 );
 function handleNewCardButtonClick() {
   //new card button
+  openPopup(newCardPopup);
+  console.log(newCardPopup);
   addCardForm.resetValidation();
   // newCardForm.reset();
-  openPopup(newCardPopup);
 
-  // console.log(newCardPopup.querySelector(".form__submit-button"));
-
-  toggleButton(
-    [...newCardPopup.querySelectorAll(".form__input")],
-    newCardPopup.querySelector(".form__submit-button"),
-    evaModule.config
-  );
+  console.log("click");
 }
 
 function handleNewCardFormSubmit(event) {
