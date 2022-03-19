@@ -3,13 +3,24 @@
 ### Overview
 * [Link to deployed project 4] (https://konstkhal.github.io/web_project_4/)
 
-### Technology and tools used4
+### Technology and tools used
 
 * [commitlint.io:] (https://commitlint.io/)
 * [emoji as favicon] (https://css-tricks.com/svg-favicons-and-all-the-fun-things-we-can-do-with-them/)
 * [I had fun with vanilla JavaScript!] (http://vanilla-js.com/ Vanilla JS)
 
-#### TODO
+
+### GENERAL TODO LIST
+#### BLOCKING, INEVIRABLE TODO
+5. Edit profile should work
+4. Add card should work
+3. Button delete should work
+2. Button like should work
+1. Both FormValidator objects should work
+
+
+
+#### OPTIONAL TODO
 * Header section for all @media queries
 * Thematic break -//-
 * Fonts / readability
