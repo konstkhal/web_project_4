@@ -3,4 +3,5 @@
   flex-direction: row;
   align-items: center;
   justify-content: space-between;
+  /*height: calc(361px - 216px);*/
 }
