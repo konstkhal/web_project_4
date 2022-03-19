@@ -6,5 +6,5 @@
   line-height: calc(15 / 12);
   font-weight: normal;
   color: #f00;
-  visibility: hidden;
+  /*visibility: hidden;*/
 }

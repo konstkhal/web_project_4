@@ -1,6 +1,9 @@
 class FormValidator {
   constructor(config, formEl) {
-    this._config = config; //configs are here
+    // this._config = [...config]; //configs are here
+    this._config = {};
+    Object.assign(this._config, config);
+
     this._element = formEl; //my form is here
 
     this._buttonElement = this._element.querySelector(

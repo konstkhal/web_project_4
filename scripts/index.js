@@ -45,13 +45,13 @@ console.log(
 /*
 console.log("Индекс 1 Создали только эдд");
 */
-//const editForm = new FormValidator(defaultFormConfig, profilePopupElement);
+const editForm = new FormValidator(defaultFormConfig, profilePopupElement);
 /*
 
 */
 
 addCardForm.enableValidation();
-//editForm.enableValidation();
+editForm.enableValidation();
 
 /* console.log(
   addCardForm._element.querySelectorAll(addCardForm._config.inputSelector)
@@ -65,7 +65,7 @@ addCardForm.resetValidation();
 );
 console.log(editForm._element.querySelectorAll(editForm._config.inputSelector));
 console.log("Индекс 2"); */
-//editForm.resetValidation();
+editForm.resetValidation();
 
 //import cards from "./cards";
 /* -------------------------------------------------------------------------- */
