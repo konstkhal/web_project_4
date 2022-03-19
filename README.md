@@ -12,10 +12,10 @@
 
 ### GENERAL TODO LIST
 #### BLOCKING, INEVIRABLE TODO
-5. Edit profile should work
-4. Add card should work
-3. Button delete should work
-2. Button like should work
+1. Edit profile should work
+1. Add card should work
+1. Button delete should work
+1. Button like should work
 1. Both FormValidator objects should work
 
 
