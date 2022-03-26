@@ -1,20 +1,15 @@
 class FormValidator {
   constructor(config, formEl) {
-    // this._config = [...config]; //configs are here
-    this._config = {};
-    Object.assign(this._config, config);
+    this._config = { ...config };
 
     this._element = formEl; //my form is here
 
     this._buttonElement = this._element.querySelector(
       this._config.submitButtonSelector
     );
-    this._config.inputList = Array.from(
+    this._inputList = Array.from(
       this._element.querySelectorAll(this._config.inputSelector)
     );
-
-    /*     console.log(this._config.inputList);
-    console.log("Конструктор"); */
   }
 
   _toggleButton() {
@@ -26,16 +21,13 @@ class FormValidator {
   }
 
   _hasValidInputs() {
-    //check?
-    return this._config.inputList.every(
-      (input) => input.validity.valid === true
-    );
+    return this._inputList.every((input) => input.validity.valid === true);
   }
 
   _setEventListeners = () => {
     this._toggleButton();
 
-    this._config.inputList.forEach((input) => {
+    this._inputList.forEach((input) => {
       input.addEventListener("input", () => {
         this._сheckInputValidity(input);
         this._toggleButton();
@@ -46,16 +38,13 @@ class FormValidator {
   _showInputError = (input) => {
     const errorSpan = this._element.querySelector(`#${input.id}-error`);
 
-    errorSpan.textContent = input.validationMessage; //is it correct?
+    errorSpan.textContent = input.validationMessage;
     errorSpan.classList.add(this._config.errorClass);
     input.classList.add(this._config.inputErrorClass);
   };
 
   _hideInputError = (input) => {
-    /*     console.log(this);
-    console.log(this._config.inputList); */
     const errorSpan = this._element.querySelector(`#${input.id}-error`);
-    // console.log(errorSpan);
 
     errorSpan.textContent = "";
     errorSpan.classList.remove(this._config.errorClass);
@@ -80,11 +69,7 @@ class FormValidator {
   }
 
   resetValidation() {
-    /*  console.log(this);
-    console.log(this._config.inputList); */
-    //  this._toggleButton();
-
-    this._config.inputList.forEach((input) => {
+    this._inputList.forEach((input) => {
       this._hideInputError(input);
     });
   }
