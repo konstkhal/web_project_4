@@ -10,7 +10,7 @@ export class Card {
     //#card-template
     //this.data = data;
     this._cardSelector = cardSelector; //template selector
-    //console.log(this._cardSelector);
+
 
     this._cardTemplate =
       this._cardSelector.content.querySelector(".photo-grid__item"); // selecting card template element

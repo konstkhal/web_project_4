@@ -50,7 +50,7 @@ const handleEscapeKeyDown = (event) => {
 
 function handlePopupMouseDown(event) {
   const popup = document.querySelector(".popup_opened");
-  //console.log(event.target + " VS " + event.currentTarget);
+
   if (event.target === event.currentTarget) {
     closePopup(event.target);
   }
