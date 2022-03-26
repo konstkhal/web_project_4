@@ -7,14 +7,7 @@
 
 import { Card } from "./Card.js";
 import FormValidator from "./FormValidator.js";
-import {
-  openPopup,
-  closePopup,
-  previewPopup,
-  previewPopupImage,
-  previewPopupCloseButton,
-  previewPopupDescription,
-} from "./utils.js";
+import { openPopup, closePopup } from "./utils.js";
 
 //validation activation
 
@@ -25,6 +18,21 @@ const defaultFormConfig = {
   inputErrorClass: "form__input-error",
   errorClass: "form__input-error_visible",
 };
+
+export const previewPopup = document.querySelector(".popup_type_preview");
+export const previewPopupImage = document.querySelector(
+  ".popup__preview-image"
+);
+export const previewPopupCloseButton = document.querySelector(
+  ".popup__close-button_place_preview"
+);
+export const previewPopupDescription = document.querySelector(
+  ".popup__description"
+);
+
+previewPopupCloseButton.addEventListener("mousedown", () => {
+  closePopup(previewPopup);
+});
 
 // selecting the Popup element with Profile
 

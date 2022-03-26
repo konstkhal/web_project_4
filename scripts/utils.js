@@ -1,14 +1,3 @@
-export const previewPopup = document.querySelector(".popup_type_preview");
-export const previewPopupImage = document.querySelector(
-  ".popup__preview-image"
-);
-export const previewPopupCloseButton = document.querySelector(
-  ".popup__close-button_place_preview"
-);
-export const previewPopupDescription = document.querySelector(
-  ".popup__description"
-);
-
 export function openPopup(popup) {
   popup.classList.add("popup_opened");
   document.addEventListener("keydown", handleEscapeKeyDown);
@@ -22,10 +11,6 @@ export function closePopup(popup) {
   document.removeEventListener("keydown", handleEscapeKeyDown);
   popup.removeEventListener("mousedown", handlePopupMouseDown);
 }
-
-previewPopupCloseButton.addEventListener("mousedown", () => {
-  closePopup(previewPopup);
-});
 
 /* -------------------------------------------------------------------------- */
 /*                          Escape key value CONST                       */
@@ -49,8 +34,6 @@ const handleEscapeKeyDown = (event) => {
 /* -------------------------------------------------------------------------- */
 
 function handlePopupMouseDown(event) {
-  const popup = document.querySelector(".popup_opened");
-
   if (event.target === event.currentTarget) {
     closePopup(event.target);
   }

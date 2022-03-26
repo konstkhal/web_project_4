@@ -1,16 +1,15 @@
+import { openPopup } from "./utils.js";
 import {
-  openPopup,
   previewPopup,
   previewPopupImage,
   previewPopupDescription,
-} from "./utils.js";
-
+  previewPopupCloseButton,
+} from "./index.js";
 export class Card {
   constructor({ name, link }, cardSelector) {
     //#card-template
     //this.data = data;
     this._cardSelector = cardSelector; //template selector
-
 
     this._cardTemplate =
       this._cardSelector.content.querySelector(".photo-grid__item"); // selecting card template element
