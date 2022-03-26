@@ -22,46 +22,35 @@ export class Card {
     // select card and card element parts
   }
   _getTemplate = () => {
-    this._cardElement = this._cardTemplate.cloneNode(true);
+    this._element = this._cardTemplate.cloneNode(true);
 
-    this._cardTitleElement =
-      this._cardElement.querySelector(".photo-grid__title");
-
-    this._cardImageElement =
-      this._cardElement.querySelector(".photo-grid__image");
-    this._cardLikeButtonElement = this._cardElement.querySelector(
-      ".photo-grid__like-button"
-    );
-    this._cardTrashButtonElement = this._cardElement.querySelector(
-      ".photo-grid__delete-button"
-    );
-    return this._cardElement;
+    return this._element;
   };
 
   _setEventListeners() {
     //handlers setted here
 
-    this._cardLikeButtonElement.addEventListener("mousedown", () =>
-      this._handleLikeButtonClick()
+    this._cardLikeButtonElement.addEventListener(
+      "mousedown",
+      this._handleLikeButtonClick
     );
-    this._cardTrashButtonElement.addEventListener("mousedown", () =>
-      this._handleTrashButtonClick()
+    this._cardTrashButtonElement.addEventListener(
+      "mousedown",
+      this._handleTrashButtonClick
     );
-    this._cardImageElement.addEventListener("mousedown", () =>
-      this._handleCardImageClick()
+    this._cardImageElement.addEventListener(
+      "mousedown",
+      this._handleCardImageClick
     );
   }
 
-  _handleLikeButtonClick = () => {
-    //console.log(event);
+  _handleLikeButtonClick = (event) => {
     event.target.classList.toggle("photo-grid__like-button_active");
   };
 
-  _handleTrashButtonClick = () => {
-    //console.log(event);
-    //this._element.remove;
+  _handleTrashButtonClick = (event) => {
     event.target.closest(".photo-grid__item").remove();
-    //the same as this._cardElement.remove?
+    this._element = null;
   };
 
   _handleCardImageClick = () => {
@@ -72,13 +61,19 @@ export class Card {
   };
 
   generateCard() {
-    // getView mexican
-    //init for a card class
     this._element = this._getTemplate();
-    //console.log(this._element);
-    this._element.querySelector(".photo-grid__image").src = this._link;
-    this._element.querySelector(".photo-grid__image").alt = this._text;
-    this._element.querySelector(".photo-grid__title").textContent = this._text;
+    this._cardTitleElement = this._element.querySelector(".photo-grid__title");
+
+    this._cardImageElement = this._element.querySelector(".photo-grid__image");
+    this._cardLikeButtonElement = this._element.querySelector(
+      ".photo-grid__like-button"
+    );
+    this._cardTrashButtonElement = this._element.querySelector(
+      ".photo-grid__delete-button"
+    );
+    this._cardImageElement.src = this._link;
+    this._cardImageElement.alt = this._text;
+    this._cardTitleElement.textContent = this._text;
     this._setEventListeners();
     return this._element;
   }
