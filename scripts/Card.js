@@ -21,9 +21,9 @@ export class Card {
     // select card and card element parts
   }
   _getTemplate = () => {
-    this._element = this._cardTemplate.cloneNode(true);
+    return this._cardTemplate.cloneNode(true);
 
-    return this._element;
+    //return this._element;
   };
 
   _setEventListeners() {
@@ -47,8 +47,8 @@ export class Card {
     event.target.classList.toggle("photo-grid__like-button_active");
   };
 
-  _handleTrashButtonClick = (event) => {
-    event.target.closest(".photo-grid__item").remove();
+  _handleTrashButtonClick = () => {
+    this._element.remove();
     this._element = null;
   };
 
