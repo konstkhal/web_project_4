@@ -1,0 +1,35 @@
+{
+  "name": "web_project_4",
+  "version": "1.0.0",
+  "description": "* [Link to deployed project 4] (https://konstkhal.github.io/web_project_4/)",
+  "main": "index.js",
+  "scripts": {
+    "build": "webpack --mode production",
+    "dev": "webpack serve --mode development"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/konstkhal/web_project_4.git"
+  },
+  "author": "Konstantin Khaletsky",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/konstkhal/web_project_4/issues"
+  },
+  "homepage": "https://github.com/konstkhal/web_project_4#readme",
+  "devDependencies": {
+    "@babel/core": "^7.17.8",
+    "@babel/preset-env": "^7.16.11",
+    "babel-loader": "^8.2.4",
+    "clean-webpack-plugin": "^4.0.0",
+    "css-loader": "^6.7.1",
+    "html-webpack-plugin": "^5.5.0",
+    "mini-css-extract-plugin": "^2.6.0",
+    "webpack": "^5.70.0",
+    "webpack-cli": "^4.9.2",
+    "webpack-dev-server": "^4.7.4"
+  },
+  "dependencies": {
+    "core-js": "^3.21.1"
+  }
+}
