@@ -1,12 +1,28 @@
 /**
- * Create the Popup class that opens and closes the popup window,
+ * @class Popup opens and closes the popup window
  * as per the following requirements:
- * The constructor has a single parameter, which is the popup selector.
- * It stores the public methods open() and
- * close() that will open and close the popup.
- * It stores a private method named _handleEscClose()
- * that stores the logic for closing the popup by pressing the Esc key.
- * It stores a public method named setEventListeners()
- * that adds a click event listener to the close icon of the popup.
- * The modal window should also close when users click on the shaded area around the form.
- *  */
+ * @constructor has a single
+ * @param popupSelector it is the popup selector.
+ * It stores the
+ * public @method open() and
+ * public @method close() that will open and close the popup.
+ * It stores a
+ * private @method _handleEscClose() that stores the logic for
+ * closing the popup by pressing the Esc key.
+ * It stores a
+ * public @method setEventListeners() that adds a click event listener
+ *  to the close icon of the popup. The modal window should also
+ * close when users click on the shaded area around the form.
+ */
+import { ESC_BUTTON } from "../utils/utils.js";
+
+class Popup {
+  constructor(popupSelector) {
+    this._popupElement = document.querySelector(`.$(popupSelector)`);
+  }
+  _handleEscClose(event) {}
+  setEventListeners() {}
+  open() {}
+  close() {}
+}
+export default Popup;

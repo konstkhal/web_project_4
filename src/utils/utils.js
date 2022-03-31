@@ -16,7 +16,7 @@ export function closePopup(popup) {
 /*                          Escape key value CONST                       */
 /* -------------------------------------------------------------------------- */
 
-const ESC_BUTTON = "Escape";
+export const ESC_BUTTON = "Escape";
 
 /* -------------------------------------------------------------------------- */
 /*                           Escape action function                           */

@@ -14,8 +14,6 @@ import {
 } from "./index.js";
 export class Card {
   constructor({ name, link }, cardSelector) {
-    //#card-template
-    //this.data = data;
     this._cardSelector = cardSelector; //template selector
 
     this._cardTemplate =
@@ -29,8 +27,6 @@ export class Card {
   }
   _getTemplate = () => {
     return this._cardTemplate.cloneNode(true);
-
-    //return this._element;
   };
 
   _setEventListeners() {
