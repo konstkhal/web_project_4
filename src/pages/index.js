@@ -54,6 +54,12 @@ const cardsListElement = new Section(
   cardsConfig.placesWrap
 );
 
+const previewPopup = new PopupWithImage({
+  popupSelector: ".popup_type_preview",
+  imageSelector: ".popup__preview-image",
+  imageTitleSelector: ".popup__description",
+});
+
 //validation activation
 
 /* export const previewPopup = document.querySelector(".popup_type_preview"); */

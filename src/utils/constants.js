@@ -6,9 +6,9 @@ const defaultFormConfig = {
   errorClass: "form__input-error_visible",
 };
 
-
 const popupOpenEditProfileButton = document.querySelector(
-  ".profile__link-change";
+  ".profile__link-change"
+);
 const newCardButtonElement = document.querySelector(".profile__link-add");
 
 /* -------------------------------------------------------------------------- */
@@ -36,5 +36,5 @@ export {
   nameInput,
   roleInput,
   userInputImageTitle,
-  userInputImageLink
- }
+  userInputImageLink,
+};
