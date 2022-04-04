@@ -10,3 +10,24 @@
  * Store a public method named setUserInfo(),
  * which takes new user data and adds it on the page.
  */
+
+export default class UserInfo {
+  constructor({ nameSelector, jobSelector }) {
+    this._nameSelector = nameSelector;
+    this._jobSelector = jobSelector;
+    this._nameElement = document.querySelector(nameSelector);
+    this._jobElement = document.querySelector(jobSelector);
+  }
+
+  getUserInfo() {
+    return {
+      name: this._nameElement.textContent,
+      job: this._jobElement.textContent,
+    };
+  }
+
+  setUserInfo({ name, job }) {
+    this._nameElement.textContent = name;
+    this._jobElement.textContent = job;
+  }
+}

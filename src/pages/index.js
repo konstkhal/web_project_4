@@ -7,21 +7,54 @@
 import "./index.css";
 import Card from "../components/Card.js";
 import FormValidator from "../components/FormValidator.js";
-import Section from "../components/Section";
-import PopupWithImage from "../components/PopupWithImage";
-import PopupWithForm from "../components/PopupWithForm";
+import Section from "../components/Section.js";
+import PopupWithImage from "../components/PopupWithImage.js";
+import PopupWithForm from "../components/PopupWithForm.js";
+import UserInfo from "../components/UserInfo.js";
 //import { openPopup, closePopup } from "../utils/utils.js";
 import { initialCards } from "../utils/cards.js";
+import {
+  defaultFormConfig,
+  popupOpenEditProfileButton,
+  newCardButtonElement,
+  nameInput,
+  roleInput,
+  userInputImageTitle,
+  userInputImageLink,
+} from "../utils/constants.js";
+/* -------------------------------------------------------------------------- */
+/*                                   Logic                                    */
+/* -------------------------------------------------------------------------- */
+const userInfo = new UserInfo({
+  userNameSelector: nameElement,
+  userDescriptionSelector: roleElement,
+});
+
+/**
+ * Newly created @constant cardsListElement contains new Section @object
+ *
+ *
+ */
+
+const cardsListElement = new Section(
+  {
+    renderer: (data) => {
+      const card = new Card(
+        {
+          data,
+          handleCardClick: () => {
+            imagePopup.open(data);
+          },
+        },
+        cardsConfig.CardSelector
+      );
+      cardsListElement.addItem(card.generateCard());
+    },
+  },
+  cardsConfig.placesWrap
+);
 
 //validation activation
-
-const defaultFormConfig = {
-  inputSelector: ".form__input",
-  submitButtonSelector: ".form__submit-button",
-  inactiveButtonClass: "button_blocked",
-  inputErrorClass: "form__input-error",
-  errorClass: "form__input-error_visible",
-};
 
 /* export const previewPopup = document.querySelector(".popup_type_preview"); */
 //const imagePopupFromVideo = document.querySelector(".popup_type_preview");
@@ -51,14 +84,6 @@ const editForm = new FormValidator(defaultFormConfig, profilePopupElement);
 
 addCardForm.enableValidation();
 editForm.enableValidation();
-
-/* -------------------------------------------------------------------------- */
-/*                     INITIAL variables for profile edit                     */
-/* -------------------------------------------------------------------------- */
-const nameElement = document.querySelector(".profile__name");
-const nameInput = document.querySelector(".form__input_type_name"); //popup form
-const roleElement = document.querySelector(".profile__role");
-const roleInput = document.querySelector(".form__input_type_role");
 
 /* -------------------------------------------------------------------------- */
 /*                       Closing popup on outside click                       */
@@ -127,29 +152,6 @@ const cardsListElement = document.querySelector(".photo-grid__list");
 const cardTemplateElement = document.querySelector("#card-template");
 */
 
-/**
- * Newly created @constant which contains new Section @object
- *
- *
- */
-
-const cardsListElement = new Section(
-  {
-    renderer: (data) => {
-      const card = new Card(
-        {
-          data,
-          handleCardClick: () => {
-            imagePopup.open(data);
-          },
-        },
-        cardsConfig.CardSelector
-      );
-      cardsListElement.addItem(card.generateCard());
-    },
-  },
-  cardsConfig.placesWrap
-);
 //.popup_type_preview
 // const imagePopup = new PopupWithImage(popupConfig.imageModalWindow);
 const imagePopup = new PopupWithImage(".popup_type_preview");
@@ -181,16 +183,10 @@ function renderInitialCards() {
 /* -------------------------------------------------------------------------- */
 const newCardForm = document.querySelector(".popup__container_place-card");
 
-const newCardButtonElement = document.querySelector(".profile__link-add");
 /* const newCardPopupCloseButtonElement = document.querySelector(
   ".popup__close-button_place_card"
 ); */
-const userInputImageTitle = document.querySelector(
-  ".form__input_type_image-title"
-);
-const userInputImageLink = document.querySelector(
-  ".form__input_type_image-link"
-);
+
 /* function handleNewCardButtonClick() {
   //new card button
   openPopup(newCardPopup);
