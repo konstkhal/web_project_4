@@ -21,24 +21,24 @@ export const ESC_BUTTON = "Escape";
 /* -------------------------------------------------------------------------- */
 /*                           Escape action function                           */
 /* -------------------------------------------------------------------------- */
-const handleEscapeKeyDown = (event) => {
+/* const handleEscapeKeyDown = (event) => {
   if (event.key === ESC_BUTTON) {
     event.preventDefault();
     const popup = document.querySelector(".popup_opened");
     closePopup(popup);
   }
-};
+}; */
 
 /* -------------------------------------------------------------------------- */
 /*                             Mouseclick Handling                            */
 /* -------------------------------------------------------------------------- */
 
-function handlePopupMouseDown(event) {
+/* function handlePopupMouseDown(event) {
   if (event.target === event.currentTarget) {
     closePopup(event.target);
   }
 }
-
+ */
 /* -------------------------------------------------------------------------- */
 /*                              Export everything                             */
 /* -------------------------------------------------------------------------- */

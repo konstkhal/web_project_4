@@ -16,3 +16,8 @@
  * The Section class doesn't have markup.
  * It receives markup through the callback function and inserts it in the container
  */
+export default class Section {
+  constructor({ renderer }, containerSelector) {}
+  renderItems() {}
+  addItem(element) {}
+}

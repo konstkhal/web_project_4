@@ -14,3 +14,21 @@
  * It modifies the close() parent method
  * in order to reset the form once the popup is closed.
  */
+import Popup from "./Popup";
+
+export default class PopupWithForm extends Popup {
+  constructor({ popupSelector, handleFormSubmit }) {
+    super(popupSelector);
+
+    this._popupForm = this._popupElement.querySelector("form");
+    this._handleFormSubmit = handleFormSubmit;
+  }
+
+  _getInputValues() {}
+  setEventListeners() {}
+  close() {
+    this._popupForm.reset();
+
+    super.close();
+  }
+}

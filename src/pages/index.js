@@ -4,10 +4,14 @@
 /* -------------------------------------------------------------------------- */
 /*                                   Imports                                  */
 /* -------------------------------------------------------------------------- */
-
-import { Card } from "../components/Card.js";
+import "./index.css";
+import Card from "../components/Card.js";
 import FormValidator from "../components/FormValidator.js";
-import { openPopup, closePopup } from "../utils/utils.js";
+import Section from "../components/Section";
+import PopupWithImage from "../components/PopupWithImage";
+import PopupWithForm from "../components/PopupWithForm";
+//import { openPopup, closePopup } from "../utils/utils.js";
+import { initialCards } from "../utils/cards.js";
 
 //validation activation
 
@@ -19,20 +23,22 @@ const defaultFormConfig = {
   errorClass: "form__input-error_visible",
 };
 
-export const previewPopup = document.querySelector(".popup_type_preview");
-export const previewPopupImage = document.querySelector(
-  ".popup__preview-image"
-);
-export const previewPopupCloseButton = document.querySelector(
-  ".popup__close-button_place_preview"
-);
-export const previewPopupDescription = document.querySelector(
-  ".popup__description"
-);
+/* export const previewPopup = document.querySelector(".popup_type_preview"); */
+//const imagePopupFromVideo = document.querySelector(".popup_type_preview");
 
-previewPopupCloseButton.addEventListener("mousedown", () => {
+/* export const previewPopupImage = document.querySelector(
+  ".popup__preview-image"
+); */
+/* export const previewPopupCloseButton = document.querySelector(
+  ".popup__close-button_place_preview"
+); */
+/* export const previewPopupDescription = document.querySelector(
+  ".popup__description"
+); */
+
+/* previewPopupCloseButton.addEventListener("mousedown", () => {
   closePopup(previewPopup);
-});
+}); */
 
 // selecting the Popup element with Profile
 
@@ -57,15 +63,15 @@ const roleInput = document.querySelector(".form__input_type_role");
 /* -------------------------------------------------------------------------- */
 /*                       Closing popup on outside click                       */
 /* -------------------------------------------------------------------------- */
-const overlays = document.querySelectorAll(".popup");
+//const overlays = document.querySelectorAll(".popup");
 
 /* ------- Function to edit popup ------ */
-function openEditProfile() {
+/* function openEditProfile() {
   editForm.resetValidation();
   openPopup(profilePopupElement);
   nameInput.value = nameElement.textContent;
   roleInput.value = roleElement.textContent;
-}
+} */
 
 function fillProfileForm() {
   nameElement.textContent = nameInput.value;
@@ -73,60 +79,88 @@ function fillProfileForm() {
 }
 
 /* ------- Function to save popup ------ */
-function handleEditProfile(event) {
+/* function handleEditProfile(event) {
   // This line stops the browser from submitting the form in the default way.
   event.preventDefault();
   closePopup(profilePopupElement);
   fillProfileForm();
-}
+} */
 
 /* -------------------------------------------------------------------------- */
 /*             Edit profile Popup close functionality                         */
 /* -------------------------------------------------------------------------- */
 /* ------------- Selecting closing button element --------------------------- */
-const popupCloseEditProfileButton = document.querySelector(
+/* const popupCloseEditProfileButton = document.querySelector(
   ".popup__close-button_place-profile"
-);
+); */
 /* --------------------- Event listener for close button -------------------- */
 
-popupCloseEditProfileButton.addEventListener("mousedown", () =>
+/* popupCloseEditProfileButton.addEventListener("mousedown", () =>
   closePopup(profilePopupElement)
-);
+); */
 /* -------------------------------------------------------------------------- */
 /*             Edit profile Popup open functionality                          */
 /* -------------------------------------------------------------------------- */
 /* ------------- Selecting opening button element --------------------------- */
-const popupOpenEditProfileButton = document.querySelector(
+/* const popupOpenEditProfileButton = document.querySelector(
   ".profile__link-change"
-);
+); */
 /* --------------------- Event listener for open button -------------------- */
-popupOpenEditProfileButton.addEventListener("mousedown", openEditProfile);
+/* popupOpenEditProfileButton.addEventListener("mousedown", openEditProfile); */
 
 /* -------------------------------------------------------------------------- */
 /*            Edit profile  Popup save functionality                          */
 /* -------------------------------------------------------------------------- */
-const editProfileformSubmitter = document.querySelector(
+/* const editProfileformSubmitter = document.querySelector(
   ".popup__container_place-profile"
-);
+); */
 
-editProfileformSubmitter.addEventListener("submit", handleEditProfile);
+/* editProfileformSubmitter.addEventListener("submit", handleEditProfile); */
 
 /* -------------------------------------------------------------------------- */
 /*                      Function to render card.                              */
 /* -------------------------------------------------------------------------- */
-
+/*
 // selecting photo-grid__list to fill with cards
 const cardsListElement = document.querySelector(".photo-grid__list");
 // selecting card template element
 const cardTemplateElement = document.querySelector("#card-template");
+*/
 
+/**
+ * Newly created @constant which contains new Section @object
+ *
+ *
+ */
+
+const cardsListElement = new Section(
+  {
+    renderer: (data) => {
+      const card = new Card(
+        {
+          data,
+          handleCardClick: () => {
+            imagePopup.open(data);
+          },
+        },
+        cardsConfig.CardSelector
+      );
+      cardsListElement.addItem(card.generateCard());
+    },
+  },
+  cardsConfig.placesWrap
+);
+//.popup_type_preview
+// const imagePopup = new PopupWithImage(popupConfig.imageModalWindow);
+const imagePopup = new PopupWithImage(".popup_type_preview");
+imagePopup.setEventListeners();
 /**
  * @function renderCard creates Card object with data param and with template hardcoded
  * @param {array} data contains {name, link}
  * @var {text} cardTemplateElement contains text id of card element to be cloned
  */
 function renderCard(data, cardsListElement) {
-  const card = new Card(data, cardTemplateElement);
+  const card = new Card(data, cardTemplateElement, imagePopup.open);
   cardsListElement.prepend(card.generateCard());
 }
 
@@ -138,9 +172,9 @@ function renderInitialCards() {
   initialCards.forEach((data) => renderCard(data, cardsListElement));
 }
 
-previewPopupCloseButton.addEventListener("mousedown", () => {
+/* previewPopupCloseButton.addEventListener("mousedown", () => {
   closePopup(previewPopup);
-});
+}); */
 
 /* -------------------------------------------------------------------------- */
 /*                        Popup ADD card functionality                        */
@@ -148,22 +182,22 @@ previewPopupCloseButton.addEventListener("mousedown", () => {
 const newCardForm = document.querySelector(".popup__container_place-card");
 
 const newCardButtonElement = document.querySelector(".profile__link-add");
-const newCardPopupCloseButtonElement = document.querySelector(
+/* const newCardPopupCloseButtonElement = document.querySelector(
   ".popup__close-button_place_card"
-);
+); */
 const userInputImageTitle = document.querySelector(
   ".form__input_type_image-title"
 );
 const userInputImageLink = document.querySelector(
   ".form__input_type_image-link"
 );
-function handleNewCardButtonClick() {
+/* function handleNewCardButtonClick() {
   //new card button
   openPopup(newCardPopup);
   addCardForm.resetValidation();
-}
+} */
 
-function handleNewCardFormSubmit(event) {
+/* function handleNewCardFormSubmit(event) {
   event.preventDefault();
   const card = {
     name: userInputImageTitle.value,
@@ -171,14 +205,14 @@ function handleNewCardFormSubmit(event) {
   };
   renderCard(card, cardsListElement);
   closePopup(newCardPopup);
-}
+} */
 
-newCardPopupCloseButtonElement.addEventListener("mousedown", () =>
+/* newCardPopupCloseButtonElement.addEventListener("mousedown", () =>
   closePopup(newCardPopup)
-);
+); */
 
 newCardButtonElement.addEventListener("mousedown", handleNewCardButtonClick);
-newCardForm.addEventListener("submit", handleNewCardFormSubmit);
+/* newCardForm.addEventListener("submit", handleNewCardFormSubmit); */
 
 /**
  * Implementation of classes based validation

@@ -1,3 +1,5 @@
+import Popup from "./Popup.js";
+
 /**
  * @class PopupWithImage a child @class of Popup.
  * This class has to change the @parent open() @method.
@@ -6,12 +8,26 @@
  *
  * Puts "name" from @arguments to the ".popup__caption" selector
  * find image by the popup__image" selector set "src" and "alt" for it
- *  call super.open, it will call the original method from original Popup class
+ *  call @class super.open, it will call the original @method from original @class Popup
  */
-import Popup from "./Popup.js";
 
-class PopupWithImage extends Popup {
-  open({ link, name }) {}
+export default class PopupWithImage extends Popup {
+  constructor(popupSelector) {
+    super(popupSelector);
+  }
+  open = ({ link, name }) => {
+    //const previewPopup = document.querySelector(".popup_type_preview");
+    const previewPopupImage = document.querySelector(".popup__preview-image");
+    const previewPopupDescription = document.querySelector(
+      ".popup__description"
+    );
+
+    previewPopupImage.src = link;
+    previewPopupImage.alt = `Picture of ${name}`;
+    previewPopupDescription.textContent = name;
+
+    this._popupElement.classList.add("popup_opened");
+    document.addEventListener("keydown", super._handleEscClose);
+    //openPopup(previewPopup);
+  };
 }
-
-export default PopupWithImage;

@@ -1,28 +1,60 @@
+import { closePopup, ESC_BUTTON } from "../utils/utils.js";
+
 /**
  * @class Popup opens and closes the popup window
  * as per the following requirements:
  * @constructor has a single
  * @param popupSelector it is the popup selector.
  * It stores the
- * public @method open() and
- * public @method close() that will open and close the popup.
+ * public @method open() that will open the popup.
+ * public @method close() that will close the popup.
  * It stores a
- * private @method _handleEscClose() that stores the logic for
- * closing the popup by pressing the Esc key.
+ * private @method _handleEscClose() that prevents default
+ * and stores the logic for  * closing the popup by pressing the Esc key.
  * It stores a
  * public @method setEventListeners() that adds a click event listener
  *  to the close icon of the popup. The modal window should also
  * close when users click on the shaded area around the form.
  */
-import { ESC_BUTTON } from "../utils/utils.js";
 
-class Popup {
+export default class Popup {
   constructor(popupSelector) {
-    this._popupElement = document.querySelector(`.$(popupSelector)`);
+    this._popupElement = document.querySelector(`.${popupSelector}`);
+    /* this.setEventListeners = this.setEventListeners.bind(this);
+     i`m not sure it`s exactly here, but we will use arrow functions everyhere */
+    this.close.bind(this);
   }
-  _handleEscClose(event) {}
-  setEventListeners() {}
-  open() {}
-  close() {}
+
+  setEventListeners() {
+    this._popupElement.addEventListener("mousedown", (event) => {
+      if (
+        event.target.classList.contains("popup") ||
+        event.target.classList.contains("popup__close-button")
+      ) {
+        /*  closePopup(this._popupElement); */
+        this.close();
+      }
+    });
+    /*     imageModalWindow.addEve;
+    popup__close - button; */
+  }
+
+  open() {
+    this._popupElement.classList.add("popup_opened");
+    document.addEventListener("keydown", this._handleEscClose);
+    //this._popupElement.addEventListener("mousedown", handlePopupMouseDown);
+  }
+
+  close() {
+    this._popupElement.classList.remove("popup_opened");
+    document.removeEventListener("keydown", this._handleEscapeKeyDown);
+    //this._popupElement.removeEventListener("mousedown", handlePopupMouseDown);
+  }
+
+  _handleEscClose(event) {
+    if (event.key === ESC_BUTTON) {
+      event.preventDefault();
+      this.close();
+    }
+  }
 }
-export default Popup;

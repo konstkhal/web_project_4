@@ -1,3 +1,11 @@
+import { openPopup } from "../utils/utils.js";
+import {
+  previewPopup,
+  previewPopupImage,
+  previewPopupDescription,
+  previewPopupCloseButton,
+} from "../pages/index.js";
+
 /** Transforming the Card Class
  *  Connect the Card class to the popup.
  * Make Card take the handleCardClick() function into the constructor.
@@ -5,21 +13,16 @@
  * this function will open the popup with an image
  */
 
-import { openPopup } from "../utils/utils.js";
-import {
-  previewPopup,
-  previewPopupImage,
-  previewPopupDescription,
-  previewPopupCloseButton,
-} from "./index.js";
-export class Card {
-  constructor({ name, link }, cardSelector) {
+export default class Card {
+  constructor({ name, link }, cardSelector, handleCardClick) {
     this._cardSelector = cardSelector; //template selector
 
     this._cardTemplate =
       this._cardSelector.content.querySelector(".photo-grid__item"); // selecting card template element
 
-    this._text = name;
+    this._handleCardClick = handleCardClick;
+
+    this._name = name;
     this._link = link;
     this._alt = `Picture of ${name}`;
 
@@ -40,10 +43,7 @@ export class Card {
       "mousedown",
       this._handleTrashButtonClick
     );
-    this._cardImageElement.addEventListener(
-      "mousedown",
-      this._handleCardImageClick
-    );
+    this._cardImageElement.addEventListener("mousedown", this._handleCardClick);
   }
 
   _handleLikeButtonClick = (event) => {
@@ -56,10 +56,7 @@ export class Card {
   };
 
   _handleCardImageClick = () => {
-    previewPopupImage.src = this._link;
-    previewPopupImage.alt = `Picture of ${this._text}`;
-    previewPopupDescription.textContent = this._text;
-    openPopup(previewPopup);
+    this._handleCardClick({ link: this._link, name: this._name });
   };
 
   generateCard() {
@@ -74,8 +71,8 @@ export class Card {
       ".photo-grid__delete-button"
     );
     this._cardImageElement.src = this._link;
-    this._cardImageElement.alt = this._text;
-    this._cardTitleElement.textContent = this._text;
+    this._cardImageElement.alt = this._name;
+    this._cardTitleElement.textContent = this._name;
     this._setEventListeners();
     return this._element;
   }
