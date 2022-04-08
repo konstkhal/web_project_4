@@ -55,9 +55,9 @@ export default class Card {
     this._element = null;
   };
 
-  _handleCardImageClick = () => {
+  /*  _handleCardImageClick = () => {
     this._handleCardClick({ link: this._link, name: this._name });
-  };
+  }; */
 
   generateCard() {
     this._element = this._getTemplate();

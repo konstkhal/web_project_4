@@ -1,3 +1,5 @@
+import Popup from "./Popup";
+
 /**
  * Create PopupWithForm as a child class of Popup.
  * The PopupWithForm class must comply with the following requirements:
@@ -14,7 +16,6 @@
  * It modifies the close() parent method
  * in order to reset the form once the popup is closed.
  */
-import Popup from "./Popup";
 
 export default class PopupWithForm extends Popup {
   constructor({ popupSelector, handleFormSubmit }) {
@@ -24,11 +25,33 @@ export default class PopupWithForm extends Popup {
     this._handleFormSubmit = handleFormSubmit;
   }
 
-  _getInputValues() {}
-  setEventListeners() {}
-  close() {
-    this._popupForm.reset();
+  _getInputValues() {
+    const inputs = [...this._popupForm.querySelectorAll(".form__input")];
+    const inputValues = {};
+    inputs.forEach((input) => {
+      inputValues[input.name] = input.value;
+    });
+    return inputValues;
+  }
 
+  setEventListeners() {
+    super.setEventListeners();
+    this._popupForm.addEventListener("submit", () =>
+      this._handleFormSubmit(this._getInputValues())
+    );
+  }
+
+  close() {
     super.close();
+    this._popupForm.reset();
   }
 }
+
+const profileName = "";
+const profileRole = "";
+const editModal = new popupWithForm(".form__input_type_name", (data) => {
+  //});
+
+  profileName.textContent = data.name;
+  profileRole.textContent = data.role;
+});

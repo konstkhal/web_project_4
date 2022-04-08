@@ -12,13 +12,15 @@ import Popup from "./Popup.js";
  */
 
 export default class PopupWithImage extends Popup {
-  constructor(popupSelector) {
+  /*   constructor(popupSelector) {
     super(popupSelector);
-  }
+  } */
   open = ({ link, name }) => {
     //const previewPopup = document.querySelector(".popup_type_preview");
-    const previewPopupImage = document.querySelector(".popup__preview-image");
-    const previewPopupDescription = document.querySelector(
+    const previewPopupImage = this._popupElement.querySelector(
+      ".popup__preview-image"
+    );
+    const previewPopupDescription = this._popupElement.querySelector(
       ".popup__description"
     );
 
@@ -26,8 +28,9 @@ export default class PopupWithImage extends Popup {
     previewPopupImage.alt = `Picture of ${name}`;
     previewPopupDescription.textContent = name;
 
-    this._popupElement.classList.add("popup_opened");
-    document.addEventListener("keydown", super._handleEscClose);
+    super.open();
+    /*   this._popupElement.classList.add("popup_opened");
+    document.addEventListener("keydown", super._handleEscClose); */
     //openPopup(previewPopup);
   };
 }

@@ -1,4 +1,4 @@
-import { closePopup, ESC_BUTTON } from "../utils/utils.js";
+import { ESC_BUTTON } from "../utils/constants.js";
 
 /**
  * @class Popup opens and closes the popup window
@@ -21,15 +21,17 @@ export default class Popup {
   constructor(popupSelector) {
     this._popupElement = document.querySelector(`.${popupSelector}`);
     /* this.setEventListeners = this.setEventListeners.bind(this);
-     i`m not sure it`s exactly here, but we will use arrow functions widely */
-    this.close.bind(this);
+     i`m not sure it`s exactly here,
+      but I will use arrow functions everywhere widely */
+    //this._handleEscClose = this._handleEscClose.bind(this);
   }
 
-  setEventListeners() {
+  setEventListeners = () => {
     this._popupElement.addEventListener("mousedown", (event) => {
       if (
         event.target.classList.contains("popup") ||
         event.target.classList.contains("popup__close-button")
+        // || !event.closest("popup")
       ) {
         /*  closePopup(this._popupElement); */
         this.close();
@@ -37,7 +39,7 @@ export default class Popup {
     });
     /*     imageModalWindow.addEve;
     popup__close - button; */
-  }
+  };
 
   open() {
     this._popupElement.classList.add("popup_opened");
@@ -47,14 +49,14 @@ export default class Popup {
 
   close() {
     this._popupElement.classList.remove("popup_opened");
-    document.removeEventListener("keydown", this._handleEscapeKeyDown);
+    document.removeEventListener("keydown", this._handleEscClose);
     //this._popupElement.removeEventListener("mousedown", handlePopupMouseDown);
   }
 
-  _handleEscClose(event) {
+  _handleEscClose = (event) => {
     if (event.key === ESC_BUTTON) {
       event.preventDefault();
       this.close();
     }
-  }
+  };
 }

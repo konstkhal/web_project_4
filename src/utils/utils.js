@@ -8,15 +8,9 @@ export function openPopup(popup) {
 /* -------------------------------------------------------------------------- */
 export function closePopup(popup) {
   popup.classList.remove("popup_opened");
-  document.removeEventListener("keydown", handleEscapeKeyDown);
+  document.removeEventListener("mousedown", handleEscapeKeyDown);
   popup.removeEventListener("mousedown", handlePopupMouseDown);
 }
-
-/* -------------------------------------------------------------------------- */
-/*                          Escape key value CONST                       */
-/* -------------------------------------------------------------------------- */
-
-export const ESC_BUTTON = "Escape";
 
 /* -------------------------------------------------------------------------- */
 /*                           Escape action function                           */

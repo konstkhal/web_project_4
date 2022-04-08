@@ -1,7 +1,6 @@
 /* -------------------------------------------------------------------------- */
 /*                              Main scripts file                             */
 /* -------------------------------------------------------------------------- */
-/* -------------------------------------------------------------------------- */
 /*                                   Imports                                  */
 /* -------------------------------------------------------------------------- */
 import "./index.css";
@@ -17,41 +16,55 @@ import {
   defaultFormConfig,
   popupOpenEditProfileButton,
   newCardButtonElement,
-  nameInput,
+  /*  nameInput,
   roleInput,
+  nameElement,
+  roleElement, */
   userInputImageTitle,
   userInputImageLink,
+  nameElementSelector,
+  roleElementSelector,
 } from "../utils/constants.js";
+
 /* -------------------------------------------------------------------------- */
-/*                                   Logic                                    */
+/*                                  Wrappers                                  */
 /* -------------------------------------------------------------------------- */
+// selecting photo-grid__list to fill with cards
+const cardsListElement = document.querySelector(".photo-grid__list");
+// selecting card template element
+const cardTemplateElement = document.querySelector("#card-template");
+// Edit form selector
+const editFormSelector = document.querySelector(
+  ".popup__container_place-profile"
+);
+// Add form selector
+const addCardFormSelector = document.querySelector(
+  ".popup__container_place-card"
+);
+
+/* function fillProfileForm() {
+  nameElement.textContent = nameInput.value;
+  roleElement.textContent = roleInput.value;
+} */
+
+/* -------------------------------------------------------------------------- */
+/*                        Objects creation                                    */
+/* -------------------------------------------------------------------------- */
+
+/* const userInfo = new UserInfo({name: '.profile__name', about: '.profile__about'}) */
+
 const userInfo = new UserInfo({
-  userNameSelector: nameElement,
-  userDescriptionSelector: roleElement,
+  name: nameElementSelector,
+  role: roleElementSelector,
 });
 
-/**
- * Newly created @constant cardsListElement contains new Section @object
- *
- *
- */
-
-const cardsListElement = new Section(
-  {
-    renderer: (data) => {
-      const card = new Card(
-        {
-          data,
-          handleCardClick: () => {
-            imagePopup.open(data);
-          },
-        },
-        cardsConfig.CardSelector
-      );
-      cardsListElement.addItem(card.generateCard());
-    },
-  },
-  cardsConfig.placesWrap
+const editProfilePopup = new PopupWithForm(
+  ".popup_type_new-card",
+  handleEditFormSubmit
+);
+const addCardPopup = new PopupWithForm(
+  ".popup_type_edit-profile",
+  handleNewCardFormSubmit
 );
 
 const previewPopup = new PopupWithImage({
@@ -60,7 +73,87 @@ const previewPopup = new PopupWithImage({
   imageTitleSelector: ".popup__description",
 });
 
-//validation activation
+const addCardForm = new FormValidator(defaultFormConfig, addCardPopup);
+const editForm = new FormValidator(defaultFormConfig, editProfilePopup);
+
+addCardForm.enableValidation();
+editForm.enableValidation();
+
+/* -------------------------------------------------------------------------- */
+/*                    Popup Form Handlers                                     */
+/* -------------------------------------------------------------------------- */
+
+const handleEditFormSubmit = (data) => {
+  userInfo.setUserInfo(data);
+  editProfilePopup.close();
+};
+
+const handleNewCardFormSubmit = () => {
+  cardsListElement.addItem(
+    renderCard({
+      name: userInputImageTitle.value,
+      link: userInputImageLink.value,
+    })
+  );
+};
+
+/* -------------------------------------------------------------------------- */
+/*                         Popup Event Listeners                              */
+/* -------------------------------------------------------------------------- */
+imagePopup.setEventListeners();
+
+editProfilePopup.setEventListeners();
+
+addCardPopup.setEventListeners();
+
+addCardPopup.addEventListener("submit", () => {
+  addCardPopup.close(); //this?
+});
+
+editProfilePopup.addEventListener("submit", () => {
+  editProfilePopup.close(); //this?
+});
+
+/* -------------------------------------------------------------------------- */
+/*                   Open Popup Buttons listeners                             */
+/* -------------------------------------------------------------------------- */
+
+popupOpenEditProfileButton.addEventListener("mousedown", openEditProfile);
+newCardButtonElement.addEventListener("mousedown", handleNewCardButtonClick);
+
+editCloseButton.addEventListener("click", () => {
+  editPopup.close();
+});
+
+addCloseButton.addEventListener("click", () => {
+  addPopup.close();
+});
+
+imageCloseButton.addEventListener("click", () => {
+  imagePopup.close();
+});
+
+/**
+ *           Edit profile Popup close functionality
+ *
+ * Selecting closing button element
+ */
+const popupCloseEditProfileButton = document.querySelector(
+  ".popup__close-button_place-profile"
+);
+/** Event listener for close button  */
+
+popupCloseEditProfileButton.addEventListener("mousedown", () =>
+  closePopup(profilePopupElement)
+);
+
+const newCardPopupCloseButtonElement = document.querySelector(
+  ".popup__close-button_place_card"
+);
+
+newCardPopupCloseButtonElement.addEventListener("mousedown", () =>
+  closePopup(newCardPopup)
+);
 
 /* export const previewPopup = document.querySelector(".popup_type_preview"); */
 //const imagePopupFromVideo = document.querySelector(".popup_type_preview");
@@ -79,17 +172,61 @@ const previewPopup = new PopupWithImage({
   closePopup(previewPopup);
 }); */
 
+/* -------------------------------------------------------------------------- */
+/*                                DOM selectors                               */
+/* -------------------------------------------------------------------------- */
+
+/* const profilePopupElement = document.querySelector(".popup_type_edit-profile");
+const newCardPopup = document.querySelector(".popup_type_new-card"); */
+
+const cardsListSection = new Section(
+  {
+    items: initialCards,
+    renderer: renderCard,
+  },
+  ".cards-list"
+);
+
+/* const editProfilePopup = new PopupWithForm(".popup_type_new-card",  (data)=>{
+  userInfo.setUserInfo(data);
+  editProfilePopup.close();
+}); */
+
+/**
+ * Newly created @constant cardsListElement contains new Section @object
+ *
+ * Need to complete
+ */
+/*
+const cardsListElement = new Section(
+  {
+    renderer: (data) => {
+      const card = new Card(
+        {
+          data,
+          handleCardClick: () => {
+            imagePopup.open(data);
+          },
+        },
+        cardsConfig.CardSelector
+      );
+      cardsListElement.addItem(card.generateCard());
+    },
+  },
+  cardsConfig.placesWrap
+); */
+
+const renderCard = (data, cardsListElement) => {
+  const card = new Card(data, cardTemplateElement, () => {
+    imagePopup.open(data.link, data.name);
+  });
+
+  cardsListElement.prepend(card.generateCard());
+};
+
+//validation activation
+
 // selecting the Popup element with Profile
-
-const profilePopupElement = document.querySelector(".popup_type_edit-profile");
-const newCardPopup = document.querySelector(".popup_type_new-card");
-
-const addCardForm = new FormValidator(defaultFormConfig, newCardPopup);
-
-const editForm = new FormValidator(defaultFormConfig, profilePopupElement);
-
-addCardForm.enableValidation();
-editForm.enableValidation();
 
 /* -------------------------------------------------------------------------- */
 /*                       Closing popup on outside click                       */
@@ -104,11 +241,6 @@ editForm.enableValidation();
   roleInput.value = roleElement.textContent;
 } */
 
-function fillProfileForm() {
-  nameElement.textContent = nameInput.value;
-  roleElement.textContent = roleInput.value;
-}
-
 /* ------- Function to save popup ------ */
 /* function handleEditProfile(event) {
   // This line stops the browser from submitting the form in the default way.
@@ -116,28 +248,6 @@ function fillProfileForm() {
   closePopup(profilePopupElement);
   fillProfileForm();
 } */
-
-/* -------------------------------------------------------------------------- */
-/*             Edit profile Popup close functionality                         */
-/* -------------------------------------------------------------------------- */
-/* ------------- Selecting closing button element --------------------------- */
-/* const popupCloseEditProfileButton = document.querySelector(
-  ".popup__close-button_place-profile"
-); */
-/* --------------------- Event listener for close button -------------------- */
-
-/* popupCloseEditProfileButton.addEventListener("mousedown", () =>
-  closePopup(profilePopupElement)
-); */
-/* -------------------------------------------------------------------------- */
-/*             Edit profile Popup open functionality                          */
-/* -------------------------------------------------------------------------- */
-/* ------------- Selecting opening button element --------------------------- */
-/* const popupOpenEditProfileButton = document.querySelector(
-  ".profile__link-change"
-); */
-/* --------------------- Event listener for open button -------------------- */
-/* popupOpenEditProfileButton.addEventListener("mousedown", openEditProfile); */
 
 /* -------------------------------------------------------------------------- */
 /*            Edit profile  Popup save functionality                          */
@@ -161,16 +271,19 @@ const cardTemplateElement = document.querySelector("#card-template");
 //.popup_type_preview
 // const imagePopup = new PopupWithImage(popupConfig.imageModalWindow);
 const imagePopup = new PopupWithImage(".popup_type_preview");
+
 imagePopup.setEventListeners();
+addCardPopup.setEventListeners();
+editProfilePopup.setEventListeners();
 /**
  * @function renderCard creates Card object with data param and with template hardcoded
  * @param {array} data contains {name, link}
  * @var {text} cardTemplateElement contains text id of card element to be cloned
  */
-function renderCard(data, cardsListElement) {
+/* function renderCard(data, cardsListElement) {
   const card = new Card(data, cardTemplateElement, imagePopup.open);
   cardsListElement.prepend(card.generateCard());
-}
+} */
 
 /* -------------------------------------------------------------------------- */
 /*                     Function to render INITIAL cards.                      */
@@ -213,7 +326,6 @@ const newCardForm = document.querySelector(".popup__container_place-card");
   closePopup(newCardPopup)
 ); */
 
-newCardButtonElement.addEventListener("mousedown", handleNewCardButtonClick);
 /* newCardForm.addEventListener("submit", handleNewCardFormSubmit); */
 
 /**
