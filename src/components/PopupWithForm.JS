@@ -18,13 +18,16 @@ import Popup from "./Popup";
  */
 
 export default class PopupWithForm extends Popup {
-  constructor({ popupSelector, handleFormSubmit }) {
+  constructor(popupSelector, handleFormSubmit) {
     super(popupSelector);
 
     this._popupForm = this._popupElement.querySelector("form");
     this._handleFormSubmit = handleFormSubmit;
   }
 
+  getPopupForm() {
+    return this._popupForm;
+  }
   _getInputValues() {
     const inputs = [...this._popupForm.querySelectorAll(".form__input")];
     const inputValues = {};
@@ -47,11 +50,12 @@ export default class PopupWithForm extends Popup {
   }
 }
 
-const profileName = "";
+/* const profileName = "";
 const profileRole = "";
-const editModal = new popupWithForm(".form__input_type_name", (data) => {
+const editModal = new PopupWithForm(".form__input_type_name", (data) => {
   //});
 
   profileName.textContent = data.name;
   profileRole.textContent = data.role;
 });
+ */

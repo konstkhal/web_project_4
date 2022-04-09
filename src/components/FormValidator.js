@@ -69,7 +69,7 @@ class FormValidator {
   }
 
   resetValidation() {
-    this._element.querySelector(".form").reset();
+    this._element.reset();
     this._inputList.forEach((input) => {
       this._hideInputError(input);
     });

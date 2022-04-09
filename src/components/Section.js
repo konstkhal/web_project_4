@@ -17,9 +17,9 @@
  * It receives markup through the callback function and inserts it in the container
  */
 export default class Section {
-  constructor({ renderer }, containerSelector) {
+  constructor(renderer, containerSelector) {
     this._renderer = renderer;
-    this._container = document.querySelector(`.$containerSelector`);
+    this._container = document.querySelector(containerSelector);
   }
 
   renderItems(items) {

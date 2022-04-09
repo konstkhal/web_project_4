@@ -15,7 +15,7 @@ export default class PopupWithImage extends Popup {
   /*   constructor(popupSelector) {
     super(popupSelector);
   } */
-  open = ({ link, name }) => {
+  open = (link, name) => {
     //const previewPopup = document.querySelector(".popup_type_preview");
     const previewPopupImage = this._popupElement.querySelector(
       ".popup__preview-image"

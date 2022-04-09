@@ -19,7 +19,7 @@ import { ESC_BUTTON } from "../utils/constants.js";
 
 export default class Popup {
   constructor(popupSelector) {
-    this._popupElement = document.querySelector(`.${popupSelector}`);
+    this._popupElement = document.querySelector(popupSelector);
     /* this.setEventListeners = this.setEventListeners.bind(this);
      i`m not sure it`s exactly here,
       but I will use arrow functions everywhere widely */
