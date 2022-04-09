@@ -26,7 +26,7 @@ export default class Popup {
     //this._handleEscClose = this._handleEscClose.bind(this);
   }
 
-  setEventListeners = () => {
+  setEventListeners() {
     this._popupElement.addEventListener("mousedown", (event) => {
       if (
         event.target.classList.contains("popup") ||
@@ -34,23 +34,24 @@ export default class Popup {
         // || !event.closest("popup")
       ) {
         /*  closePopup(this._popupElement); */
-        this.close();
+        // this.close();
       }
     });
     /*     imageModalWindow.addEve;
     popup__close - button; */
-  };
+  }
 
   open() {
     this._popupElement.classList.add("popup_opened");
     document.addEventListener("keydown", this._handleEscClose);
-    //this._popupElement.addEventListener("mousedown", handlePopupMouseDown);
+    //this._popupElement.addEventListener("mousedown", () => this.close());
   }
 
   close() {
     this._popupElement.classList.remove("popup_opened");
     document.removeEventListener("keydown", this._handleEscClose);
     //this._popupElement.removeEventListener("mousedown", handlePopupMouseDown);
+    /*  console.log(this); */
   }
 
   _handleEscClose = (event) => {

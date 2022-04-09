@@ -22,6 +22,7 @@ export default class PopupWithForm extends Popup {
     super(popupSelector);
 
     this._popupForm = this._popupElement.querySelector("form");
+
     this._handleFormSubmit = handleFormSubmit;
   }
 
@@ -38,11 +39,20 @@ export default class PopupWithForm extends Popup {
   }
 
   setEventListeners() {
+    console.log(this._popupForm);
     super.setEventListeners();
-    this._popupForm.addEventListener("submit", () =>
-      this._handleFormSubmit(this._getInputValues())
-    );
+
+    this._popupForm.addEventListener("submit", () => {
+      this._handleFormSubmit(this._getInputValues());
+
+      //this.close;
+    });
   }
+  /*  open() {
+    super.open;
+    //debugger;
+    this.setEventListeners();
+  } */
 
   close() {
     super.close();

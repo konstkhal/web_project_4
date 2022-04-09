@@ -17,6 +17,7 @@ export default class UserInfo {
     this._jobSelector = jobSelector;
     this._nameElement = document.querySelector(nameSelector);
     this._jobElement = document.querySelector(jobSelector);
+    return this;
   }
 
   getUserInfo() {
