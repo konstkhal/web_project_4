@@ -12,7 +12,7 @@
  */
 
 export default class UserInfo {
-  constructor({ nameSelector, jobSelector }) {
+  constructor(nameSelector, jobSelector) {
     this._nameSelector = nameSelector;
     this._jobSelector = jobSelector;
     this._nameElement = document.querySelector(nameSelector);
@@ -21,6 +21,10 @@ export default class UserInfo {
   }
 
   getUserInfo() {
+    console.log({
+      name: this._nameElement.textContent,
+      job: this._jobElement.textContent,
+    });
     return {
       name: this._nameElement.textContent,
       job: this._jobElement.textContent,
@@ -28,6 +32,7 @@ export default class UserInfo {
   }
 
   setUserInfo({ name, job }) {
+    console.log({ name, job });
     this._nameElement.textContent = name;
     this._jobElement.textContent = job;
   }

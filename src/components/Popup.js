@@ -34,7 +34,7 @@ export default class Popup {
         // || !event.closest("popup")
       ) {
         /*  closePopup(this._popupElement); */
-        // this.close();
+        this.close();
       }
     });
     /*     imageModalWindow.addEve;

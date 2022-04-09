@@ -15,7 +15,7 @@ const newCardButtonElement = document.querySelector(".profile__link-add");
 /*                     INITIAL variables for profile edit                     */
 /* -------------------------------------------------------------------------- */
 const nameElementSelector = ".profile__name";
-const nameElement = document.querySelector(nameElementSelector);
+//const nameElement = document.querySelector(nameElementSelector);
 const nameInput = document.querySelector(".form__input_type_name"); //popup form
 const roleElementSelector = ".profile__role";
 const roleElement = document.querySelector(roleElementSelector);

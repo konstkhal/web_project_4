@@ -16,10 +16,10 @@ import {
   defaultFormConfig,
   popupOpenEditProfileButton,
   newCardButtonElement,
-  /*  nameInput,
+  nameInput,
   roleInput,
   nameElement,
-  roleElement, */
+  roleElement,
   userInputImageTitle,
   userInputImageLink,
   nameElementSelector,
@@ -69,28 +69,26 @@ const cardList = new Section(
 /* -------------------------------------------------------------------------- */
 //console.log("we are here");
 const handleEditFormSubmit = (data) => {
+  //console.log(data);
   userInfo.setUserInfo(data);
   /*
   this.close();
   */
-  console.log(this);
+  // console.log(this);
 };
 
-const handleNewCardFormSubmit = () => {
+function handleNewCardFormSubmit() {
   cardsListSelector.addItem(
     renderCard({
       name: userInputImageTitle.value,
       link: userInputImageLink.value,
     })
   );
-  console.log("here we are");
+  //console.log("here we are");
   this.close();
-};
+}
 
-const userInfo = new UserInfo({
-  name: nameElementSelector,
-  role: roleElementSelector,
-});
+const userInfo = new UserInfo(nameElementSelector, roleElementSelector);
 
 const editProfilePopup = new PopupWithForm(
   ".popup_type_edit-profile",
@@ -136,7 +134,13 @@ const previewPopupCloseButton = document.querySelector(
 /* -------------------------------------------------------------------------- */
 
 popupOpenEditProfileButton.addEventListener("mousedown", () => {
+  const { name, job } = userInfo.getUserInfo();
+
+  console.log(userInfo.getUserInfo());
+  nameInput.value = name;
+  roleInput.value = job;
   editProfilePopup.open();
+  // formValidators['profileEditForm'].resetValidation();
 });
 newCardButtonElement.addEventListener("mousedown", () => {
   addCardPopup.open();

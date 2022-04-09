@@ -35,11 +35,12 @@ export default class PopupWithForm extends Popup {
     inputs.forEach((input) => {
       inputValues[input.name] = input.value;
     });
+    // console.log(inputValues);
     return inputValues;
   }
 
   setEventListeners() {
-    console.log(this._popupForm);
+    // console.log(this._popupForm);
     super.setEventListeners();
 
     this._popupForm.addEventListener("submit", () => {
@@ -48,11 +49,11 @@ export default class PopupWithForm extends Popup {
       //this.close;
     });
   }
-  /*  open() {
-    super.open;
+  open() {
+    super.open();
     //debugger;
     this.setEventListeners();
-  } */
+  }
 
   close() {
     super.close();
