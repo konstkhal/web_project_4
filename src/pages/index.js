@@ -81,7 +81,7 @@ function handleEditFormSubmit(data) {
 
 const renderCard = (data) => {
   const card = new Card(data, cardTemplateElement, () => {
-    imagePopup.open(data.link, data.name);
+    imagePopup.open(data.linkPlace, data.namePlace);
   });
 
   return card.generateCard();

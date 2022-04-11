@@ -15,7 +15,8 @@ export default class PopupWithImage extends Popup {
   /*   constructor(popupSelector) {
     super(popupSelector);
   } */
-  open = (link, name) => {
+  open = (linkPlace, namePlace) => {
+    console.log(linkPlace, namePlace);
     //const previewPopup = document.querySelector(".popup_type_preview");
     const previewPopupImage = this._popupElement.querySelector(
       ".popup__preview-image"
@@ -24,9 +25,9 @@ export default class PopupWithImage extends Popup {
       ".popup__description"
     );
 
-    previewPopupImage.src = link;
-    previewPopupImage.alt = `Picture of ${name}`;
-    previewPopupDescription.textContent = name;
+    previewPopupImage.src = linkPlace;
+    previewPopupImage.alt = `Picture of ${namePlace}`;
+    previewPopupDescription.textContent = namePlace;
 
     super.open();
     /*   this._popupElement.classList.add("popup_opened");
