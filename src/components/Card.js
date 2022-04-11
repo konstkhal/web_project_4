@@ -14,7 +14,7 @@ import {
  */
 
 export default class Card {
-  constructor({ name, link }, cardSelector, handleCardClick) {
+  constructor({ namePlace, linkPlace }, cardSelector, handleCardClick) {
     this._cardSelector = cardSelector; //template selector
 
     this._cardTemplate =
@@ -22,9 +22,9 @@ export default class Card {
 
     this._handleCardClick = handleCardClick;
 
-    this._name = name;
-    this._link = link;
-    this._alt = `Picture of ${name}`;
+    this._name = namePlace;
+    this._link = linkPlace;
+    this._alt = `Picture of ${namePlace}`;
 
     // select card and card element parts
   }

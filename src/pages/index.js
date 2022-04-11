@@ -29,6 +29,8 @@ import {
 /* -------------------------------------------------------------------------- */
 /*                                  Wrappers                                  */
 /* -------------------------------------------------------------------------- */
+
+/* const cardsList = ".photo-grid__list"; */
 // selecting photo-grid__list to fill with cards
 const cardsListSelector = document.querySelector(".photo-grid__list");
 // selecting card template element
@@ -52,7 +54,7 @@ const addCardFormElement = document.querySelector(
 /* -------------------------------------------------------------------------- */
 
 /* const userInfo = new UserInfo({name: '.profile__name', about: '.profile__about'}) */
-const cardList = new Section(
+const cardListSection = new Section(
   {
     items: {},
     renderer: (item) => {
@@ -62,30 +64,39 @@ const cardList = new Section(
       return cardElement.getCardElement();
     },
   },
-  ".elements"
+  ".photo-grid__list"
 );
 /* -------------------------------------------------------------------------- */
 /*                    Popup Form Handlers                                     */
 /* -------------------------------------------------------------------------- */
 //console.log("we are here");
-const handleEditFormSubmit = (data) => {
+function handleEditFormSubmit(data) {
   //console.log(data);
   userInfo.setUserInfo(data);
-  /*
-  this.close();
-  */
+
+  /* this.close();
+   */
   // console.log(this);
+}
+
+const renderCard = (data) => {
+  const card = new Card(data, cardTemplateElement, () => {
+    imagePopup.open(data.link, data.name);
+  });
+
+  return card.generateCard();
 };
 
 function handleNewCardFormSubmit() {
-  cardsListSelector.addItem(
+  cardListSection.addItem(
     renderCard({
-      name: userInputImageTitle.value,
-      link: userInputImageLink.value,
+      namePlace: userInputImageTitle.value,
+      linkPlace: userInputImageLink.value,
     })
   );
   //console.log("here we are");
-  this.close();
+
+  // console.log(this);
 }
 
 const userInfo = new UserInfo(nameElementSelector, roleElementSelector);
@@ -136,7 +147,7 @@ const previewPopupCloseButton = document.querySelector(
 popupOpenEditProfileButton.addEventListener("mousedown", () => {
   const { name, job } = userInfo.getUserInfo();
 
-  console.log(userInfo.getUserInfo());
+  // console.log(userInfo.getUserInfo());
   nameInput.value = name;
   roleInput.value = job;
   editProfilePopup.open();
@@ -158,45 +169,19 @@ previewPopupCloseButton.addEventListener("mousedown", () => {
 /*                                DOM selectors                               */
 /* -------------------------------------------------------------------------- */
 
-const renderCard = (data) => {
-  const card = new Card(data, cardTemplateElement, () => {
-    imagePopup.open(data.link, data.name);
-  });
-
-  cardsListSelector.prepend(card.generateCard());
-};
-
-const cardsListSection = new Section(
+/* const cardsListSection = new Section(
   {
     items: initialCards,
     renderer: renderCard,
   },
   ".cards-list"
-);
+); */
 
 /**
  * Newly created @constant cardsListElement contains new Section @object
  *
  * Need to complete
  */
-
-/* const cardsListElement = new Section(
-  {
-    renderer: (data) => {
-      const card = new Card(
-        {
-          data,
-          handleCardClick: () => {
-            imagePopup.open(data);
-          },
-        },
-        cardsConfig.CardSelector
-      );
-      cardsListElement.addItem(card.generateCard());
-    },
-  },
-  cardsConfig.placesWrap
-); */
 
 /* const renderCard = (data, cardsListElement) => {
   const card = new Card(data, cardTemplateElement, () => {
@@ -225,7 +210,11 @@ const cardsListSection = new Section(
 /* -------------------------------------------------------------------------- */
 
 function renderInitialCards() {
-  initialCards.forEach((data) => renderCard(data, cardsListSelector));
+  initialCards.forEach(({ namePlace, linkPlace }) => {
+    cardListSection.addItem(renderCard({ namePlace, linkPlace }));
+
+    //console.log({ namePlace, linkPlace });
+  });
 }
 
 /* previewPopupCloseButton.addEventListener("mousedown", () => {

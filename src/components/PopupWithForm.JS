@@ -35,24 +35,20 @@ export default class PopupWithForm extends Popup {
     inputs.forEach((input) => {
       inputValues[input.name] = input.value;
     });
-    // console.log(inputValues);
+
     return inputValues;
   }
 
   setEventListeners() {
-    // console.log(this._popupForm);
     super.setEventListeners();
 
     this._popupForm.addEventListener("submit", () => {
       this._handleFormSubmit(this._getInputValues());
-
-      //this.close;
+      this.close();
     });
   }
   open() {
     super.open();
-    //debugger;
-    this.setEventListeners();
   }
 
   close() {
@@ -60,13 +56,3 @@ export default class PopupWithForm extends Popup {
     this._popupForm.reset();
   }
 }
-
-/* const profileName = "";
-const profileRole = "";
-const editModal = new PopupWithForm(".form__input_type_name", (data) => {
-  //});
-
-  profileName.textContent = data.name;
-  profileRole.textContent = data.role;
-});
- */

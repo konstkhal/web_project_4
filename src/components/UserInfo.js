@@ -21,19 +21,14 @@ export default class UserInfo {
   }
 
   getUserInfo() {
-    console.log({
-      name: this._nameElement.textContent,
-      job: this._jobElement.textContent,
-    });
     return {
       name: this._nameElement.textContent,
       job: this._jobElement.textContent,
     };
   }
 
-  setUserInfo({ name, job }) {
-    console.log({ name, job });
-    this._nameElement.textContent = name;
-    this._jobElement.textContent = job;
+  setUserInfo(info) {
+    this._nameElement.textContent = info["profileFormNameInput"];
+    this._jobElement.textContent = info["profileFormRoleInput"];
   }
 }
