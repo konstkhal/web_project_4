@@ -133,37 +133,40 @@ editProfilePopup.setEventListeners();
 //debugger;
 addCardPopup.setEventListeners();
 
-const newCardPopupCloseButtonElement = document.querySelector(
+/* const newCardPopupCloseButtonElement = document.querySelector(
   ".popup__close-button_place_card"
-);
+); */
 
-const previewPopupCloseButton = document.querySelector(
+/* const previewPopupCloseButton = document.querySelector(
   ".popup__close-button_place_preview"
-);
+); */
 /* -------------------------------------------------------------------------- */
 /*                   Open / Close Popup Buttons listeners                             */
 /* -------------------------------------------------------------------------- */
 
-popupOpenEditProfileButton.addEventListener("mousedown", () => {
+popupOpenEditProfileButton.addEventListener("click", () => {
   const { name, job } = userInfo.getUserInfo();
 
   // console.log(userInfo.getUserInfo());
+
+  editProfilePopup.open();
+  editForm.resetValidation();
   nameInput.value = name;
   roleInput.value = job;
-  editProfilePopup.open();
-  // formValidators['profileEditForm'].resetValidation();
+  //console.log(nameInput.value);
 });
-newCardButtonElement.addEventListener("mousedown", () => {
+newCardButtonElement.addEventListener("click", () => {
   addCardPopup.open();
+  addCardForm.resetValidation();
 });
 
-newCardPopupCloseButtonElement.addEventListener("mousedown", () => {
+/* newCardPopupCloseButtonElement.addEventListener("click", () => {
   addCardPopup.close();
 });
 
-previewPopupCloseButton.addEventListener("mousedown", () => {
+previewPopupCloseButton.addEventListener("click", () => {
   imagePopup.close();
-});
+}); */
 
 /* -------------------------------------------------------------------------- */
 /*                                DOM selectors                               */
@@ -224,7 +227,6 @@ function renderInitialCards() {
 /* -------------------------------------------------------------------------- */
 /*                        Popup ADD card functionality                        */
 /* -------------------------------------------------------------------------- */
-const newCardForm = document.querySelector(".popup__container_place-card");
 
 /* const newCardPopupCloseButtonElement = document.querySelector(
   ".popup__close-button_place_card"
@@ -257,8 +259,8 @@ const newCardForm = document.querySelector(".popup__container_place-card");
  *
  */
 //addCardForm.reset();
-addCardForm.resetValidation();
+/* addCardForm.resetValidation();
 
-editForm.resetValidation();
+editForm.resetValidation(); */
 
 renderInitialCards();

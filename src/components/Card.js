@@ -1,11 +1,3 @@
-import { openPopup } from "../utils/utils.js";
-import {
-  previewPopup,
-  previewPopupImage,
-  previewPopupDescription,
-  previewPopupCloseButton,
-} from "../pages/index.js";
-
 /** Transforming the Card Class
  *  Connect the Card class to the popup.
  * Make Card take the handleCardClick() function into the constructor.
@@ -36,11 +28,11 @@ export default class Card {
     //handlers setted here
 
     this._cardLikeButtonElement.addEventListener(
-      "mousedown",
+      "click",
       this._handleLikeButtonClick
     );
     this._cardTrashButtonElement.addEventListener(
-      "mousedown",
+      "click",
       this._handleTrashButtonClick
     );
     this._cardImageElement.addEventListener("mousedown", this._handleCardClick);

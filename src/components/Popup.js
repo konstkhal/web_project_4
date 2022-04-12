@@ -20,12 +20,9 @@ import { ESC_BUTTON } from "../utils/constants.js";
 export default class Popup {
   constructor(popupSelector) {
     this._popupElement = document.querySelector(popupSelector);
-    /* this.setEventListeners = this.setEventListeners.bind(this);
-     i`m not sure it`s exactly here,
-      but I will use arrow functions everywhere widely */
-    //this._handleEscClose = this._handleEscClose.bind(this);
+    // this.setEventListeners = this.setEventListeners.bind(this);
+    //Reserved for future use: solution for not losing contex
   }
-
   setEventListeners() {
     this._popupElement.addEventListener("mousedown", (event) => {
       if (
@@ -33,25 +30,19 @@ export default class Popup {
         event.target.classList.contains("popup__close-button")
         // || !event.closest("popup")
       ) {
-        /*  closePopup(this._popupElement); */
         this.close();
       }
     });
-    /*     imageModalWindow.addEve;
-    popup__close - button; */
   }
 
   open() {
     this._popupElement.classList.add("popup_opened");
     document.addEventListener("keydown", this._handleEscClose);
-    //this._popupElement.addEventListener("mousedown", () => this.close());
   }
 
   close() {
     this._popupElement.classList.remove("popup_opened");
     document.removeEventListener("keydown", this._handleEscClose);
-    //this._popupElement.removeEventListener("mousedown", handlePopupMouseDown);
-    /*  console.log(this); */
   }
 
   _handleEscClose = (event) => {
