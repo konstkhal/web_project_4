@@ -84,7 +84,7 @@ function handleNewCardFormSubmit(data) {
     imagePopup.open(data.linkPlace, data.namePlace);
   });
 
-  console.log(card);
+  //console.log(card);
 
   cardListSection.addItem(card.generateCard());
 
@@ -258,4 +258,4 @@ previewPopupCloseButton.addEventListener("click", () => {
 editForm.resetValidation(); */
 
 //renderInitialCards();
-cardListSection.renderItems(initialCards);
+cardListSection.renderItems();
