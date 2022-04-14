@@ -62,7 +62,10 @@ const renderCard = (data) => {
 };
 
 /* const userInfo = new UserInfo({name: '.profile__name', about: '.profile__about'}) */
-const cardListSection = new Section(renderCard, ".photo-grid__list");
+const cardListSection = new Section(
+  { items: initialCards, renderer: renderCard },
+  ".photo-grid__list"
+);
 /* -------------------------------------------------------------------------- */
 /*                    Popup Form Handlers                                     */
 /* -------------------------------------------------------------------------- */
@@ -77,14 +80,14 @@ function handleEditFormSubmit(data) {
 }
 
 function handleNewCardFormSubmit(data) {
-  // cardListSection.renderItems();
+  const card = new Card(data, cardTemplateElement, () => {
+    imagePopup.open(data.linkPlace, data.namePlace);
+  });
 
-  cardListSection.addItem(
-    renderCard({
-      namePlace: userInputImageTitle.value,
-      linkPlace: userInputImageLink.value,
-    })
-  );
+  console.log(card);
+
+  cardListSection.addItem(card.generateCard());
+
   //console.log("here we are");
 
   // console.log(this);

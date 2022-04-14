@@ -17,19 +17,21 @@
  * It receives markup through the callback function and inserts it in the container
  */
 export default class Section {
-  constructor(renderer, containerSelector) {
-    this._renderer = renderer;
-    this._container = document.querySelector(containerSelector);
+  constructor({ items, renderer }, containerSelector) {
+    this.initialItems = items;
+    this.renderer = renderer;
+    this.container = document.querySelector(containerSelector);
+    //console.log(this.container);
   }
 
   renderItems(items) {
     items.forEach((item) => {
-      this._renderer(item);
+      this.renderer(item);
     });
   }
 
-  addItem(element) {
+  addItem = (element) => {
     // console.log(element);
-    this._container.prepend(element);
-  }
+    this.container.prepend(element);
+  };
 }
