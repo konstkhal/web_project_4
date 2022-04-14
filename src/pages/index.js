@@ -53,19 +53,16 @@ const addCardFormElement = document.querySelector(
 /*                        Objects creation                                    */
 /* -------------------------------------------------------------------------- */
 
+const renderCard = (data) => {
+  const card = new Card(data, cardTemplateElement, () => {
+    imagePopup.open(data.linkPlace, data.namePlace);
+  });
+
+  return card.generateCard();
+};
+
 /* const userInfo = new UserInfo({name: '.profile__name', about: '.profile__about'}) */
-const cardListSection = new Section(
-  {
-    items: {},
-    renderer: (item) => {
-      const cardElement = new Card({ item }, cardTemplateSelector, () => {
-        imagePopup.open(item.link, item.name);
-      });
-      return cardElement.getCardElement();
-    },
-  },
-  ".photo-grid__list"
-);
+const cardListSection = new Section(renderCard, ".photo-grid__list");
 /* -------------------------------------------------------------------------- */
 /*                    Popup Form Handlers                                     */
 /* -------------------------------------------------------------------------- */
@@ -79,15 +76,9 @@ function handleEditFormSubmit(data) {
   // console.log(this);
 }
 
-const renderCard = (data) => {
-  const card = new Card(data, cardTemplateElement, () => {
-    imagePopup.open(data.linkPlace, data.namePlace);
-  });
+function handleNewCardFormSubmit(data) {
+  // cardListSection.renderItems();
 
-  return card.generateCard();
-};
-
-function handleNewCardFormSubmit() {
   cardListSection.addItem(
     renderCard({
       namePlace: userInputImageTitle.value,
@@ -212,13 +203,13 @@ previewPopupCloseButton.addEventListener("click", () => {
 /*                     Function to render INITIAL cards.                      */
 /* -------------------------------------------------------------------------- */
 
-function renderInitialCards() {
+/* function renderInitialCards() {
   initialCards.forEach(({ namePlace, linkPlace }) => {
     cardListSection.addItem(renderCard({ namePlace, linkPlace }));
 
     //console.log({ namePlace, linkPlace });
   });
-}
+} */
 
 /* previewPopupCloseButton.addEventListener("mousedown", () => {
   closePopup(previewPopup);
@@ -263,4 +254,5 @@ function renderInitialCards() {
 
 editForm.resetValidation(); */
 
-renderInitialCards();
+//renderInitialCards();
+cardListSection.renderItems(initialCards);
