@@ -10,7 +10,7 @@ import Section from "../components/Section.js";
 import PopupWithImage from "../components/PopupWithImage.js";
 import PopupWithForm from "../components/PopupWithForm.js";
 import UserInfo from "../components/UserInfo.js";
-//import { openPopup, closePopup } from "../utils/utils.js";
+
 import { initialCards } from "../utils/cards.js";
 import {
   defaultFormConfig,
@@ -18,10 +18,6 @@ import {
   newCardButtonElement,
   nameInput,
   roleInput,
-  nameElement,
-  roleElement,
-  userInputImageTitle,
-  userInputImageLink,
   nameElementSelector,
   roleElementSelector,
 } from "../utils/constants.js";
@@ -30,29 +26,15 @@ import {
 /*                                  Wrappers                                  */
 /* -------------------------------------------------------------------------- */
 
-/* const cardsList = ".photo-grid__list"; */
-// selecting photo-grid__list to fill with cards
-const cardsListSelector = document.querySelector(".photo-grid__list");
 // selecting card template element
 const cardTemplateElement = document.querySelector("#card-template");
-// Edit form selector
-const editFormElement = document.querySelector(
-  ".popup__container_place-profile"
-);
-// Add form selector
-const addCardFormElement = document.querySelector(
-  ".popup__container_place-card"
-);
 
-/* function fillProfileForm() {
-  nameElement.textContent = nameInput.value;
-  roleElement.textContent = roleInput.value;
-} */
-
-/* -------------------------------------------------------------------------- */
-/*                        Objects creation                                    */
-/* -------------------------------------------------------------------------- */
-
+/**
+ * @function renderCard creates Card object with data param and with template hardcoded
+ * @param {array} data contains {name, link}
+ * @param {text} cardTemplateElement contains text id of card element to be cloned
+ * @param {Arrow function} is cardClick handler for opening PopupWithImage
+ */
 const renderCard = (data) => {
   const card = new Card(data, cardTemplateElement, () => {
     imagePopup.open(data.linkPlace, data.namePlace);
@@ -60,8 +42,15 @@ const renderCard = (data) => {
 
   return card.generateCard();
 };
+/* -------------------------------------------------------------------------- */
+/*                        Objects creation                                    */
+/* -------------------------------------------------------------------------- */
+/**
+ * Newly created @constant cardListSection contains Section @object
+ *
+ *
+ */
 
-/* const userInfo = new UserInfo({name: '.profile__name', about: '.profile__about'}) */
 const cardListSection = new Section(
   { items: initialCards, renderer: renderCard },
   ".photo-grid__list"
@@ -69,14 +58,9 @@ const cardListSection = new Section(
 /* -------------------------------------------------------------------------- */
 /*                    Popup Form Handlers                                     */
 /* -------------------------------------------------------------------------- */
-//console.log("we are here");
-function handleEditFormSubmit(data) {
-  //console.log(data);
-  userInfo.setUserInfo(data);
 
-  /* this.close();
-   */
-  // console.log(this);
+function handleEditFormSubmit(data) {
+  userInfo.setUserInfo(data);
 }
 
 function handleNewCardFormSubmit(data) {
@@ -84,13 +68,7 @@ function handleNewCardFormSubmit(data) {
     imagePopup.open(data.linkPlace, data.namePlace);
   });
 
-  //console.log(card);
-
   cardListSection.addItem(card.generateCard());
-
-  //console.log("here we are");
-
-  // console.log(this);
 }
 
 const userInfo = new UserInfo(nameElementSelector, roleElementSelector);
@@ -124,138 +102,22 @@ editForm.enableValidation();
 imagePopup.setEventListeners();
 
 editProfilePopup.setEventListeners();
-//debugger;
+
 addCardPopup.setEventListeners();
 
-/* const newCardPopupCloseButtonElement = document.querySelector(
-  ".popup__close-button_place_card"
-); */
-
-/* const previewPopupCloseButton = document.querySelector(
-  ".popup__close-button_place_preview"
-); */
 /* -------------------------------------------------------------------------- */
-/*                   Open / Close Popup Buttons listeners                             */
+/*                   Open Popup Buttons listeners                             */
 /* -------------------------------------------------------------------------- */
 
 popupOpenEditProfileButton.addEventListener("click", () => {
   const { name, job } = userInfo.getUserInfo();
 
-  // console.log(userInfo.getUserInfo());
-
   editProfilePopup.open();
   editForm.resetValidation();
   nameInput.value = name;
   roleInput.value = job;
-  //console.log(nameInput.value);
 });
 newCardButtonElement.addEventListener("click", () => {
   addCardPopup.open();
   addCardForm.resetValidation();
 });
-
-/* newCardPopupCloseButtonElement.addEventListener("click", () => {
-  addCardPopup.close();
-});
-
-previewPopupCloseButton.addEventListener("click", () => {
-  imagePopup.close();
-}); */
-
-/* -------------------------------------------------------------------------- */
-/*                                DOM selectors                               */
-/* -------------------------------------------------------------------------- */
-
-/* const cardsListSection = new Section(
-  {
-    items: initialCards,
-    renderer: renderCard,
-  },
-  ".cards-list"
-); */
-
-/**
- * Newly created @constant cardsListElement contains new Section @object
- *
- * Need to complete
- */
-
-/* const renderCard = (data, cardsListElement) => {
-  const card = new Card(data, cardTemplateElement, () => {
-    imagePopup.open(data.link, data.name);
-  });
-
-  cardsListElement.prepend(card.generateCard());
-}; */
-
-//validation activation
-
-// selecting the Popup element with Profile
-
-/**
- * @function renderCard creates Card object with data param and with template hardcoded
- * @param {array} data contains {name, link}
- * @var {text} cardTemplateElement contains text id of card element to be cloned
- */
-/* function renderCard(data, cardsListElement) {
-  const card = new Card(data, cardTemplateElement, imagePopup.open);
-  cardsListElement.prepend(card.generateCard());
-} */
-
-/* -------------------------------------------------------------------------- */
-/*                     Function to render INITIAL cards.                      */
-/* -------------------------------------------------------------------------- */
-
-/* function renderInitialCards() {
-  initialCards.forEach(({ namePlace, linkPlace }) => {
-    cardListSection.addItem(renderCard({ namePlace, linkPlace }));
-
-    //console.log({ namePlace, linkPlace });
-  });
-} */
-
-/* previewPopupCloseButton.addEventListener("mousedown", () => {
-  closePopup(previewPopup);
-}); */
-
-/* -------------------------------------------------------------------------- */
-/*                        Popup ADD card functionality                        */
-/* -------------------------------------------------------------------------- */
-
-/* const newCardPopupCloseButtonElement = document.querySelector(
-  ".popup__close-button_place_card"
-); */
-
-/* function handleNewCardButtonClick() {
-  //new card button
-  openPopup(newCardPopup);
-  addCardForm.resetValidation();
-} */
-
-/* function handleNewCardFormSubmit(event) {
-  event.preventDefault();
-  const card = {
-    name: userInputImageTitle.value,
-    link: userInputImageLink.value,
-  };
-  renderCard(card, cardsListElement);
-  closePopup(newCardPopup);
-} */
-
-/* newCardPopupCloseButtonElement.addEventListener("mousedown", () =>
-  closePopup(newCardPopup)
-); */
-
-/* newCardForm.addEventListener("submit", handleNewCardFormSubmit); */
-
-/**
- * Implementation of classes based validation
- *
- */
-//addCardForm.reset();
-/* addCardForm.resetValidation();
-
-editForm.resetValidation(); */
-
-//renderInitialCards();
-cardListSection.renderItems();

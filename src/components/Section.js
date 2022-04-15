@@ -21,11 +21,11 @@ export default class Section {
     this.initialItems = items;
     this.renderer = renderer;
     this.container = document.querySelector(containerSelector);
-    this.renderItems(this.initialItems);
+    this.renderItems();
   }
 
-  renderItems(items) {
-    items.forEach((item) => {
+  renderItems() {
+    this.initialItems.forEach((item) => {
       this.addItem(this.renderer(item));
     });
   }
