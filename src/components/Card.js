@@ -35,7 +35,7 @@ export default class Card {
       "click",
       this._handleTrashButtonClick
     );
-    this._cardImageElement.addEventListener("mousedown", this._handleCardClick);
+    this._cardImageElement.addEventListener("click", this._handleCardClick);
   }
 
   _handleLikeButtonClick = (event) => {
