@@ -64,11 +64,7 @@ function handleEditFormSubmit(data) {
 }
 
 function handleNewCardFormSubmit(data) {
-  const card = new Card(data, cardTemplateElement, () => {
-    imagePopup.open(data.linkPlace, data.namePlace);
-  });
-
-  cardListSection.addItem(card.generateCard());
+  cardListSection.addItem(renderCard(data));
 }
 
 const userInfo = new UserInfo(nameElementSelector, roleElementSelector);
