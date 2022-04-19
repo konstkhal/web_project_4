@@ -10,8 +10,8 @@ import Section from "../components/Section.js";
 import PopupWithImage from "../components/PopupWithImage.js";
 import PopupWithForm from "../components/PopupWithForm.js";
 import UserInfo from "../components/UserInfo.js";
-
-import { initialCards } from "../utils/cards.js";
+import Api from "../components/Api";
+//import { initialCards } from "../utils/cards.js";
 import {
   defaultFormConfig,
   popupOpenEditProfileButton,
@@ -42,6 +42,35 @@ const renderCard = (data) => {
 
   return card.generateCard();
 };
+
+const api = new Api({
+  baseUrl: "https://around.nomoreparties.co/v1/group-12",
+  headers: {
+    authorization: "cfbd7707-a110-44ae-8aa8-630296f53c66",
+    "Content-Type": "application/json",
+  },
+});
+
+const correctObject = [];
+api.getInitialCards().then((res) => {
+  res.forEach((element) => {
+    const i = {
+      createdAt: element.createdAt,
+      namePlace: element.name,
+      _id: element._id,
+      linkPlace: element.link,
+      owner: element.owner,
+      likes: element.likes,
+    };
+    correctObject.push(i);
+  });
+
+  const cardListSection = new Section(
+    { items: correctObject, renderer: renderCard },
+    ".photo-grid__list"
+  );
+});
+
 /* -------------------------------------------------------------------------- */
 /*                        Objects creation                                    */
 /* -------------------------------------------------------------------------- */
@@ -51,10 +80,6 @@ const renderCard = (data) => {
  *
  */
 
-const cardListSection = new Section(
-  { items: initialCards, renderer: renderCard },
-  ".photo-grid__list"
-);
 /* -------------------------------------------------------------------------- */
 /*                    Popup Form Handlers                                     */
 /* -------------------------------------------------------------------------- */
