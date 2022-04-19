@@ -36,8 +36,6 @@ const cardTemplateElement = document.querySelector("#card-template");
  * @param {Arrow function} is cardClick handler for opening PopupWithImage
  */
 const renderCard = (data) => {
-  console.log("data", data);
-  // api.createCard;
   const card = new Card(data, cardTemplateElement, () => {
     imagePopup.open(data.linkPlace, data.namePlace);
   });
@@ -104,7 +102,12 @@ function handleEditFormSubmit(data) {
 }
 
 function handleNewCardFormSubmit(data) {
-  cardListSection.addItem(renderCard(data));
+  api.createCard({ name: data.namePlace, link: data.linkPlace }).then((res) => {
+    //console.log(res);
+    cardListSection.addItem(
+      renderCard({ namePlace: res.name, linkPlace: res.link })
+    );
+  });
 }
 
 const userInfo = new UserInfo(nameElementSelector, roleElementSelector);
