@@ -9,6 +9,7 @@ import FormValidator from "../components/FormValidator.js";
 import Section from "../components/Section.js";
 import PopupWithImage from "../components/PopupWithImage.js";
 import PopupWithForm from "../components/PopupWithForm.js";
+import PopupWithSubmit from "../components/PopupWithSubmit";
 import UserInfo from "../components/UserInfo.js";
 import Api from "../components/Api";
 //import { initialCards } from "../utils/cards.js";
@@ -36,9 +37,23 @@ const cardTemplateElement = document.querySelector("#card-template");
  * @param {Arrow function} is cardClick handler for opening PopupWithImage
  */
 const renderCard = (data) => {
-  const card = new Card(data, cardTemplateElement, () => {
-    imagePopup.open(data.linkPlace, data.namePlace);
-  });
+  const card = new Card(
+    data,
+    cardTemplateElement,
+    () => {
+      imagePopup.open(data.linkPlace, data.namePlace);
+    },
+    (id) => {
+      confirmModal.open();
+
+      confirmModal.setAction(() => {
+        api.deleteCard(id).then((res) => {
+          card.removeCard();
+          confirmModal.close();
+        });
+      });
+    }
+  );
 
   return card.generateCard();
 };
@@ -109,6 +124,18 @@ function handleNewCardFormSubmit(data) {
     );
   });
 }
+/* const cardDelete = (id) => {
+  console.log(id);
+  confirmModal.open();
+
+  confirmModal.setAction(() => {
+    console.log("set action");
+    api.deleteCard(id).then((res) => {
+      console.log("Card is deleted", res);
+      card.removeCard();
+    });
+  });
+}; */
 
 const userInfo = new UserInfo(nameElementSelector, roleElementSelector);
 
@@ -122,6 +149,7 @@ const addCardPopup = new PopupWithForm(
 );
 
 const imagePopup = new PopupWithImage(".popup_type_preview");
+const confirmModal = new PopupWithSubmit(".popup_type_confirm-delete-card");
 
 const addCardForm = new FormValidator(
   defaultFormConfig,
@@ -144,6 +172,7 @@ editProfilePopup.setEventListeners();
 
 addCardPopup.setEventListeners();
 
+confirmModal.setEventListeners();
 /* -------------------------------------------------------------------------- */
 /*                   Open Popup Buttons listeners                             */
 /* -------------------------------------------------------------------------- */

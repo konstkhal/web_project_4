@@ -6,12 +6,14 @@
  */
 
 export default class Card {
-  constructor(data, cardSelector, handleCardClick) {
+  constructor(data, cardSelector, handleCardClick, handleTrashButtonClick) {
     this._cardSelector = cardSelector; //template selector
-
+    this._id = data._id;
+    // console.log(data._id);
     this._cardTemplate =
       this._cardSelector.content.querySelector(".photo-grid__item"); // selecting card template element
 
+    this._handleTrashButtonClick = handleTrashButtonClick;
     this._handleCardClick = handleCardClick;
 
     this._name = data.namePlace;
@@ -27,25 +29,26 @@ export default class Card {
   _setEventListeners() {
     //handlers setted here
 
-    this._cardLikeButtonElement.addEventListener(
-      "click",
-      this._handleLikeButtonClick
+    this._cardLikeButtonElement.addEventListener("click", () =>
+      this._handleLikeButtonClick()
     );
-    this._cardTrashButtonElement.addEventListener(
-      "click",
-      this._handleTrashButtonClick
+    this._cardTrashButtonElement.addEventListener("click", () =>
+      this._handleTrashButtonClick(this._id)
     );
-    this._cardImageElement.addEventListener("click", this._handleCardClick);
+
+    this._cardImageElement.addEventListener("click", () =>
+      this._handleCardClick()
+    );
   }
 
   _handleLikeButtonClick = (event) => {
     event.target.classList.toggle("photo-grid__like-button_active");
   };
 
-  _handleTrashButtonClick = () => {
+  /*   _handleTrashButtonClick = () => {
     this._element.remove();
     this._element = null;
-  };
+  }; */
 
   /*  _handleCardImageClick = () => {
     this._handleCardClick({ link: this._link, name: this._name });
@@ -67,5 +70,10 @@ export default class Card {
     this._cardTitleElement.textContent = this._name;
     this._setEventListeners();
     return this._element;
+  }
+
+  removeCard() {
+    this._element.remove();
+    this._element = null;
   }
 }

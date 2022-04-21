@@ -11,7 +11,7 @@
 
 
 ### GENERAL TODO LIST
-#### BLOCKING, INEVIRABLE TODO
+#### BLOCKING, INEVITABLE TODO
 1. Edit profile should work
 1. Add card should work
 1. Button delete should work

@@ -22,7 +22,7 @@ export default class PopupWithImage extends Popup {
     );
   }
   open = (linkPlace, namePlace) => {
-    console.log(linkPlace);
+    //  console.log(linkPlace);
 
     this._previewPopupImage.src = linkPlace;
     this._previewPopupImage.alt = `Picture of ${namePlace}`;
