@@ -52,6 +52,29 @@ const renderCard = (data) => {
           confirmModal.close();
         });
       });
+    },
+    (id) => {
+      const isAlreadyLiked = card.getIsLiked();
+      if (isAlreadyLiked) {
+        console.log("should DISlike");
+
+        api.disLikeCard(id).then((res) => {
+          console.log("res", res);
+          card.renderLike(res.likes);
+
+          /*      card.removeCard();
+          confirmModal.close(); */
+        });
+      } else {
+        console.log("should like");
+        api.likeCard(id).then((res) => {
+          console.log("res", res);
+          card.renderLike(res.likes);
+
+          /*      card.removeCard();
+          confirmModal.close(); */
+        });
+      }
     }
   );
 
@@ -66,9 +89,11 @@ const api = new Api({
   },
 });
 
-const correctObject = [];
+/* const correctObject = [];
+let userId;
 api.getInitialCards().then((res) => {
   res.forEach((element) => {
+    console.log(element);
     const i = {
       createdAt: element.createdAt,
       namePlace: element.name,
@@ -80,14 +105,15 @@ api.getInitialCards().then((res) => {
     correctObject.push(i);
   });
 
-  const cardListSection = new Section(
+  //   const cardListSection =
+  new Section(
     { items: correctObject, renderer: renderCard },
     ".photo-grid__list"
   );
-});
+}); */
 
 const cardListSection = new Section(
-  { items: correctObject, renderer: renderCard },
+  { items: [], renderer: renderCard },
   ".photo-grid__list"
 );
 
@@ -98,6 +124,32 @@ api.getUserInfo().then((res) => {
   });
   //console.log("res", res);
 });
+
+let userId;
+const correctObject = [];
+Promise.all([api.getInitialCards(), api.getUserInfo()]).then(
+  ([cardData, userData]) => {
+    userId = userData._id;
+
+    cardData.forEach((element) => {
+      const i = {
+        createdAt: element.createdAt,
+        namePlace: element.name,
+        _id: element._id,
+        linkPlace: element.link,
+        owner: element.owner,
+        likes: element.likes,
+        user_id: userId,
+      };
+      correctObject.push(i);
+    });
+
+    /*   const cardListSection =  */ new Section(
+      { items: correctObject, renderer: renderCard },
+      ".photo-grid__list"
+    );
+  }
+);
 
 /* -------------------------------------------------------------------------- */
 /*                        Objects creation                                    */
@@ -120,7 +172,13 @@ function handleNewCardFormSubmit(data) {
   api.createCard({ name: data.namePlace, link: data.linkPlace }).then((res) => {
     //console.log(res);
     cardListSection.addItem(
-      renderCard({ namePlace: res.name, linkPlace: res.link })
+      renderCard({
+        namePlace: res.name,
+        linkPlace: res.link,
+        _id: res._id,
+        owner: res.owner,
+        user_id: userId,
+      })
     );
   });
 }

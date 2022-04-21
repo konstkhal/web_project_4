@@ -40,5 +40,19 @@ export default class Api {
       method: "DELETE",
     });
   }
+  likeCard(cardId) {
+    return this._customFetch(`${this._baseUrl}/cards/likes/${cardId}`, {
+      headers: this._headers,
+      method: "PUT",
+    });
+  }
+
+  disLikeCard(cardId) {
+    return this._customFetch(`${this._baseUrl}/cards/likes/${cardId}`, {
+      headers: this._headers,
+      method: "DELETE",
+    });
+  }
+
   // other methods for working with the API
 }
