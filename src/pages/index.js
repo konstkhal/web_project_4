@@ -209,6 +209,24 @@ const addCardPopup = new PopupWithForm(
 const imagePopup = new PopupWithImage(".popup_type_preview");
 const confirmModal = new PopupWithSubmit(".popup_type_confirm-delete-card");
 
+/* const formValidators = {};
+
+// enable validation
+const enableValidation = (config) => {
+  const formList = Array.from(document.querySelectorAll(config.formSelector));
+  formList.forEach((formElement) => {
+    const validator = new FormValidator(formElement, config);
+    // here you get the name of the form
+    const formName = formElement.getAttribute("name");
+
+    // here you store a validator by the `name` of the form
+    formValidators[formName] = validator;
+    validator.enableValidation();
+  });
+};
+
+enableValidation(config); */
+
 const addCardForm = new FormValidator(
   defaultFormConfig,
   addCardPopup.getPopupForm()

@@ -36,18 +36,34 @@
 
     <main class="content">
       <section class="profile">
-        <img
-          src="<%=require('./images/image.png')%>"
-          class="profile__photo"
-          alt="Alt placeholder"
-        />
+        <div class="profile__photo-container">
+          <div class="profile__cover-overlay"></div>
+          <img
+            src="<%=require('./images/image.png')%>"
+            class="profile__photo"
+            alt="Alt placeholder"
+          />
+          <button
+            type="button"
+            class="button profile__link-change profile__link-change_place_image"
+          >
+            <img
+              src="<%=require('./images/pen.svg')%>"
+              class="profile__image-change profile__image-change_place_image"
+              alt="Alt placeholder"
+            />
+          </button>
+        </div>
 
         <div class="profile__info">
           <h1 class="profile__name">Jacques Cousteau</h1>
 
-          <button type="button" class="button profile__link-change">
+          <button
+            type="button"
+            class="button profile__link-change profile__link-change_place_profile"
+          >
             <img
-              src="<%=require('./images/Vector-2.svg')%>"
+              src="<%=require('./images/pen.svg')%>"
               class="profile__image-change"
               alt="Alt placeholder"
             />

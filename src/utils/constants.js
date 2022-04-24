@@ -4,10 +4,11 @@ const defaultFormConfig = {
   inactiveButtonClass: "button_blocked",
   inputErrorClass: "form__input-error",
   errorClass: "form__input-error_visible",
+  // formSelector: ".form",
 };
 
 const popupOpenEditProfileButton = document.querySelector(
-  ".profile__link-change"
+  ".profile__link-change_place_profile"
 );
 const newCardButtonElement = document.querySelector(".profile__link-add");
 
