@@ -18,6 +18,7 @@ export default class UserInfo {
     this._nameElement = document.querySelector(nameSelector);
     this._jobElement = document.querySelector(jobSelector);
     this._avatar = document.querySelector(avatarSelector);
+
     // console.log(this);
     return this;
   }
@@ -32,7 +33,8 @@ export default class UserInfo {
   setUserInfo(info) {
     this._nameElement.textContent = info["profileFormNameInput"];
     this._jobElement.textContent = info["profileFormRoleInput"];
-    this._avatar.alt = this._nameElement.textContent;
+    this._avatar.alt = `Image of ${info["profileFormNameInput"]}`;
+    this._avatar.src = info["avatarLink"];
   }
 
   /*   setUserAvatar({ avatar }) {

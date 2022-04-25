@@ -100,6 +100,7 @@ api.getUserInfo().then((res) => {
   userInfo.setUserInfo({
     profileFormNameInput: res.name,
     profileFormRoleInput: res.about,
+    avatarLink: res.avatar,
   });
   //console.log("res", res);
 });
