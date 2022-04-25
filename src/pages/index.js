@@ -21,6 +21,8 @@ import {
   roleInput,
   nameElementSelector,
   roleElementSelector,
+  popupOpenEditAvatarLink,
+  AvatarElementSelector,
 } from "../utils/constants.js";
 
 /* -------------------------------------------------------------------------- */
@@ -56,7 +58,7 @@ const renderCard = (data) => {
     (id) => {
       const isAlreadyLiked = card.getIsLiked();
       if (isAlreadyLiked) {
-        console.log("should DISlike");
+        // console.log("should DISlike");
 
         api.disLikeCard(id).then((res) => {
           console.log("res", res);
@@ -66,7 +68,7 @@ const renderCard = (data) => {
           confirmModal.close(); */
         });
       } else {
-        console.log("should like");
+        //console.log("should like");
         api.likeCard(id).then((res) => {
           console.log("res", res);
           card.renderLike(res.likes);
@@ -101,6 +103,31 @@ api.getUserInfo().then((res) => {
   });
   //console.log("res", res);
 });
+
+//api.getAvatarLink().then((res) => {
+/* userInfo.setUserInfo({
+    profileFormNameInput: res.name,
+    profileFormRoleInput: res.about,
+  }); */
+//console.log("res", res);
+//});
+
+function handleAvatarFormSubmit(data) {
+  editAvatarPopup.renderLoading(true);
+  var userdata = data.name;
+  api
+    .setAvatarLink(userdata)
+    .then((res) => {
+      userInfo.setUserAvatar(res);
+      editAvatarPopup.close();
+    })
+    .catch((err) => {
+      console.log(err);
+    })
+    .finally(() => {
+      editAvatarPopup.renderLoading(false);
+    });
+}
 
 let userId;
 const correctObject = [];
@@ -144,7 +171,7 @@ Promise.all([api.getInitialCards(), api.getUserInfo()]).then(
 function handleEditFormSubmit(data) {
   editProfilePopup.renderLoading(true);
   //debugger;
-  //console.log({name: });
+  console.log(data);
   api
     .setUserInfo({
       name: data.profileFormNameInput,
@@ -166,6 +193,8 @@ function handleEditFormSubmit(data) {
       editProfilePopup.close();
     });
 }
+
+//function handleAvatarFormSubmit
 
 function handleNewCardFormSubmit(data) {
   addCardPopup.renderLoading(true);
@@ -206,7 +235,11 @@ function handleNewCardFormSubmit(data) {
   });
 }; */
 
-const userInfo = new UserInfo(nameElementSelector, roleElementSelector);
+const userInfo = new UserInfo(
+  nameElementSelector,
+  roleElementSelector,
+  AvatarElementSelector
+);
 
 const editProfilePopup = new PopupWithForm(
   ".popup_type_edit-profile",
@@ -217,9 +250,15 @@ const addCardPopup = new PopupWithForm(
   handleNewCardFormSubmit
 );
 
+const editAvatarPopup = new PopupWithForm(
+  ".popup_type_avatar_change",
+  handleAvatarFormSubmit
+);
+
 const imagePopup = new PopupWithImage(".popup_type_preview");
 const confirmModal = new PopupWithSubmit(".popup_type_confirm-delete-card");
 
+//console.log(editAvatarPopup);
 /* const formValidators = {};
 
 // enable validation
@@ -247,8 +286,14 @@ const editForm = new FormValidator(
   editProfilePopup.getPopupForm()
 );
 
+const editAvatarForm = new FormValidator(
+  defaultFormConfig,
+  editAvatarPopup.getPopupForm()
+);
+
 addCardForm.enableValidation();
 editForm.enableValidation();
+editAvatarForm.enableValidation();
 
 /* -------------------------------------------------------------------------- */
 /*                         Popup Event Listeners                              */
@@ -260,6 +305,7 @@ editProfilePopup.setEventListeners();
 addCardPopup.setEventListeners();
 
 confirmModal.setEventListeners();
+editAvatarPopup.setEventListeners();
 /* -------------------------------------------------------------------------- */
 /*                   Open Popup Buttons listeners                             */
 /* -------------------------------------------------------------------------- */
@@ -276,4 +322,9 @@ popupOpenEditProfileButton.addEventListener("click", () => {
 newCardButtonElement.addEventListener("click", () => {
   addCardPopup.open();
   addCardForm.resetValidation();
+});
+
+popupOpenEditAvatarLink.addEventListener("click", () => {
+  editAvatarPopup.open();
+  editAvatarForm.resetValidation();
 });

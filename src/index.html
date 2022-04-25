@@ -213,33 +213,47 @@
           name="confirmDeleteCard"
           novalidate
         >
-          <!-- <input
-            id="name-place"
-            value=""
-            type="text"
-            class="form__input form__input_type_image-title"
-            placeholder="Title"
-            name="namePlace"
-            minlength="1"
-            maxlength="30"
-            required
-          />
-          <span id="name-place-error" class="form__input-error"></span>
-          <input
-            id="url-place"
-            value=" "
-            type="url"
-            class="form__input form__input_type_image-link"
-            placeholder="Image link"
-            name="linkPlace"
-            required
-          />
-          <span id="url-place-error" class="form__input-error"></span> -->
           <button
             type="submit"
             class="button form__submit-button form__submit-button_place_confirm-delete-card"
           >
             Yes
+          </button>
+        </form>
+      </div>
+    </div>
+
+    <!--------------------------------------------------------------------------->
+    <!--                   Popup avatar change window                          -->
+    <!--------------------------------------------------------------------------->
+    <div class="popup popup_type_avatar_change">
+      <div class="popup__window">
+        <button
+          type="button"
+          class="popup__close-button popup__close-button_avatar_change"
+          aria-label="close"
+        ></button>
+        <h2 class="popup__title">Change profile picture</h2>
+        <form
+          class="form popup__container popup__container_avatar_change"
+          name="confirmDeleteCard"
+          novalidate
+        >
+          <input
+            id="url-avatar"
+            value=" "
+            type="url"
+            class="form__input form__input_type_avatar-link"
+            placeholder="Image link"
+            name="name"
+            required
+          />
+          <span id="url-avatar-error" class="form__input-error"></span>
+          <button
+            type="submit"
+            class="button form__submit-button form__submit-button_place_avatar_change"
+          >
+            Save
           </button>
         </form>
       </div>

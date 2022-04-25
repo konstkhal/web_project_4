@@ -25,7 +25,23 @@ export default class Api {
       headers: this._headers,
     });
   }
+
+  /*  getAvatarLink() {
+    return this._customFetch(`${this._baseUrl}/users/me/avatar`, {
+      headers: this._headers,
+    });
+  } */
+
+  setAvatarLink(data) {
+    return this._customFetch(`${this._baseUrl}/users/me/avatar`, {
+      headers: this._headers,
+      method: "PATCH",
+      body: JSON.stringify(data.name),
+    });
+  }
+
   setUserInfo(data) {
+    console.log(data);
     return this._customFetch(`${this._baseUrl}/users/me`, {
       headers: this._headers,
       method: "PATCH",

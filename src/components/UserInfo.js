@@ -12,11 +12,13 @@
  */
 
 export default class UserInfo {
-  constructor(nameSelector, jobSelector) {
+  constructor(nameSelector, jobSelector, avatarSelector) {
     this._nameSelector = nameSelector;
     this._jobSelector = jobSelector;
     this._nameElement = document.querySelector(nameSelector);
     this._jobElement = document.querySelector(jobSelector);
+    this._avatar = document.querySelector(avatarSelector);
+    // console.log(this);
     return this;
   }
 
@@ -30,5 +32,10 @@ export default class UserInfo {
   setUserInfo(info) {
     this._nameElement.textContent = info["profileFormNameInput"];
     this._jobElement.textContent = info["profileFormRoleInput"];
+    this._avatar.alt = this._nameElement.textContent;
   }
+
+  /*   setUserAvatar({ avatar }) {
+    this._avatar.src = avatar;
+  } */
 }

@@ -28,6 +28,7 @@ export default class PopupWithForm extends Popup {
     //console.log(this._submitButton);
     this.handleFormSubmit = handleFormSubmit;
     this._inputsArray = [...this._popupForm.querySelectorAll(".form__input")];
+    //console.log(this._inputsArray);
   }
 
   renderLoading(isLoading) {
@@ -41,6 +42,7 @@ export default class PopupWithForm extends Popup {
   }
 
   getPopupForm() {
+    //console.log(this._popupForm);
     return this._popupForm;
   }
   _getInputValues() {

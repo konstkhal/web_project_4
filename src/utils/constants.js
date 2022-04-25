@@ -12,6 +12,10 @@ const popupOpenEditProfileButton = document.querySelector(
 );
 const newCardButtonElement = document.querySelector(".profile__link-add");
 
+const popupOpenEditAvatarLink = document.querySelector(
+  ".profile__link-change_place_image"
+);
+
 /* -------------------------------------------------------------------------- */
 /*                     INITIAL variables for profile edit                     */
 /* -------------------------------------------------------------------------- */
@@ -21,6 +25,7 @@ const nameInput = document.querySelector(".form__input_type_name"); //popup form
 const roleElementSelector = ".profile__role";
 const roleElement = document.querySelector(roleElementSelector);
 const roleInput = document.querySelector(".form__input_type_role");
+const AvatarElementSelector = ".profile__photo";
 
 /* -------------------------------------------------------------------------- */
 /*                        Popup ADD card functionality                        */
@@ -43,10 +48,12 @@ export {
   defaultFormConfig,
   popupOpenEditProfileButton,
   newCardButtonElement,
+  popupOpenEditAvatarLink,
   nameInput,
   roleInput,
   nameElementSelector,
   roleElementSelector,
   userInputImageTitle,
   userInputImageLink,
+  AvatarElementSelector,
 };
