@@ -253,7 +253,7 @@ const addCardPopup = new PopupWithForm(
 );
 
 const editAvatarPopup = new PopupWithForm(
-  ".popup_type_avatar_change",
+  ".popup_type_avatar-change",
   handleAvatarFormSubmit
 );
 
