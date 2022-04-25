@@ -37,7 +37,7 @@ export default class UserInfo {
     this._avatar.src = info["avatarLink"];
   }
 
-  /*   setUserAvatar({ avatar }) {
+  setUserAvatar({ avatar }) {
     this._avatar.src = avatar;
-  } */
+  }
 }

@@ -33,15 +33,15 @@ export default class Api {
   } */
 
   setAvatarLink(data) {
+    console.log(JSON.stringify(data));
     return this._customFetch(`${this._baseUrl}/users/me/avatar`, {
       headers: this._headers,
       method: "PATCH",
-      body: JSON.stringify(data.name),
+      body: JSON.stringify({ avatar: data }),
     });
   }
 
   setUserInfo(data) {
-    console.log(data);
     return this._customFetch(`${this._baseUrl}/users/me`, {
       headers: this._headers,
       method: "PATCH",

@@ -119,6 +119,7 @@ function handleAvatarFormSubmit(data) {
   api
     .setAvatarLink(userdata)
     .then((res) => {
+      console.log(res);
       userInfo.setUserAvatar(res);
       editAvatarPopup.close();
     })
