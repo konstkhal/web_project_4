@@ -25,6 +25,13 @@ export default class Api {
       headers: this._headers,
     });
   }
+  setUserInfo(data) {
+    return this._customFetch(`${this._baseUrl}/users/me`, {
+      headers: this._headers,
+      method: "PATCH",
+      body: JSON.stringify(data),
+    });
+  }
 
   createCard(data) {
     return this._customFetch(`${this._baseUrl}/cards`, {

@@ -89,29 +89,6 @@ const api = new Api({
   },
 });
 
-/* const correctObject = [];
-let userId;
-api.getInitialCards().then((res) => {
-  res.forEach((element) => {
-    console.log(element);
-    const i = {
-      createdAt: element.createdAt,
-      namePlace: element.name,
-      _id: element._id,
-      linkPlace: element.link,
-      owner: element.owner,
-      likes: element.likes,
-    };
-    correctObject.push(i);
-  });
-
-  //   const cardListSection =
-  new Section(
-    { items: correctObject, renderer: renderCard },
-    ".photo-grid__list"
-  );
-}); */
-
 const cardListSection = new Section(
   { items: [], renderer: renderCard },
   ".photo-grid__list"
@@ -165,22 +142,56 @@ Promise.all([api.getInitialCards(), api.getUserInfo()]).then(
 /* -------------------------------------------------------------------------- */
 
 function handleEditFormSubmit(data) {
-  userInfo.setUserInfo(data);
+  editProfilePopup.renderLoading(true);
+  //debugger;
+  //console.log({name: });
+  api
+    .setUserInfo({
+      name: data.profileFormNameInput,
+      about: data.profileFormRoleInput,
+    })
+    .then((res) => {
+      console.log(res);
+      userInfo.setUserInfo({
+        profileFormNameInput: res.name,
+        profileFormRoleInput: res.about,
+      });
+    })
+
+    .catch((err) => {
+      console.log(err);
+    })
+    .finally(() => {
+      editProfilePopup.renderLoading(false);
+      editProfilePopup.close();
+    });
 }
 
 function handleNewCardFormSubmit(data) {
-  api.createCard({ name: data.namePlace, link: data.linkPlace }).then((res) => {
-    //console.log(res);
-    cardListSection.addItem(
-      renderCard({
-        namePlace: res.name,
-        linkPlace: res.link,
-        _id: res._id,
-        owner: res.owner,
-        user_id: userId,
-      })
-    );
-  });
+  addCardPopup.renderLoading(true);
+  api
+    .createCard({ name: data.namePlace, link: data.linkPlace })
+    .then((res) => {
+      //console.log(res);
+      cardListSection.addItem(
+        renderCard({
+          namePlace: res.name,
+          linkPlace: res.link,
+          _id: res._id,
+          owner: res.owner,
+          user_id: userId,
+          likes: res.likes,
+        })
+      );
+    })
+
+    .catch((err) => {
+      console.log(err);
+    })
+    .finally(() => {
+      addCardPopup.renderLoading(false);
+      addCardPopup.close();
+    });
 }
 /* const cardDelete = (id) => {
   console.log(id);
@@ -261,6 +272,7 @@ popupOpenEditProfileButton.addEventListener("click", () => {
   nameInput.value = name;
   roleInput.value = job;
 });
+
 newCardButtonElement.addEventListener("click", () => {
   addCardPopup.open();
   addCardForm.resetValidation();

@@ -15,7 +15,7 @@ export default class Card {
   ) {
     this._cardSelector = cardSelector; //template selector
     this._id = data._id;
-    //   console.log(data.owner._id);
+    //console.log(data);
     this._ownerId = data.owner._id;
     this._userId = data.user_id;
     this._likesCount = data.likes.length;
