@@ -32,6 +32,12 @@ import {
 // selecting card template element
 const cardTemplateElement = document.querySelector("#card-template");
 
+/* -------------------------------------------------------------------------- */
+/*                                Declarations                                */
+/* -------------------------------------------------------------------------- */
+
+let userId;
+
 /**
  * @function renderCard creates Card object with data param and with template hardcoded
  * @param {array} data contains {name, link}
@@ -70,7 +76,7 @@ const renderCard = (data) => {
       } else {
         //console.log("should like");
         api.likeCard(id).then((res) => {
-          console.log("res", res);
+          // console.log("res", res);
           card.renderLike(res.likes);
 
           /*      card.removeCard();
@@ -143,12 +149,10 @@ function handleAvatarFormSubmit(data) {
   editAvatarPopup.renderLoading(false);
 }
 
-let userId;
-const correctObject = [];
 Promise.all([api.getInitialCards(), api.getUserInfo()]).then(
   ([cardData, userData]) => {
     userId = userData._id;
-
+    const cards = [];
     cardData.forEach((element) => {
       const i = {
         createdAt: element.createdAt,
@@ -159,11 +163,11 @@ Promise.all([api.getInitialCards(), api.getUserInfo()]).then(
         likes: element.likes,
         user_id: userId,
       };
-      correctObject.push(i);
+      cards.push(i);
     });
 
     /*   const cardListSection =  */ new Section(
-      { items: correctObject, renderer: renderCard },
+      { items: cards, renderer: renderCard },
       ".photo-grid__list"
     );
   }
@@ -182,7 +186,7 @@ Promise.all([api.getInitialCards(), api.getUserInfo()]).then(
 /*                    Popup Form Handlers                                     */
 /* -------------------------------------------------------------------------- */
 
-function handleEditFormSubmit(data) {
+/* function handleEditFormSubmit(data) {
   editProfilePopup.renderLoading(true);
   //debugger;
   //console.log(data);
@@ -206,9 +210,35 @@ function handleEditFormSubmit(data) {
       editProfilePopup.renderLoading(false);
       editProfilePopup.close();
     });
+} */
+
+function handleEditFormSubmit(data) {
+  // show loading
+  editProfilePopup.renderLoading(true);
+  try {
+    // api request
+    api
+      .setUserInfo({
+        name: data.profileFormNameInput,
+        about: data.profileFormRoleInput,
+      })
+      .then((res) => {
+        // update data
+        userInfo.setUserInfo({
+          profileFormNameInput: res.name,
+          profileFormRoleInput: res.about,
+        });
+        // close popup if necessary
+        editProfilePopup.close();
+      });
+  } catch (err) {
+    console.log(err);
+  }
+  // hide loading
+  editProfilePopup.renderLoading(false);
 }
 
-function handleNewCardFormSubmit(data) {
+/* function handleNewCardFormSubmit(data) {
   addCardPopup.renderLoading(true);
   api
     .createCard({ name: data.namePlace, link: data.linkPlace })
@@ -233,6 +263,36 @@ function handleNewCardFormSubmit(data) {
       addCardPopup.renderLoading(false);
       addCardPopup.close();
     });
+} */
+
+function handleNewCardFormSubmit(data) {
+  // show loading
+  addCardPopup.renderLoading(true);
+  try {
+    // api request
+    api
+      .createCard({ name: data.namePlace, link: data.linkPlace })
+      .then((res) => {
+        // update data
+        cardListSection.addItem(
+          renderCard({
+            namePlace: res.name,
+            linkPlace: res.link,
+            _id: res._id,
+            owner: res.owner,
+            user_id: userId,
+            likes: res.likes,
+          })
+        );
+      });
+    // close popup if necessary
+    addCardPopup.close();
+  } catch {
+    // process error
+    console.log(err);
+  }
+  // hide loading }
+  addCardPopup.renderLoading(false);
 }
 
 const userInfo = new UserInfo(
