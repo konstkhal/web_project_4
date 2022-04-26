@@ -105,7 +105,7 @@ api.getUserInfo().then((res) => {
   //console.log("res", res);
 });
 
-function handleAvatarFormSubmit(data) {
+/* function handleAvatarFormSubmit(data) {
   editAvatarPopup.renderLoading(true);
   var userdata = data.name;
 
@@ -122,6 +122,25 @@ function handleAvatarFormSubmit(data) {
     .finally(() => {
       editAvatarPopup.renderLoading(false);
     });
+} */
+
+function handleAvatarFormSubmit(data) {
+  editAvatarPopup.renderLoading(true);
+  var userdata = data.name;
+  try {
+    // api request
+    api.setAvatarLink(userdata).then((res) => {
+      // update data
+      userInfo.setUserAvatar(res);
+      // close popup if necessary
+      editAvatarPopup.close();
+    });
+  } catch (err) {
+    // process error
+    console.log(err);
+  }
+  // hide loading
+  editAvatarPopup.renderLoading(false);
 }
 
 let userId;
