@@ -126,10 +126,10 @@ api.getUserInfo().then((res) => {
 
 function handleAvatarFormSubmit(data) {
   editAvatarPopup.renderLoading(true);
-  var userdata = data.name;
+  const userData = data.name;
   try {
     // api request
-    api.setAvatarLink(userdata).then((res) => {
+    api.setAvatarLink(userData).then((res) => {
       // update data
       userInfo.setUserAvatar(res);
       // close popup if necessary
