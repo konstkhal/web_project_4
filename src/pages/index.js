@@ -105,17 +105,10 @@ api.getUserInfo().then((res) => {
   //console.log("res", res);
 });
 
-//api.getAvatarLink().then((res) => {
-/* userInfo.setUserInfo({
-    profileFormNameInput: res.name,
-    profileFormRoleInput: res.about,
-  }); */
-//console.log("res", res);
-//});
-
 function handleAvatarFormSubmit(data) {
   editAvatarPopup.renderLoading(true);
   var userdata = data.name;
+
   api
     .setAvatarLink(userdata)
     .then((res) => {
@@ -173,7 +166,7 @@ Promise.all([api.getInitialCards(), api.getUserInfo()]).then(
 function handleEditFormSubmit(data) {
   editProfilePopup.renderLoading(true);
   //debugger;
-  console.log(data);
+  //console.log(data);
   api
     .setUserInfo({
       name: data.profileFormNameInput,
@@ -195,8 +188,6 @@ function handleEditFormSubmit(data) {
       editProfilePopup.close();
     });
 }
-
-//function handleAvatarFormSubmit
 
 function handleNewCardFormSubmit(data) {
   addCardPopup.renderLoading(true);
@@ -224,18 +215,6 @@ function handleNewCardFormSubmit(data) {
       addCardPopup.close();
     });
 }
-/* const cardDelete = (id) => {
-  console.log(id);
-  confirmModal.open();
-
-  confirmModal.setAction(() => {
-    console.log("set action");
-    api.deleteCard(id).then((res) => {
-      console.log("Card is deleted", res);
-      card.removeCard();
-    });
-  });
-}; */
 
 const userInfo = new UserInfo(
   nameElementSelector,
@@ -260,25 +239,6 @@ const editAvatarPopup = new PopupWithForm(
 const imagePopup = new PopupWithImage(".popup_type_preview");
 const confirmModal = new PopupWithSubmit(".popup_type_confirm-delete-card");
 
-//console.log(editAvatarPopup);
-/* const formValidators = {};
-
-// enable validation
-const enableValidation = (config) => {
-  const formList = Array.from(document.querySelectorAll(config.formSelector));
-  formList.forEach((formElement) => {
-    const validator = new FormValidator(formElement, config);
-    // here you get the name of the form
-    const formName = formElement.getAttribute("name");
-
-    // here you store a validator by the `name` of the form
-    formValidators[formName] = validator;
-    validator.enableValidation();
-  });
-};
-
-enableValidation(config); */
-
 const addCardForm = new FormValidator(
   defaultFormConfig,
   addCardPopup.getPopupForm()
@@ -292,6 +252,10 @@ const editAvatarForm = new FormValidator(
   defaultFormConfig,
   editAvatarPopup.getPopupForm()
 );
+
+/* -------------------------------------------------------------------------- */
+/*                         Popup Enable Validation                            */
+/* -------------------------------------------------------------------------- */
 
 addCardForm.enableValidation();
 editForm.enableValidation();

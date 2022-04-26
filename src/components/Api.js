@@ -4,11 +4,11 @@ export default class Api {
     this._headers = headers;
   }
   _customFetch = async (url, headers) => {
-    try {
-      const res = await fetch(url, headers);
-      return await (res.ok ? res.json() : Promise.reject(res.statusText));
-    } catch (message) {
-      return console.log(message);
+    const response = await fetch(url, headers);
+    if (response.ok) {
+      return response.json();
+    } else {
+      return Promise.reject(response.statusText);
     }
   };
 
