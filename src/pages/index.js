@@ -53,29 +53,53 @@ const renderCard = (data) => {
     },
     (id) => {
       confirmModal.open();
-      try {
-        confirmModal.setAction(() => {
+      confirmModal
+        .setAction(() => {
           confirmModal.renderLoading(true);
           api.deleteCard(id).then((res) => {
             card.removeCard();
             confirmModal.close();
           });
+        })
+        .catch((error) => {
+          // error
+          console.log(error);
+        })
+        .finally(() => {
+          // end loading
+          confirmModal.renderLoading(false);
         });
-      } catch (err) {
-        console.log(err);
-      }
-      confirmModal.renderLoading(false);
     },
     (id) => {
       const isAlreadyLiked = card.getIsLiked();
       if (isAlreadyLiked) {
-        api.disLikeCard(id).then((res) => {
-          card.updateLikes(res.likes);
-        });
+        api
+          .disLikeCard(id)
+          .then((res) => {
+            card.updateLikes(res.likes);
+          })
+          .catch((error) => {
+            // error
+            console.log(error);
+          })
+          .finally(() => {
+            // end loading
+            confirmModal.renderLoading(false);
+          });
       } else {
-        api.likeCard(id).then((res) => {
-          card.updateLikes(res.likes);
-        });
+        api
+          .likeCard(id)
+          .then((res) => {
+            card.updateLikes(res.likes);
+          })
+          .catch((error) => {
+            // error
+            console.log(error);
+          })
+          .finally(() => {
+            // end loading
+            confirmModal.renderLoading(false);
+          });
       }
     }
   );
@@ -96,117 +120,125 @@ const cardListSection = new Section(
   ".photo-grid__list"
 );
 
-api.getUserInfo().then((res) => {
-  userInfo.setUserInfo({
-    profileFormNameInput: res.name,
-    profileFormRoleInput: res.about,
-    avatarLink: res.avatar,
+api
+  .getUserInfo()
+  .then((res) => {
+    userInfo.setUserInfo({
+      profileFormNameInput: res.name,
+      profileFormRoleInput: res.about,
+      avatarLink: res.avatar,
+    });
+  })
+  .catch((error) => {
+    // error
+    console.log(error);
   });
-});
 
 function handleAvatarFormSubmit(data) {
   editAvatarPopup.renderLoading(true);
   const userData = data.name;
-  try {
-    // api request
-    api.setAvatarLink(userData).then((res) => {
+
+  api
+    .setAvatarLink(userData)
+    .then((res) => {
       // update data
       userInfo.setUserAvatar(res);
       // close popup if necessary
       editAvatarPopup.close();
+    })
+    .catch((error) => {
+      // error
+      console.log(error);
+    })
+    .finally(() => {
+      // end loading
+      editAvatarPopup.renderLoading(false);
     });
-  } catch (err) {
-    // process error
-    console.log(err);
-  }
-  // hide loading
-  editAvatarPopup.renderLoading(false);
 }
 
-try {
-  Promise.all([api.getInitialCards(), api.getUserInfo()]).then(
-    ([cardData, userData]) => {
-      userId = userData._id;
-      const cards = [];
-      cardData.forEach((element) => {
-        const entry = {
-          createdAt: element.createdAt,
-          namePlace: element.name,
-          _id: element._id,
-          linkPlace: element.link,
-          owner: element.owner,
-          likes: element.likes,
-          user_id: userId,
-        };
-        cards.push(entry);
-      });
+Promise.all([api.getInitialCards(), api.getUserInfo()])
+  .then(([cardData, userData]) => {
+    userId = userData._id;
+    const cards = [];
+    cardData.forEach((element) => {
+      const entry = {
+        createdAt: element.createdAt,
+        namePlace: element.name,
+        _id: element._id,
+        linkPlace: element.link,
+        owner: element.owner,
+        likes: element.likes,
+        user_id: userId,
+      };
+      cards.push(entry);
+    });
 
-      cardListSection.renderItems(cards);
-      /*  { items: cards, renderer: renderCard },
-      ".photo-grid__list"
-    ); */
-    }
-  );
-} catch (err) {
-  // process error
-  console.log(err);
-}
+    cardListSection.renderItems(cards);
+  })
+  .catch((error) => {
+    // error
+    console.log(error);
+  });
 
 function handleEditFormSubmit(data) {
   // show loading
   editProfilePopup.renderLoading(true);
-  try {
-    // api request
-    api
-      .setUserInfo({
-        name: data.profileFormNameInput,
-        about: data.profileFormRoleInput,
-      })
-      .then((res) => {
-        // update data
-        userInfo.setUserInfo({
-          profileFormNameInput: res.name,
-          profileFormRoleInput: res.about,
-          avatarLink: res.avatar,
-        });
-        // close popup if necessary
-        editProfilePopup.close();
+
+  // api request
+  api
+    .setUserInfo({
+      name: data.profileFormNameInput,
+      about: data.profileFormRoleInput,
+    })
+    .then((res) => {
+      // update data
+      userInfo.setUserInfo({
+        profileFormNameInput: res.name,
+        profileFormRoleInput: res.about,
+        avatarLink: res.avatar,
       });
-  } catch (err) {
-    console.log(err);
-  }
-  // hide loading
-  editProfilePopup.renderLoading(false);
+      // close popup if necessary
+      editProfilePopup.close();
+    })
+    .catch((error) => {
+      // error
+      console.log(error);
+    })
+    .finally(() => {
+      // end loading
+      editProfilePopup.renderLoading(false);
+    });
 }
 
 function handleNewCardFormSubmit(data) {
   // show loading
   addCardPopup.renderLoading(true);
-  try {
-    // api request
-    api
-      .createCard({ name: data.namePlace, link: data.linkPlace })
-      .then((res) => {
-        // update data
-        cardListSection.addItem(
-          renderCard({
-            namePlace: res.name,
-            linkPlace: res.link,
-            _id: res._id,
-            owner: res.owner,
-            user_id: userId,
-            likes: res.likes,
-          })
-        );
-      });
-    // close popup if necessary
-    addCardPopup.close();
-  } catch {
-    // process error
-    console.log(err);
-  }
-  // hide loading }
-  addCardPopup.renderLoading(false);
+
+  api
+    .createCard({ name: data.namePlace, link: data.linkPlace })
+    .then((res) => {
+      // update data
+      cardListSection.addItem(
+        renderCard({
+          namePlace: res.name,
+          linkPlace: res.link,
+          _id: res._id,
+          owner: res.owner,
+          user_id: userId,
+          likes: res.likes,
+        })
+      );
+      addCardPopup.close();
+    })
+
+    .catch((error) => {
+      // error
+      console.log(error);
+    })
+    .finally(() => {
+      // end loading
+      addCardPopup.renderLoading(false);
+    });
 }
 
 const userInfo = new UserInfo(
