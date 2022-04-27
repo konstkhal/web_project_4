@@ -157,10 +157,10 @@ Promise.all([api.getInitialCards(), api.getUserInfo()]).then(
       cards.push(i);
     });
 
-    /*   const cardListSection =  */ new Section(
-      { items: cards, renderer: renderCard },
+    cardListSection.renderItems(cards);
+    /*  { items: cards, renderer: renderCard },
       ".photo-grid__list"
-    );
+    ); */
   }
 );
 
