@@ -53,19 +53,22 @@ const renderCard = (data) => {
     },
     (id) => {
       confirmModal.open();
-
-      confirmModal.setAction(() => {
-        api.deleteCard(id).then((res) => {
-          card.removeCard();
-          confirmModal.close();
+      try {
+        confirmModal.setAction(() => {
+          confirmModal.renderLoading(true);
+          api.deleteCard(id).then((res) => {
+            card.removeCard();
+            confirmModal.close();
+          });
         });
-      });
+      } catch (err) {
+        console.log(err);
+      }
+      confirmModal.renderLoading(false);
     },
     (id) => {
       const isAlreadyLiked = card.getIsLiked();
       if (isAlreadyLiked) {
-        // console.log("should DISlike");
-
         api.disLikeCard(id).then((res) => {
           card.updateLikes(res.likes);
         });
@@ -101,25 +104,6 @@ api.getUserInfo().then((res) => {
   });
   //console.log("res", res);
 });
-
-/* function handleAvatarFormSubmit(data) {
-  editAvatarPopup.renderLoading(true);
-  var userdata = data.name;
-
-  api
-    .setAvatarLink(userdata)
-    .then((res) => {
-      console.log(res);
-      userInfo.setUserAvatar(res);
-      editAvatarPopup.close();
-    })
-    .catch((err) => {
-      console.log(err);
-    })
-    .finally(() => {
-      editAvatarPopup.renderLoading(false);
-    });
-} */
 
 function handleAvatarFormSubmit(data) {
   editAvatarPopup.renderLoading(true);
@@ -169,45 +153,6 @@ try {
   console.log(err);
 }
 
-/* -------------------------------------------------------------------------- */
-/*                        Objects creation                                    */
-/* -------------------------------------------------------------------------- */
-/**
- * Newly created @constant cardListSection contains Section @object
- *
- *
- */
-
-/* -------------------------------------------------------------------------- */
-/*                    Popup Form Handlers                                     */
-/* -------------------------------------------------------------------------- */
-
-/* function handleEditFormSubmit(data) {
-  editProfilePopup.renderLoading(true);
-  //debugger;
-  //console.log(data);
-  api
-    .setUserInfo({
-      name: data.profileFormNameInput,
-      about: data.profileFormRoleInput,
-    })
-    .then((res) => {
-      console.log(res);
-      userInfo.setUserInfo({
-        profileFormNameInput: res.name,
-        profileFormRoleInput: res.about,
-      });
-    })
-
-    .catch((err) => {
-      console.log(err);
-    })
-    .finally(() => {
-      editProfilePopup.renderLoading(false);
-      editProfilePopup.close();
-    });
-} */
-
 function handleEditFormSubmit(data) {
   // show loading
   editProfilePopup.renderLoading(true);
@@ -234,33 +179,6 @@ function handleEditFormSubmit(data) {
   // hide loading
   editProfilePopup.renderLoading(false);
 }
-
-/* function handleNewCardFormSubmit(data) {
-  addCardPopup.renderLoading(true);
-  api
-    .createCard({ name: data.namePlace, link: data.linkPlace })
-    .then((res) => {
-      //console.log(res);
-      cardListSection.addItem(
-        renderCard({
-          namePlace: res.name,
-          linkPlace: res.link,
-          _id: res._id,
-          owner: res.owner,
-          user_id: userId,
-          likes: res.likes,
-        })
-      );
-    })
-
-    .catch((err) => {
-      console.log(err);
-    })
-    .finally(() => {
-      addCardPopup.renderLoading(false);
-      addCardPopup.close();
-    });
-} */
 
 function handleNewCardFormSubmit(data) {
   // show loading
@@ -358,16 +276,10 @@ function fillProfileForm({ name, job }) {
 }
 
 popupOpenEditProfileButton.addEventListener("click", () => {
-  //const { name, job } = userInfo.getUserInfo();
-
   editProfilePopup.open();
   editForm.resetValidation();
 
   fillProfileForm(userInfo.getUserInfo());
-  /*
-  nameInput.value = name;
-  roleInput.value = job;
-   */
 });
 
 newCardButtonElement.addEventListener("click", () => {
