@@ -22,7 +22,7 @@ import {
   nameElementSelector,
   roleElementSelector,
   popupOpenEditAvatarLink,
-  AvatarElementSelector,
+  avatarElementSelector,
 } from "../utils/constants.js";
 
 /* -------------------------------------------------------------------------- */
@@ -140,29 +140,34 @@ function handleAvatarFormSubmit(data) {
   editAvatarPopup.renderLoading(false);
 }
 
-Promise.all([api.getInitialCards(), api.getUserInfo()]).then(
-  ([cardData, userData]) => {
-    userId = userData._id;
-    const cards = [];
-    cardData.forEach((element) => {
-      const i = {
-        createdAt: element.createdAt,
-        namePlace: element.name,
-        _id: element._id,
-        linkPlace: element.link,
-        owner: element.owner,
-        likes: element.likes,
-        user_id: userId,
-      };
-      cards.push(i);
-    });
+try {
+  Promise.all([api.getInitialCards(), api.getUserInfo()]).then(
+    ([cardData, userData]) => {
+      userId = userData._id;
+      const cards = [];
+      cardData.forEach((element) => {
+        const entry = {
+          createdAt: element.createdAt,
+          namePlace: element.name,
+          _id: element._id,
+          linkPlace: element.link,
+          owner: element.owner,
+          likes: element.likes,
+          user_id: userId,
+        };
+        cards.push(entry);
+      });
 
-    cardListSection.renderItems(cards);
-    /*  { items: cards, renderer: renderCard },
+      cardListSection.renderItems(cards);
+      /*  { items: cards, renderer: renderCard },
       ".photo-grid__list"
     ); */
-  }
-);
+    }
+  );
+} catch (err) {
+  // process error
+  console.log(err);
+}
 
 /* -------------------------------------------------------------------------- */
 /*                        Objects creation                                    */
@@ -218,6 +223,7 @@ function handleEditFormSubmit(data) {
         userInfo.setUserInfo({
           profileFormNameInput: res.name,
           profileFormRoleInput: res.about,
+          avatarLink: res.avatar,
         });
         // close popup if necessary
         editProfilePopup.close();
@@ -289,7 +295,7 @@ function handleNewCardFormSubmit(data) {
 const userInfo = new UserInfo(
   nameElementSelector,
   roleElementSelector,
-  AvatarElementSelector
+  avatarElementSelector
 );
 
 const editProfilePopup = new PopupWithForm(
@@ -346,13 +352,22 @@ editAvatarPopup.setEventListeners();
 /*                   Open Popup Buttons listeners                             */
 /* -------------------------------------------------------------------------- */
 
+function fillProfileForm({ name, job }) {
+  nameInput.value = name;
+  roleInput.value = job;
+}
+
 popupOpenEditProfileButton.addEventListener("click", () => {
-  const { name, job } = userInfo.getUserInfo();
+  //const { name, job } = userInfo.getUserInfo();
 
   editProfilePopup.open();
   editForm.resetValidation();
+
+  fillProfileForm(userInfo.getUserInfo());
+  /*
   nameInput.value = name;
   roleInput.value = job;
+   */
 });
 
 newCardButtonElement.addEventListener("click", () => {

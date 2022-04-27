@@ -25,7 +25,7 @@ const nameInput = document.querySelector(".form__input_type_name"); //popup form
 const roleElementSelector = ".profile__role";
 const roleElement = document.querySelector(roleElementSelector);
 const roleInput = document.querySelector(".form__input_type_role");
-const AvatarElementSelector = ".profile__photo";
+const avatarElementSelector = ".profile__photo";
 
 /* -------------------------------------------------------------------------- */
 /*                        Popup ADD card functionality                        */
@@ -55,5 +55,5 @@ export {
   roleElementSelector,
   userInputImageTitle,
   userInputImageLink,
-  AvatarElementSelector,
+  avatarElementSelector,
 };

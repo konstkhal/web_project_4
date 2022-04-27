@@ -31,10 +31,10 @@ export default class UserInfo {
   }
 
   setUserInfo(info) {
-    this._nameElement.textContent = info["profileFormNameInput"];
-    this._jobElement.textContent = info["profileFormRoleInput"];
-    this._avatar.alt = `Image of ${info["profileFormNameInput"]}`;
-    this._avatar.src = info["avatarLink"];
+    this._nameElement.textContent = info.profileFormNameInput;
+    this._jobElement.textContent = info.profileFormRoleInput;
+    this._avatar.alt = `Image of ${info.profileFormNameInput}`;
+    this._avatar.src = info.avatarLink;
   }
 
   setUserAvatar({ avatar }) {
