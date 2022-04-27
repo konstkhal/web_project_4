@@ -15,15 +15,12 @@ export default class Card {
   ) {
     this._cardSelector = cardSelector; //template selector
     this._id = data._id;
-    //console.log(data);
+
     this._ownerId = data.owner._id;
     this._userId = data.user_id;
     this._likesCount = data.likes.length;
     this._likesList = data.likes;
-    //console.log(this._likesList);
 
-    //console.log(this._likesCount);
-    //console.log(data);
     this._cardTemplate =
       this._cardSelector.content.querySelector(".photo-grid__item"); // selecting card template element
 
@@ -56,36 +53,9 @@ export default class Card {
     );
   }
 
-  /*  _handleLikeButtonClick = (e) => {
-    //console.log(event);
-    e.target.classList.toggle("photo-grid__like-button_active");
-  }; */
-
-  /*   _handleTrashButtonClick = () => {
-    this._element.remove();
-    this._element = null;
-  }; */
-
-  /*  _handleCardImageClick = () => {
-    this._handleCardClick({ link: this._link, name: this._name });
-  }; */
-
   getIsLiked() {
     return this._isLiked();
   }
-
-  /* renderLike(newLikes) {
-    //console.log(newLikes);
-    this._likesList = newLikes;
-    this._likesCount = newLikes.length;
-    this._element.querySelector(".photo-grid__likes-counter").textContent =
-      this._likesCount;
-    this._cardLikeButtonElement.classList.toggle(
-      "photo-grid__like-button_active"
-    );
-
-    // this._likesCount = newLikes.length;
-  } */
 
   updateLikes(likes) {
     // set instance variable

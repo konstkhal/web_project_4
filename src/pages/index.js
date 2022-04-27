@@ -102,7 +102,6 @@ api.getUserInfo().then((res) => {
     profileFormRoleInput: res.about,
     avatarLink: res.avatar,
   });
-  //console.log("res", res);
 });
 
 function handleAvatarFormSubmit(data) {

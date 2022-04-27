@@ -13,9 +13,6 @@ export default class Api {
   };
 
   getInitialCards() {
-    /*     console.log(
-      this._customFetch(`${this._baseUrl}/cards`, { headers: this._headers })
-    ); */
     return this._customFetch(`${this._baseUrl}/cards`, {
       headers: this._headers,
     });
@@ -26,14 +23,7 @@ export default class Api {
     });
   }
 
-  /*  getAvatarLink() {
-    return this._customFetch(`${this._baseUrl}/users/me/avatar`, {
-      headers: this._headers,
-    });
-  } */
-
   setAvatarLink(data) {
-    //console.log(JSON.stringify(data));
     return this._customFetch(`${this._baseUrl}/users/me/avatar`, {
       headers: this._headers,
       method: "PATCH",
