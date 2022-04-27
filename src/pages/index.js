@@ -67,20 +67,11 @@ const renderCard = (data) => {
         // console.log("should DISlike");
 
         api.disLikeCard(id).then((res) => {
-          console.log("res", res);
-          card.renderLike(res.likes);
-
-          /*      card.removeCard();
-          confirmModal.close(); */
+          card.updateLikes(res.likes);
         });
       } else {
-        //console.log("should like");
         api.likeCard(id).then((res) => {
-          // console.log("res", res);
-          card.renderLike(res.likes);
-
-          /*      card.removeCard();
-          confirmModal.close(); */
+          card.updateLikes(res.likes);
         });
       }
     }

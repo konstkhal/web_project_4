@@ -6,7 +6,7 @@ import Popup from "./Popup";
  * It takes two arguments:
  * the popup selector,
  * and a callback function
- * which PopupWithForm calls when the form’s submit event fires.
+ * which PopupWithgit rm calls when the form’s submit event fires.
  * It stores a private method named _getInputValues(),
  * which collects data from all the input fields and returns that data as an object.
  * It modifies the setEventListeners() parent method.

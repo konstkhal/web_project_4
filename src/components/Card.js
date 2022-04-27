@@ -22,10 +22,6 @@ export default class Card {
     this._likesList = data.likes;
     //console.log(this._likesList);
 
-    this._isLiked = this._likesList.some(
-      (person) => person._id === this._userId
-    );
-
     //console.log(this._likesCount);
     //console.log(data);
     this._cardTemplate =
@@ -75,10 +71,10 @@ export default class Card {
   }; */
 
   getIsLiked() {
-    return this._likesList.some((person) => person._id === this._userId);
+    return this._isLiked();
   }
 
-  renderLike(newLikes) {
+  /* renderLike(newLikes) {
     //console.log(newLikes);
     this._likesList = newLikes;
     this._likesCount = newLikes.length;
@@ -89,6 +85,32 @@ export default class Card {
     );
 
     // this._likesCount = newLikes.length;
+  } */
+
+  updateLikes(likes) {
+    // set instance variable
+    this._likesList = likes;
+    this._renderLikes();
+  }
+
+  _isLiked() {
+    // return true if user liked the card, otherwise false
+    return this._likesList.some((person) => person._id === this._userId);
+  }
+
+  _renderLikes() {
+    const likesCount = this._likesList.length;
+    this._cardLikesCounterElement.textContent = likesCount;
+
+    if (this._isLiked()) {
+      this._cardLikeButtonElement.classList.add(
+        "photo-grid__like-button_active"
+      );
+    } else {
+      this._cardLikeButtonElement.classList.remove(
+        "photo-grid__like-button_active"
+      );
+    }
   }
 
   generateCard() {
@@ -110,17 +132,18 @@ export default class Card {
     this._cardImageElement.src = this._link;
     this._cardImageElement.alt = this._name;
     this._cardTitleElement.textContent = this._name;
+
     this._setEventListeners();
 
     if (this._ownerId !== this._userId) {
       this._element.querySelector(".photo-grid__delete-button").remove();
     }
 
-    if (this._isLiked) {
+    /*     if (this._isLiked) {
       this.renderLike(this._likesList);
-    }
-
-    this._cardLikesCounterElement.textContent = this._likesCount;
+    }*/
+    this._renderLikes();
+    //this._cardLikesCounterElement.textContent = likesCount;
 
     return this._element;
   }
