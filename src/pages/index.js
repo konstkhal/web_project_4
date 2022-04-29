@@ -53,22 +53,23 @@ const renderCard = (data) => {
     },
     (id) => {
       confirmModal.open();
-      confirmModal
-        .setAction(() => {
-          confirmModal.renderLoading(true);
-          api.deleteCard(id).then((res) => {
+      confirmModal.setAction(() => {
+        confirmModal.renderLoading(true);
+        api
+          .deleteCard(id)
+          .then((res) => {
             card.removeCard();
             confirmModal.close();
+          })
+          .catch((error) => {
+            // error
+            console.log(error);
+          })
+          .finally(() => {
+            // end loading
+            confirmModal.renderLoading(false);
           });
-        })
-        .catch((error) => {
-          // error
-          console.log(error);
-        })
-        .finally(() => {
-          // end loading
-          confirmModal.renderLoading(false);
-        });
+      });
     },
     (id) => {
       const isAlreadyLiked = card.getIsLiked();
@@ -81,11 +82,11 @@ const renderCard = (data) => {
           .catch((error) => {
             // error
             console.log(error);
-          })
+          }) /*
           .finally(() => {
             // end loading
             confirmModal.renderLoading(false);
-          });
+          }) */;
       } else {
         api
           .likeCard(id)
@@ -95,11 +96,11 @@ const renderCard = (data) => {
           .catch((error) => {
             // error
             console.log(error);
-          })
+          }); /*
           .finally(() => {
             // end loading
             confirmModal.renderLoading(false);
-          });
+          }); */
       }
     }
   );
@@ -136,10 +137,10 @@ api
 
 function handleAvatarFormSubmit(data) {
   editAvatarPopup.renderLoading(true);
-  const userData = data.name;
+  const avatarData = data.name;
 
   api
-    .setAvatarLink(userData)
+    .setAvatarLink(avatarData)
     .then((res) => {
       // update data
       userInfo.setUserAvatar(res);
